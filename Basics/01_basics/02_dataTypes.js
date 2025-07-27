@@ -76,7 +76,7 @@ let userWithSymbol = {
   name: "Piyush",
   [Symbol("id")]: 101
 };
-console.log("User with symbol:", userWithSymbol);
+console.log("User with symbol : ", userWithSymbol);
 
 // Hard Symbol access
 const userId = Symbol("userId");
@@ -84,7 +84,9 @@ const person = {
   name: "John",
   [userId]: 123
 };
+//A Symbol is a unique and immutable primitive value used as an identifier.
 
+//for each -> used on object (more prefered)
 for (let key in person) {
   console.log("Loop key:", key); // Won’t show Symbol
 }

@@ -5,7 +5,7 @@ let score = "Piyush"
 
 let valueInNumber = Number(score) 
 // console.log(typeof valueInNumber);
-//console.log(valueInNumber);  // with give no.
+// console.log(valueInNumber);  // with give no.
 
 
 // let valueInNumber = BigInt(score)  // ❌ Throws error
@@ -27,6 +27,7 @@ let emptyStr = ""
 let booleanIsLoggedIn = Boolean(isLoggedIn)
 let booleanEmptyStr = Boolean(emptyStr)
 //  console.table(` booleanIsLoggedIn will give ${booleanIsLoggedIn}  & booleanEmptyStr will give ${booleanEmptyStr} `);
+
  //str convert to boolean will give true
  // EMPTY str convert to boolean will give false
 
@@ -81,8 +82,10 @@ num1 = num2 = num3 = 2 + 2
 // console.log(num2);
 
 let gameCounter = 100
+//pre increament
 // console.log(++gameCounter);
 
+//post increament
 // console.log(gameCounter++);
 // console.log(gameCounter);
 

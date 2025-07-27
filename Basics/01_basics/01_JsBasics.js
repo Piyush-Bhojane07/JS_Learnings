@@ -1,6 +1,6 @@
-const accountId = 144553;
-let accountEmail = "Piyush@google.com";
-var accountPassword = "12345";
+const accountId = 144553; // will not change in future
+let accountEmail = "Piyush@google.com"; // will change, block scope , prefer let to use
+var accountPassword = "12345"; // will change, functional scope , prefer let to use
 
 console.table([accountEmail, accountId, accountPassword]);
 /* if wrote console.table(var1, var2) will gave error 
