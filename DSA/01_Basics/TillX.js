@@ -1,16 +1,12 @@
 const readline = require("readline-sync");
 
 let sum = 0;
-
 while (true) {
     let input = readline.question("Enter a number (or 'x' to stop): ");
-
     if (input.toLowerCase() === 'x') {
         break;
     }
-
     let number = parseInt(input);
-
     if (!isNaN(number)) {
         sum += number;
     } else {
