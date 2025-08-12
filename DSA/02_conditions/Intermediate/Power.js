@@ -1,5 +1,5 @@
 function power(input) {
-    let powerOf = Math.pow(input, 2); // raise to the power of 2
+    let powerOf = Math.pow(input, 2); 
     console.log(powerOf);
     return powerOf;
 }
