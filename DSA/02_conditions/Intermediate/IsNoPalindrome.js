@@ -1,15 +1,17 @@
-// Find if a number is palindrome or not
+// Palindrome check for numbers
+const readline = require("readline-sync");
+let input = readline.question("Enter a number: ");
+let isPalindrome = true;
 
-const readline = require("readline-sync")
-let input = parseInt(readline.question("enter a no"))
-let start = 0;
-let end = 0;
-let last = input.length -1;
-for(let i = 0; i < input.length; i++){
-    end = last;
-        if(start != end){
-            console.log("not a palindrome")
-            break;
-        }
-        console.log("Palindrome")
+for (let i = 0; i < input.length / 2; i++) {
+  if (input[i] !== input[input.length - 1 - i]) {
+    isPalindrome = false;
+    break;
+  }
+}
+
+if (isPalindrome) {
+  console.log("Palindrome");
+} else {
+  console.log("Not a palindrome");
 }
