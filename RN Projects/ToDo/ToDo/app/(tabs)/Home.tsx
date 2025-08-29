@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   View,
   FlatList,
+  Alert,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -13,16 +14,40 @@ import { Colors } from "@/constants/Colors";
 export default function Home() {
   const [todo, setTodo] = useState([]);
   const [task, setTask] = useState("");
+  const [adding, setAdding] = useState(false);
+  const [error, setError] = useState(null);
 
   const getData = async () => {
-    const res = await axios("https://dummyjson.com/todos");
-    const resData = await res.data;
-    setTodo(resData.todos);
+    const { data } = await axios.get("https://dummyjson.com/todos");
+    setTodo(data.todos);
   };
 
   useEffect(() => {
     getData();
   }, []);
+
+const [userIdCounter, setUserIdCounter] = useState(0);
+
+const addTask = async () => {
+  if (!task.trim()) return;
+
+  setUserIdCounter((prev) => prev + 1);
+
+  try {
+    const { data: newTodo } = await axios.post(
+      "https://dummyjson.com/todos/add",
+      {
+        todo: task.trim(),
+        completed: false,
+        userId: userIdCounter + 1, // careful: state updates async
+      }
+    );
+    setTodo((prev) => [newTodo, ...prev]);
+    setTask("");
+  } catch (err) {
+    console.error(err);
+  }
+};
 
   const cardColors = [
     Colors.cardOne,
@@ -56,6 +81,7 @@ export default function Home() {
         placeholderTextColor="#888"
         value={task}
         onChangeText={setTask}
+        editable={!adding}
       />
 
       {/* Buttons Row */}
@@ -63,23 +89,19 @@ export default function Home() {
         <TouchableOpacity
           style={[styles.btn, { backgroundColor: Colors.cardOne }]}
           activeOpacity={0.8}
-          onPress={() => {
-            if (task.trim()) {
-              setTodo([
-                { id: Date.now(), todo: task, completed: false },
-                ...todo,
-              ]);
-              setTask("");
-            }
-          }}
+          onPress={addTask}
+          disabled={adding || !task.trim()}
         >
-          <Text style={styles.btntxt}>➕ Add Task</Text>
+          <Text style={styles.btntxt}>
+            {adding ? "⏳ Adding..." : "➕ Add Task"}
+          </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={[styles.btn, { backgroundColor: Colors.cardTwo }]}
           activeOpacity={0.8}
           onPress={getData}
+          disabled={adding}
         >
           <Text style={styles.btntxt}>🔄 Refresh</Text>
         </TouchableOpacity>
@@ -97,85 +119,29 @@ export default function Home() {
   );
 }
 
+// your existing styles...
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: Colors.light.background,
-    flex: 1,
-    padding: 20,
-  },
+  container: { flex: 1, padding: 16 },
   input: {
-    width: "100%",
-    borderWidth: 1.5,
-    borderColor: Colors.dark.background,
-    padding: 14,
+    borderWidth: 1,
+    borderColor: "#ddd",
+    padding: 12,
     borderRadius: 12,
+    marginBottom: 12,
+    marginTop : 49,
     fontSize: 16,
-    marginBottom: 15,
-    backgroundColor: "#fff",
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 3,
   },
-  buttonRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "100%",
-    marginBottom: 20,
-  },
-  btn: {
-    flex: 1,
-    marginHorizontal: 5,
-    paddingVertical: 14,
-    borderRadius: 12,
-    justifyContent: "center",
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOpacity: 0.2,
-    shadowRadius: 6,
-    shadowOffset: { width: 0, height: 3 },
-    elevation: 5,
-  },
-  btntxt: {
-    fontSize: 16,
-    color: "white",
-    fontWeight: "600",
-  },
-  list: {
-    paddingBottom: 30,
-  },
-  todoCard: {
-    padding: 18,
-    borderRadius: 14,
-    marginBottom: 14,
-    shadowColor: "#000",
-    shadowOpacity: 0.15,
-    shadowRadius: 6,
-    shadowOffset: { width: 0, height: 3 },
-    elevation: 4,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  todoText: {
-    fontSize: 16,
-    fontWeight: "500",
-    color: "white",
-    flex: 1,
-    marginRight: 12,
-  },
-  status: {
-    fontSize: 14,
-    fontWeight: "600",
-  },
-  done: {
-    color: "#e0ffe0",
-  },
-  pending: {
-    color: "#ffe0e0",
-  },
+  buttonRow: { flexDirection: "row", gap: 12, marginBottom: 12 },
+  btn: { flex: 1, padding: 12, borderRadius: 12, alignItems: "center" },
+  btntxt: { color: "#fff", fontWeight: "600" },
+  list: { paddingBottom: 24, gap: 12 },
+  todoCard: { padding: 16, borderRadius: 16 },
+  todoText: { fontSize: 16, fontWeight: "600", marginBottom: 6 },
+  status: { fontSize: 14 },
+  done: { opacity: 0.8 },
+  pending: { opacity: 0.8 },
 });
+
 
 /*
 // Call it when component mounts /* Option 1: DummyJSON To-Dos API A free fake REST API ideal for testing and prototyping. It supports full CRUD operations: Get all to-dos: GET https://dummyjson.com/todos — returns a list of to-dos (default limit = 30, supports pagination) Get a single to-do: GET https://dummyjson.com/todos/{id} Add a to-do: POST https://dummyjson.com/todos/add — you can include fields like todo, completed, and userId Update: PUT https://dummyjson.com/todos/{id} or PATCH https://dummyjson.com/todos/{id} Delete: DELETE https://dummyjson.com/todos/{id} DummyJSON */
