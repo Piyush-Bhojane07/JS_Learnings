@@ -1,0 +1,456 @@
+🚀 REACT NATIVE SCENARIOS (25 Scenarios)
+Performance & Optimization Scenarios:
+"Your React Native app has a feed with 1000+ items that's scrolling sluggishly. How do you diagnose and fix this?"
+
+Expected: Virtualized lists, memoization, image optimization, key extraction
+
+"Users report the app becomes unresponsive when typing in search. How do you optimize search functionality?"
+
+Expected: Debouncing, background processing, loading states
+
+"Your app's bundle size is 50MB+ and takes 10 seconds to load. How do you reduce it?"
+
+Expected: Code splitting, dynamic imports, Hermes, asset optimization
+
+"The app crashes on low-end devices when rendering complex animations. What's your approach?"
+
+Expected: useNativeDriver, React Native Reanimated, simplifying animations
+
+"Users complain about high battery usage. How do you identify and fix battery drain issues?"
+
+Expected: Background tasks, efficient re-renders, network optimization
+
+Architecture & State Management:
+"You're building a food delivery app. How would you structure state for orders, cart, and user authentication?"
+
+Expected: Redux slices, normalized state, API state management
+
+"Your team's codebase has prop drilling through 5+ components. How do you refactor this?"
+
+Expected: Context API, component composition, custom hooks
+
+"You need to implement offline support for a note-taking app. What's your strategy?"
+
+Expected: Offline-first architecture, sync queues, conflict resolution
+
+"The app needs to support real-time chat. How do you handle WebSocket connections and message synchronization?"
+
+Expected: WebSocket management, message queue, optimistic updates
+
+"You're building a multi-language app. How do you implement i18n with dynamic language switching?"
+
+Expected: i18n libraries, context for language, dynamic loading
+
+Navigation & User Experience:
+"Users get lost in deep navigation stacks. How do you improve navigation experience?"
+
+Expected: Deep linking, navigation state persistence, breadcrumbs
+
+"You need to implement biometric authentication flow. Walk through the implementation."
+
+Expected: Biometric APIs, secure storage, fallback mechanisms
+
+"The app needs to handle poor network conditions gracefully. What's your strategy?"
+
+Expected: Offline queues, retry mechanisms, optimistic UI
+
+"Users want to share deep links to specific content. How do you implement this?"
+
+Expected: Deep linking setup, URL parsing, navigation handling
+
+"You're building a tab-based app where some tabs require authentication. How do you handle this?"
+
+Expected: Protected routes, conditional rendering, auth state management
+
+Native Integration & Platform-Specific:
+"You need to implement a custom camera feature not available in existing libraries. How do you approach this?"
+
+Expected: Native module development, bridge communication, type safety
+
+"The app needs to handle file uploads with progress tracking. How do you implement this?"
+
+Expected: File picker, FormData, progress tracking, background upload
+
+"You need to implement push notifications with deep linking. Walk through the setup."
+
+Expected: FCM/APNS setup, notification handling, deep link routing
+
+"The design team wants different layouts for tablets and phones. How do you implement responsive design?"
+
+Expected: Dimension APIs, responsive hooks, platform-specific code
+
+"You need to support both light and dark mode with system preference detection."
+
+Expected: Theme context, system preferences, dynamic styling
+
+Testing & Maintenance:
+"Your team has no tests and frequent regressions. How do you introduce testing?"
+
+Expected: Testing strategy, Jest/Detox setup, test priorities
+
+"The app has memory leaks causing crashes. How do you identify and fix them?"
+
+Expected: Memory profiling, useEffect cleanup, reference management
+
+"You need to upgrade React Native from an old version with breaking changes. What's your migration strategy?"
+
+Expected: Gradual migration, testing plan, rollback strategy
+
+"Users report the app looks different on various Android devices. How do you ensure consistency?"
+
+Expected: UI testing, device testing, responsive components
+
+"Your team struggles with code quality and consistency. How do you improve this?"
+
+Expected: ESLint/Prettier, code reviews, component library
+
+🎯 JAVASCRIPT & TYPESCRIPT SCENARIOS (20 Scenarios)
+Async Operations & Performance:
+"Your API calls are timing out randomly. How do you implement robust error handling and retry logic?"
+
+Expected: Retry patterns, exponential backoff, error boundaries
+
+"You have multiple API calls that need to happen in specific order with dependencies. How do you manage this?"
+
+Expected: Promise chains, async/await, error handling
+
+"Users report the app freezes when processing large datasets. How do you handle this without blocking the UI?"
+
+Expected: Web Workers, chunk processing, background tasks
+
+"You need to implement real-time data synchronization across multiple tabs. How do you approach this?"
+
+Expected: BroadcastChannel, localStorage events, state synchronization
+
+"Your function is called too frequently (e.g., on scroll). How do you optimize performance?"
+
+Expected: Debouncing, throttling, requestAnimationFrame
+
+TypeScript & Code Quality:
+"Your team is migrating a large JavaScript codebase to TypeScript. What's your strategy?"
+
+Expected: Gradual migration, strict mode, type definitions
+
+"You're building a utility library. How do you design flexible yet type-safe utility functions?"
+
+Expected: Generics, conditional types, overloads
+
+"You need to type a complex form with dynamic fields and validation. How do you structure the types?"
+
+Expected: Discriminated unions, mapped types, validation types
+
+"Your React components have complex prop interfaces. How do you make them maintainable?"
+
+Expected: Component props, default props, prop documentation
+
+"You're integrating with a third-party API that has inconsistent response formats. How do you handle this safely?"
+
+Expected: Runtime validation, type guards, error handling
+
+Architecture & Patterns:
+"You're building a plugin system where developers can extend functionality. How do you design this?"
+
+Expected: Plugin architecture, dependency injection, type safety
+
+"Your application has complex business logic spread across components. How do you centralize it?"
+
+Expected: Custom hooks, service layers, state machines
+
+"You need to implement A/B testing across the application. How do you design the architecture?"
+
+Expected: Feature flags, context providers, analytics integration
+
+"Your team is building a design system. How do you ensure type safety and consistency?"
+
+Expected: Component props, theme typing, variant systems
+
+"You're implementing a caching system for API responses. How do you design it?"
+
+Expected: Cache strategies, invalidation, memory management
+
+Error Handling & Debugging:
+"Your application has unhandled promise rejections causing crashes. How do you fix this?"
+
+Expected: Global error handlers, error boundaries, logging
+
+"Users report inconsistent behavior that you can't reproduce. How do you debug this?"
+
+Expected: Logging, error tracking, user session replay
+
+"You need to handle form submission with multiple validation rules and async checks."
+
+Expected: Form libraries, validation schemas, async validation
+
+"Your function has complex conditional logic that's hard to read. How do you refactor it?"
+
+Expected: Early returns, guard clauses, strategy pattern
+
+"You're dealing with race conditions in API calls. How do you prevent them?"
+
+Expected: Request cancellation, AbortController, request deduplication
+
+🔥 REDUX & STATE MANAGEMENT SCENARIOS (15 Scenarios)
+Redux Toolkit Scenarios:
+"Your Redux store has become large and slow. How do you optimize it?"
+
+Expected: Normalized state, selectors, lazy loading
+
+"You need to implement optimistic updates for a collaborative editing feature."
+
+Expected: Optimistic updates, conflict resolution, rollback strategies
+
+"Your team is new to Redux and creating inconsistent actions. How do you standardize this?"
+
+Expected: createSlice, action creators, middleware
+
+"You have multiple API calls that need to be coordinated. How do you manage this with Redux?"
+
+Expected: createAsyncThunk, extraReducers, loading states
+
+"Users report state inconsistencies after coming back to the app. How do you implement state persistence?"
+
+Expected: Redux Persist, migration, storage configuration
+
+Advanced State Patterns:
+"You're building a real-time dashboard with multiple data sources. How do you manage state?"
+
+Expected: WebSocket integration, real-time updates, data normalization
+
+"Your application has complex derived state that's expensive to compute. How do you optimize this?"
+
+Expected: Reselect, memoized selectors, derived state patterns
+
+"You need to implement undo/redo functionality. How do you approach this?"
+
+Expected: State history, action replay, immutable updates
+
+"Your team is mixing local and global state inconsistently. How do you establish clear boundaries?"
+
+Expected: State colocation, when to use local vs global state
+
+"You're building a multi-step form that needs to persist state between sessions."
+
+Expected: Form state management, persistence, validation
+
+Migration & Architecture:
+"You're migrating from class components to hooks with Redux. What's your strategy?"
+
+Expected: Gradual migration, hooks adoption, testing strategy
+
+"Your Redux actions have become too granular. How do you consolidate them?"
+
+Expected: Action design, domain-driven actions, batch updates
+
+"You need to implement feature-based Redux structure. How do you organize the codebase?"
+
+Expected: Feature folders, slice organization, dependency management
+
+"Your application has circular dependencies in Redux. How do you resolve this?"
+
+Expected: Dependency analysis, middleware organization, action types
+
+"You're integrating Redux with a real-time database. How do you handle synchronization?"
+
+Expected: Real-time updates, conflict resolution, offline support
+
+⚡ TANSTACK QUERY SCENARIOS (15 Scenarios)
+API Integration & Caching:
+"Your application makes duplicate API calls. How do you implement request deduplication?"
+
+Expected: Query keys, staleTime, cacheTime configuration
+
+"You need to implement infinite scrolling for a social media feed. How do you approach this?"
+
+Expected: useInfiniteQuery, cursor-based pagination, loading states
+
+"Users see stale data after mutations. How do you ensure cache consistency?"
+
+Expected: Query invalidation, optimistic updates, background refetch
+
+"Your API has rate limiting. How do you handle retries and backoff?"
+
+Expected: retry configuration, error handling, exponential backoff
+
+"You need to prefetch data for better UX. How do you implement this?"
+
+Expected: prefetchQuery, router integration, user behavior prediction
+
+Advanced Patterns:
+"You have dependent queries where one query needs data from another."
+
+Expected: enabled option, query dependencies, loading states
+
+"You're building a search feature with real-time results. How do you optimize this?"
+
+Expected: Debounced queries, cancel previous requests, loading states
+
+"Your application needs offline support with background synchronization."
+
+Expected: Offline mutations, sync on reconnect, conflict resolution
+
+"You're integrating with a GraphQL API. How do you set up TanStack Query?"
+
+Expected: GraphQL clients, query normalization, cache configuration
+
+"You need to implement real-time updates with WebSockets alongside REST APIs."
+
+Expected: WebSocket integration, cache updates, subscription management
+
+Performance & Optimization:
+"Your query cache is growing too large. How do you manage cache size and memory?"
+
+Expected: Cache garbage collection, max cache size, manual cache management
+
+"You have complex data transformations. Where should you put this logic?"
+
+Expected: select option, derived data, transformation layers
+
+"Your application makes too many background refetches. How do you optimize this?"
+
+Expected: staleTime configuration, refetch intervals, smart refetching
+
+"You need to implement request cancellation for slow networks."
+
+Expected: AbortController, query cancellation, timeout handling
+
+"Your team is new to TanStack Query and overusing isLoading. How do you educate them?"
+
+Expected: Loading state differences, status vs fetchStatus, UI patterns
+
+🎛️ DEBOUNCING & THROTTLING SCENARIOS (10 Scenarios)
+Real-World Implementation:
+"Your search input makes an API call on every keystroke, overwhelming the server."
+
+Expected: Debounced search, cancel previous requests, loading indicators
+
+"Scroll events are firing too frequently, causing performance issues."
+
+Expected: Throttled scroll handlers, passive event listeners, RAF
+
+"Users can spam a submit button, causing duplicate submissions."
+
+Expected: Button debouncing, loading states, form submission guards
+
+"Resize events are causing expensive layout recalculations."
+
+Expected: Debounced resize handlers, layout thrashing prevention
+
+"You need to implement auto-save that triggers after user stops typing."
+
+Expected: Debounced auto-save, save states, conflict detection
+
+Advanced Patterns:
+"You need different debounce timings based on network conditions."
+
+Expected: Adaptive debouncing, network-aware timings
+
+"Your debounced function needs to execute immediately on first call."
+
+Expected: Leading debounce, immediate execution patterns
+
+"You need to cancel pending debounced calls when component unmounts."
+
+Expected: Cleanup functions, cancellation tokens, useEffect cleanup
+
+"You're implementing a real-time collaboration feature with throttled updates."
+
+Expected: Throttled WebSocket messages, update batching, conflict resolution
+
+"Your analytics system needs to send events but not overwhelm the server."
+
+Expected: Throttled analytics, event batching, queue management
+
+🔄 REAL-WORLD PROJECT SCENARIOS (15 Scenarios)
+E-commerce Application:
+"You're building an e-commerce app. How do you handle cart state, inventory updates, and order management?"
+
+Expected: Optimistic updates, real-time inventory, order workflow
+
+"Users add items to cart but see out-of-stock messages at checkout. How do you prevent this?"
+
+Expected: Real-time inventory checks, reservation systems, cache invalidation
+
+"You need to implement product search with filters, sorting, and pagination."
+
+Expected: Query parameters, URL synchronization, filter state management
+
+Social Media Application:
+"You're building a social media app with real-time feeds, likes, and comments."
+
+Expected: Real-time updates, optimistic UI, notification systems
+
+"Users want to upload multiple images with progress tracking and retry failed uploads."
+
+Expected: File upload management, progress tracking, retry logic
+
+"You need to implement infinite scrolling with seamless loading and error handling."
+
+Expected: Infinite query, error boundaries, skeleton loading
+
+Productivity Application:
+"You're building a task management app with drag-and-drop, real-time collaboration, and offline support."
+
+Expected: Real-time sync, conflict resolution, offline queues
+
+"Users want to export their data in multiple formats with progress tracking."
+
+Expected: Background processing, file generation, progress indicators
+
+"You need to implement a rich text editor with auto-save and version history."
+
+Expected: Debounced auto-save, delta updates, version management
+
+Finance Application:
+"You're building a stock trading app with real-time prices, portfolio updates, and trade execution."
+
+Expected: Real-time data, WebSocket management, transaction safety
+
+"Users need to see real-time charts that update every second without performance issues."
+
+Expected: Canvas rendering, data streaming, performance optimization
+
+"You're implementing secure authentication with session management and biometric login."
+
+Expected: Secure storage, token management, biometric APIs
+
+Travel Application:
+"You're building a travel booking app with complex search, availability checks, and booking flows."
+
+Expected: Complex state management, API coordination, error handling
+
+"Users want to search flights with multiple filters, date ranges, and real-time pricing."
+
+Expected: Search optimization, cache strategies, real-time updates
+
+"You need to implement a map with real-time locations, directions, and offline maps."
+
+Expected: Map integration, location tracking, offline storage
+
+🎯 INTERVIEW EVALUATION CRITERIA
+For Each Scenario, Evaluate:
+markdown
+✅ Technical Depth: How well they understand underlying concepts
+✅ Problem-Solving: Logical approach and consideration of edge cases
+✅ Architecture Thinking: System design and scalability considerations
+✅ Practical Experience: Real-world implementation knowledge
+✅ Communication: Ability to explain complex concepts clearly
+Senior-Level Expectations:
+markdown
+🎯 1-2 Years: Basic implementation, follows patterns
+🎯 2-3 Years: Advanced patterns, performance considerations  
+🎯 3+ Years: System design, architecture decisions, team leadership
+💡 HOW TO USE THESE SCENARIOS
+For Interviewers:
+javascript
+// Ask follow-up questions:
+- "What are the trade-offs of your approach?"
+- "How would you handle edge case X?"
+- "How would you test this implementation?"
+- "What metrics would you track to measure success?"
+For Candidates Preparing:
+javascript
+// Practice answering:
+- Think aloud and explain your reasoning
+- Consider multiple approaches and trade-offs
+- Discuss real-world constraints (team, timeline, resources)
+- Mention how you'd measure and iterate on the solution
