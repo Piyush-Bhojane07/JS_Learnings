@@ -1,0 +1,635 @@
+🎯 HIGH PRIORITY (400+ Questions)
+1. React Native Core (120 Questions)
+Architecture & Fundamentals:
+
+What is React Native and how does it differ from other cross-platform frameworks?
+
+Explain the React Native architecture and bridge concept
+
+What are the main threads in React Native and what do they handle?
+
+How does React Native communicate with native platforms?
+
+What is the difference between native modules and JS components?
+
+Explain the new architecture (Fabric, Turbo Modules, JSI)
+
+What is JSI (JavaScript Interface) and how does it improve performance?
+
+What are Turbo Modules and how do they differ from legacy native modules?
+
+What is Fabric and how does it change rendering?
+
+What is Hermes and what advantages does it offer?
+
+How does React Native handle different screen densities and resolutions?
+
+What are the differences between react-native and expo?
+
+When would you choose bare React Native over Expo?
+
+What are the main limitations of React Native?
+
+How does hot reloading differ from live reloading?
+
+Explain the component lifecycle in React Native
+
+What are the different ways to create components in React Native?
+
+How does React Native's styling differ from web CSS?
+
+What is the purpose of the Metro bundler?
+
+How does code signing work in React Native?
+
+Core Components:
+21. Explain all core components and their use cases
+22. What's the difference between View and ScrollView?
+23. How do FlatList and SectionList differ from ScrollView?
+24. When would you use Image vs ImageBackground?
+25. Explain the Pressable component and its advantages over Touchable* components
+26. How does Flexbox work in React Native compared to web?
+27. What are the main differences in styling between React Native and CSS?
+28. How do you handle platform-specific styling?
+29. What is the PixelRatio API and when would you use it?
+30. How do you create responsive designs in React Native?
+31. Explain the useWindowDimensions hook
+32. How do you handle dark/light mode theming?
+33. How do you handle text overflow and ellipsis?
+34. What's the difference between margin and padding in React Native?
+35. How do you create custom reusable components with TypeScript?
+36. How do you handle images optimization and caching?
+37. How do you implement custom fonts in React Native?
+38. What are the best practices for handling different screen sizes?
+39. How do you handle safe areas and notches?
+435. How do you implement custom text components in React Native?
+436. What's the difference between props and state in React components?
+437. How do you create reusable button components with variants?
+438. How do you handle component composition in React Native?
+439. What are the best practices for component prop design?
+
+State Management & Hooks:
+40. How do you choose between local state and global state?
+41. Compare Redux, MobX, Zustand, and Context API for state management
+42. How do you implement Context API with useReducer?
+43. What are the performance implications of using Context?
+44. Explain the useState hook with complex state objects
+45. How does useEffect work and what are its dependency patterns?
+46. When would you use useMemo vs useCallback?
+47. How do you create custom hooks in React Native?
+48. What is the useRef hook and its use cases beyond DOM references?
+49. How do you handle forms and form state management?
+50. Explain the useReducer hook for complex state logic
+51. How do you persist state locally with async storage?
+52. What are the common patterns for API state management?
+53. How do you handle offline state and synchronization?
+54. How do you implement debouncing with hooks?
+55. How do you implement throttling with hooks?
+56. What is the useImperativeHandle hook and when to use it?
+57. How do you handle derived state with useMemo?
+58. What are the rules of hooks and why are they important?
+440. How does useState work internally and when should you use it?
+441. What are the common pitfalls when using useState?
+442. How do you handle complex state objects with useState?
+443. When should you use multiple useState vs single state object?
+444. How do you implement derived state with useState?
+
+Performance Optimization:
+59. How do you identify performance bottlenecks in React Native?
+60. What are the common causes of slow performance in React Native apps?
+61. How do you optimize React Native bundle size?
+62. Explain the useMemo and useCallback optimization patterns
+63. How do you debug performance issues using Flipper?
+64. What is the importance of keys in lists?
+65. How do you implement virtualized lists effectively?
+66. Explain React.memo and shouldComponentUpdate usage
+67. How do you reduce re-renders in React Native?
+68. What are the best practices for image optimization?
+69. How do you handle memory leaks in React Native?
+70. Explain the InteractionManager and when to use it
+71. How do you implement lazy loading of components and screens?
+72. What are the performance implications of the bridge?
+73. How do you use the Performance API to monitor app performance?
+74. How does Hermes improve performance?
+75. What is debouncing and how do you implement it for search?
+76. What is throttling and how do you implement it for scroll events?
+77. How do you optimize animation performance?
+78. How do you measure and reduce JavaScript thread load?
+
+APIs & Networking:
+79. How do you handle API calls in React Native?
+80. Compare Fetch vs Axios vs React Query for API handling
+81. How do you implement secure API communication with SSL pinning?
+82. Explain error handling and retry mechanisms in API calls
+83. How do you handle file uploads and downloads?
+84. What is the FormData API and when to use it?
+85. How do you implement WebSocket connections in React Native?
+86. What are the best practices for handling API tokens and authentication?
+87. How do you implement request/response interceptors?
+88. Explain the NetInfo API and offline detection strategies
+89. How do you handle different API environments (dev/staging/prod)?
+90. What are the strategies for API caching?
+
+2. JavaScript Fundamentals (80 Questions)
+Core Concepts:
+91. Explain JavaScript's event loop and call stack
+92. What is the difference between let, const, and var?
+93. How does JavaScript handle asynchronous operations?
+94. Explain the concept of hoisting in JavaScript
+95. What are closures and how do they work?
+96. Explain the this keyword and its binding rules
+97. What is the difference between == and ===?
+98. How does JavaScript's prototypal inheritance work?
+99. What are primitive and reference types in JavaScript?
+100. Explain the concept of truthy and falsy values
+
+ES6+ Features:
+101. What are the main features introduced in ES6?
+102. Explain arrow functions and their differences from regular functions
+103. What are template literals and their advantages?
+104. Explain destructuring assignment for objects and arrays
+105. What are default parameters and how do they work?
+106. Explain the spread and rest operators
+107. What are enhanced object literals?
+108. Explain the different types of loops (for, for...of, for...in, forEach)
+109. What are Sets, Maps, WeakSet, and WeakMap?
+110. Explain the class syntax and how it differs from prototype-based inheritance
+
+Functions & Scope:
+111. What is the difference between function scope and block scope?
+112. Explain lexical scoping in JavaScript
+113. How do closures help in data encapsulation?
+114. What are higher-order functions?
+115. Explain function currying and partial application
+116. How does the bind method work?
+117. Explain the concept of pure functions
+118. How do you memoize functions?
+
+Async JavaScript:
+119. Explain the callback pattern and callback hell
+120. What are Promises and how do they work?
+121. Explain the Promise lifecycle (pending, fulfilled, rejected)
+122. How does async/await work under the hood?
+123. What is the difference between microtasks and macrotasks?
+124. Explain the event loop with examples
+125. How do you handle multiple asynchronous operations?
+126. What is the difference between Promise.all and Promise.allSettled?
+127. How do you cancel a Promise?
+128. Explain the AbortController API
+129. How do you handle errors in async/await?
+130. What is the difference between parallel and sequential execution of promises?
+
+Objects & Arrays:
+131. What are the different ways to iterate over objects and arrays?
+132. Explain the array methods: map, filter, reduce, find, some, every
+133. How do you deep clone an object?
+134. What is the difference between Object.create, Object.assign, and spread operator?
+135. How do you prevent object modification (freeze, seal, preventExtensions)?
+136. What are getters and setters in objects?
+137. Explain the prototype chain and proto vs prototype
+138. How does the instanceof operator work?
+
+3. TypeScript with React (60 Questions)
+Fundamentals:
+139. What are the differences between interface and type in TypeScript?
+140. How do you type React component props with TypeScript?
+141. What are generic types and how do you use them with React components?
+142. How do you type React hooks like useState, useEffect, and useReducer?
+143. What are union types and how are they useful in React development?
+144. How do you handle optional props and default values?
+145. What are utility types (Partial, Pick, Omit, Required)?
+146. How do you type React events (onClick, onChange, onSubmit)?
+147. What is type inference and how does it work with React?
+148. How do you create and use custom hooks with TypeScript?
+
+Advanced Patterns:
+149. How do you create polymorphic components in TypeScript?
+150. What are discriminated unions and how do they help with state management?
+151. How do you type higher-order components (HOCs) in TypeScript?
+152. What is the as const assertion and when would you use it?
+153. How do you create type-safe forms with TypeScript?
+154. How do you type Redux slices and actions with TypeScript?
+155. How do you create type-safe event emitters in React?
+156. How do you handle dependency injection with TypeScript?
+157. How do you type React context with TypeScript?
+158. What are the different ways to type React children?
+159. How do you handle component refs with TypeScript?
+160. What are template literal types and how can they be useful?
+
+Performance & Testing:
+161. How do you use React.memo with TypeScript to optimize re-renders?
+162. How do you type useCallback and useMemo hooks properly?
+163. How do you handle large type definitions without performance issues?
+164. How do you write type-safe tests for React components?
+165. How do you create type-safe test utilities and fixtures?
+166. How do you handle third-party library types?
+167. How do you create type-safe error boundaries?
+168. How do you type custom hooks that return complex state shapes?
+
+4. State Management (50 Questions)
+Redux Toolkit:
+169. What are the main problems Redux Toolkit solves?
+170. How do you configure a store with multiple reducers?
+171. What is createSlice and how does it work?
+172. How do you handle immutable updates in slice reducers?
+173. What is the difference between reducers and extraReducers?
+174. What is createAsyncThunk and how does it work?
+175. How do you handle loading states with async thunks?
+176. How do you optimize Redux selectors?
+177. What is the purpose of createSelector from Reselect?
+178. How do you prevent unnecessary re-renders?
+179. How do you test Redux slices and reducers?
+180. How do you test async thunks with mock APIs?
+
+Context API:
+181. How do you implement Context API with useReducer?
+182. What are the performance implications of using Context?
+183. How do you optimize Context API with selective re-renders?
+184. When should you use Context vs Redux?
+185. How do you handle complex state with useReducer + Context?
+
+React Query (TanStack):
+186. What is React Query and what problems does it solve?
+187. How do you set up React Query in a React application?
+188. How do you use the useQuery hook?
+189. What are query keys and why are they important?
+190. How do you handle loading and error states?
+191. How do you implement dependent queries?
+192. How do you handle pagination with useQuery?
+193. How do you use the useMutation hook?
+194. How do you handle optimistic updates?
+195. How do you invalidate queries?
+196. How do you update query data directly?
+197. How do you implement request deduplication?
+198. How do you handle cache garbage collection?
+445. Practical useQuery implementation for API data fetching
+446. How do you handle loading states with useQuery?
+447. How do you implement error handling with useQuery?
+448. How do you implement data refetching with useQuery?
+449. How do you implement dependent queries with useQuery?
+
+5. Styling (40 Questions)
+StyleSheet API:
+199. What are the advantages of StyleSheet API over inline styles?
+200. How does StyleSheet optimize style performance?
+201. How do you create and use StyleSheets?
+202. How do you handle dynamic styles with StyleSheet?
+203. How do you combine multiple styles?
+204. How do you create responsive designs with StyleSheet?
+205. How do you handle platform-specific styles?
+206. How does StyleSheet.create() optimize performance?
+
+Tailwind/NativeWind:
+207. What is NativeWind and how does it bring Tailwind to React Native?
+208. How do you configure tailwind.config.js for React Native?
+209. How do you handle dark mode with NativeWind?
+210. How do you create responsive designs with NativeWind?
+211. How do you handle dynamic classes with conditional rendering?
+212. How do you create reusable component variants with Tailwind?
+213. What are the performance considerations of using NativeWind?
+
+Styled Components:
+214. What are Styled Components and how do they work?
+215. How do you implement themes with Styled Components?
+216. How do you handle responsive design with Styled Components?
+217. How do you create polymorphic components?
+218. How do you handle conditional styling?
+219. What are the performance implications?
+220. How do you optimize re-renders with Styled Components?
+
+Performance & Optimization:
+221. How do you optimize large lists with React Query?
+222. How do you implement query debouncing?
+223. How do you handle concurrent mutations?
+224. What are the best practices for query key structure?
+225. How do you integrate React Query with Axios interceptors?
+226. How do you handle authentication with React Query?
+227. How do you test components using React Query?
+
+📚 MEDIUM PRIORITY (350+ Questions)
+1. Navigation (40 Questions)
+Compare React Navigation vs React Native Navigation (Wix)
+
+How do you implement stack navigation with parameters?
+
+What's the difference between stack, tab, and drawer navigators?
+
+How do you handle authentication flow with navigation?
+
+Explain deep linking implementation in React Native
+
+How do you pass complex objects between screens?
+
+What are navigation references and how do you use them?
+
+How do you handle navigation state persistence?
+
+Explain the navigation lifecycle methods
+
+How do you implement custom transitions and animations?
+
+How do you handle protected routes and navigation guards?
+
+What is the purpose of navigation containers?
+
+How do you implement nested navigation?
+
+How do you handle hardware back button on Android?
+
+How do you implement modal screens and overlay navigation?
+
+2. Advanced Patterns (60 Questions)
+How do you implement biometric authentication?
+
+Explain push notification implementation with FCM and APNS
+
+How do you implement in-app purchases?
+
+What are the best practices for accessibility?
+
+How do you handle right-to-left (RTL) layouts?
+
+Explain the LayoutAnimation API usage
+
+How do you create reusable component libraries?
+
+What are the considerations for supporting tablets?
+
+How do you handle theming in large applications?
+
+Explain react-native-reanimated library advantages
+
+How do you implement complex gesture handling?
+
+What are the security best practices?
+
+How do you prevent reverse engineering?
+
+How do you migrate between major React Native versions?
+
+How do you implement background tasks?
+
+How do you handle deep linking with multiple parameters?
+
+How do you implement video streaming and playback?
+
+How do you work with maps and location services?
+
+How do you implement audio recording and playback?
+
+How do you handle camera and photo library access?
+
+3. Testing & Debugging (50 Questions)
+What testing frameworks are commonly used?
+
+How do you set up Jest for React Native testing?
+
+Explain unit, integration, and e2e testing differences
+
+How do you test React Native components with React Testing Library?
+
+What is Detox and how do you use it for e2e testing?
+
+How do you debug using Flipper?
+
+Explain Chrome DevTools debugging
+
+How do you handle error tracking and crash reporting?
+
+What are common debugging techniques for native issues?
+
+How do you test platform-specific code?
+
+How do you mock native modules in tests?
+
+What are best practices for snapshot testing?
+
+How do you test navigation flows?
+
+How do you implement continuous testing in CI/CD?
+
+How do you measure test coverage?
+
+4. Storage & APIs (60 Questions)
+Storage:
+278. What are different storage options in React Native?
+279. Compare AsyncStorage vs MMKV vs SQLite vs Realm
+280. When would you use SQLite over key-value storage?
+281. How do you implement secure storage for sensitive data?
+282. Explain Keychain (iOS) and SharedPreferences (Android)
+283. How do you handle data synchronization?
+284. What are best practices for database schema migrations?
+285. How do you implement efficient caching strategies?
+286. Explain MMKV advantages over AsyncStorage
+287. How do you handle large dataset storage?
+288. What is Realm and when would you use it over SQLite?
+289. How do you implement offline-first data strategies?
+
+Advanced APIs:
+290. How do you implement background sync?
+291. How do you handle large file downloads with progress?
+292. What are security considerations for network requests?
+293. How do you implement WebSocket connections?
+294. How do you handle real-time updates?
+295. How do you implement file uploads with progress tracking?
+
+5. Deployment & CI/CD (40 Questions)
+Explain building iOS apps for distribution
+
+Explain building Android apps for distribution
+
+Differences between dev, staging, production builds
+
+How do you set up CodePush for OTA updates?
+
+Explain app signing process for iOS and Android
+
+How do you automate builds with Fastlane?
+
+Best practices for app store submission
+
+How do you handle versioning and build numbers?
+
+Explain CI/CD pipeline setup
+
+How do you manage environment configurations?
+
+Common deployment pitfalls and how to avoid
+
+How do you handle beta testing and distribution?
+
+How do you monitor app performance in production?
+
+How do you handle rollbacks and emergency updates?
+
+6. Native Modules (30 Questions)
+When would you need to create a native module?
+
+Explain creating native module for iOS (Swift/Obj-C)
+
+Explain creating native module for Android (Kotlin/Java)
+
+Differences between sync and async native methods
+
+How do you handle data type conversion between JS and native?
+
+Common pitfalls when working with native modules
+
+How do you debug native module issues?
+
+Explain event emitter pattern for native-to-JS communication
+
+How do you handle threading in native modules?
+
+What is codegen and how does it help with type safety?
+
+7. Library-Specific (70 Questions)
+Axios:
+320. What is Axios and how does it differ from Fetch API?
+321. How do you create Axios instance with custom configuration?
+322. How do you handle different content types?
+323. How do you cancel requests in Axios?
+324. How do you handle request timeouts?
+325. What are Axios interceptors and how do you use them?
+326. How do you implement automatic token refresh?
+327. How do you handle request retry logic?
+328. How do you create centralized error handling?
+
+Advanced JavaScript:
+329. Explain Proxy and Reflect API
+330. What are WebAssembly use cases with JavaScript?
+331. Explain Internationalization API (Intl)
+332. What are JavaScript decorators?
+333. How does JavaScript handle big numbers (BigInt)?
+334. Explain WeakRefs and when to use them
+335. What is Web Cryptography API?
+
+System Design:
+336. How do you structure large JavaScript applications?
+337. Principles of clean code in JavaScript
+338. How do you handle state management in large apps?
+339. Explain microfrontends concept
+340. How do you implement caching strategies?
+341. Best practices for API design
+342. How do you handle authentication and authorization?
+343. Explain feature flags concept
+344. How do you implement A/B testing?
+
+⏳ LOW PRIORITY (250+ Questions)
+1. Advanced Edge Cases (80 Questions)
+How would you debug memory leak in large React Native app?
+
+Describe optimizing slow-scrolling FlatList with 1000+ items
+
+How would you implement real-time chat with offline support?
+
+Strategy for handling poor network conditions
+
+How would you migrate large app from old to new architecture?
+
+Describe implementing complex animation sequence
+
+How would you handle data synchronization across multiple screens?
+
+Approach to internationalization (i18n) in large app
+
+How would you implement A/B testing and feature flags?
+
+Strategy for monitoring and improving app startup time
+
+Advanced Scenarios:
+355. Implement deep clone function
+356. Create debounce function
+357. Implement Promise from scratch
+358. Create function to flatten nested arrays
+359. Implement memoization for expensive functions
+360. Create function to remove duplicates from array
+361. Implement function to reverse string
+362. Create function to find most frequent element
+363. Implement function to check palindrome
+364. Create function to merge sorted arrays
+365. Implement function to find intersection of arrays
+366. Create function to capitalize first letter of each word
+367. Implement function to chunk array
+368. Create function to check if objects are equal
+369. Implement function to group array elements by property
+
+2. Rarely Asked Concepts (90 Questions)
+Framework Comparisons:
+370. How does React Native compare to Flutter?
+371. Advantages over Ionic/Capacitor?
+372. How does it handle native APIs compared to others?
+373. Future roadmap of React Native
+374. Performance compared to native development
+375. Community and ecosystem strengths
+376. Third-party library compatibility
+377. Licensing considerations
+378. Support for emerging platforms (Windows, macOS)
+379. Enterprise adoption considerations
+
+Advanced Storage:
+380. What is WatermelonDB and what problems does it solve?
+381. How does WatermelonDB differ from SQLite?
+382. How do you define models and relationships?
+383. How do you handle database migrations?
+384. How do you perform CRUD operations?
+385. How do you query data with WatermelonDB?
+386. How do you implement offline synchronization?
+387. How do you handle conflicts?
+388. What is Realm and how does it compare?
+389. How do you perform CRUD in Realm?
+390. What are Realm's real-time capabilities?
+391. How do you implement Realm sync?
+392. How do you handle migrations in Realm?
+393. What is RxDB and its main features?
+394. How does RxDB handle real-time synchronization?
+395. How do you perform CRUD with RxDB?
+396. How do you handle real-time queries?
+
+Advanced Architecture:
+397. How do you implement feature-based Redux structure?
+398. How do you handle complex state relationships?
+399. Patterns for handling forms with Redux
+400. How do you implement search with debouncing?
+401. How do you handle file uploads with progress?
+402. How do you implement real-time collaboration?
+403. Security best practices with RTK
+404. How do you handle API versioning?
+405. How do you implement A/B testing with Redux?
+
+3. Very Specific Scenarios (80 Questions)
+Offline Storage Deep Dive:
+406. What is offline-first architecture?
+407. Different strategies for caching API data
+408. How do you handle data synchronization conflicts?
+409. Trade-offs between offline storage solutions
+410. How do you implement optimistic updates offline?
+411. When to use SQLite vs key-value vs document databases?
+412. How do you handle schema migrations?
+413. Security considerations for offline data
+414. How do you implement data encryption at rest?
+415. Performance implications of large datasets
+
+Advanced Patterns:
+416. How do you design API for offline compatibility?
+417. Patterns for handling offline queues
+418. How do you implement background sync?
+419. Strategies for data compression
+420. How do you monitor storage usage and cleanup?
+421. How do you implement cancellable debounced functions?
+422. Implement adaptive debouncing based on network
+423. How do you test debounced and throttled functions?
+424. Implement debouncing with immediate execution
+425. How do you handle memory leaks with debounced functions?
+
+Advanced Tooling:
+426. Role of package.json in JavaScript projects
+427. Difference between dependencies and devDependencies
+428. Explain semantic versioning in npm
+429. What are JavaScript bundlers (Webpack, Vite, Parcel)?
+430. How do you configure Webpack?
+431. What are Babel and its use cases?
+432. Explain ESLint and Prettier for code quality
+433. What are pre-commit hooks?
+434. How do you set up CI/CD pipeline?
+435. Different JavaScript module systems

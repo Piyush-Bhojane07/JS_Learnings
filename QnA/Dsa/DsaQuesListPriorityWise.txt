@@ -1,0 +1,440 @@
+DSA for 1-3+ Years Experience - Priority Wise Coding Problems
+🎯 HIGH PRIORITY (Must Solve - 80 Problems)
+1. Arrays & Strings (25 Problems)
+Easy (Warm-up):
+
+Two Sum - Find two numbers that add up to target
+
+Best Time to Buy/Sell Stock - Maximum profit
+
+Contains Duplicate - Check if array has duplicates
+
+Valid Anagram - Check if two strings are anagrams
+
+Valid Parentheses - Check balanced parentheses
+
+Medium (Core):
+6. Longest Substring Without Repeating Characters - Sliding window
+7. 3Sum - Find all triplets that sum to zero
+8. Container With Most Water - Two pointers
+9. Group Anagrams - Hash map + sorting
+10. Longest Palindromic Substring - Expand around center
+11. Merge Intervals - Sort and merge
+12. Set Matrix Zeroes - In-place modification
+13. Spiral Matrix - Matrix traversal
+14. Rotate Image - Matrix rotation
+15. Word Search - Backtracking in matrix
+
+Hard (Important):
+16. Trapping Rain Water - Two pointers/DP
+17. Minimum Window Substring - Sliding window
+18. Sliding Window Maximum - Deque approach
+19. Largest Rectangle in Histogram - Stack
+20. Find All Anagrams in String - Sliding window
+
+Pattern Practice:
+21. Maximum Subarray (Kadane's Algorithm)
+22. Product of Array Except Self (Prefix/Suffix)
+23. Find First and Last Position in Sorted Array (Binary Search)
+24. Search in Rotated Sorted Array (Modified Binary Search)
+25. Next Permutation (Array manipulation)
+
+2. Linked Lists (15 Problems)
+Core Operations:
+26. Reverse Linked List (Iterative & Recursive)
+27. Detect Cycle in Linked List (Floyd's Algorithm)
+28. Merge Two Sorted Lists
+29. Remove Nth Node From End (Two pointers)
+30. Add Two Numbers (Linked list arithmetic)
+
+Advanced Patterns:
+31. Copy List with Random Pointer (Hash map/optimized)
+32. LRU Cache (Hash map + Doubly linked list)
+33. Merge K Sorted Lists (Heap approach)
+34. Reverse Nodes in k-Group
+35. Palindrome Linked List (Slow-fast pointers)
+
+Practice Problems:
+36. Intersection of Two Linked Lists
+37. Sort List (Merge sort on linked list)
+38. Reorder List
+39. Remove Duplicates from Sorted List II
+40. Flatten a Multilevel Doubly Linked List
+
+3. Trees & BST (20 Problems)
+Binary Tree Fundamentals:
+41. Maximum Depth of Binary Tree
+42. Same Tree
+43. Invert/Flip Binary Tree
+44. Binary Tree Level Order Traversal (BFS)
+45. Subtree of Another Tree
+
+Binary Search Tree:
+46. Validate Binary Search Tree
+47. Kth Smallest Element in BST (Inorder traversal)
+48. Lowest Common Ancestor of BST
+49. Convert Sorted Array to Binary Search Tree
+50. Delete Node in BST
+
+Advanced Tree Problems:
+51. Construct Binary Tree from Preorder and Inorder Traversal
+52. Binary Tree Maximum Path Sum
+53. Serialize and Deserialize Binary Tree
+54. Word Search II (Trie + Backtracking)
+55. Count Complete Tree Nodes
+
+Traversal Variations:
+56. Zigzag Level Order Traversal
+57. Binary Tree Right Side View
+58. Path Sum II (All paths)
+59. Sum Root to Leaf Numbers
+60. House Robber III (Tree DP)
+
+4. Dynamic Programming (15 Problems)
+Classic DP Sequences:
+61. Climbing Stairs (Fibonacci pattern)
+62. Coin Change (Unbounded knapsack)
+63. Longest Increasing Subsequence
+64. Word Break
+65. Combination Sum IV
+
+2D DP Problems:
+66. Longest Common Subsequence
+67. Edit Distance
+68. 0/1 Knapsack Problem
+69. Target Sum (Subset sum variation)
+70. Interleaving String
+
+Grid & Path Problems:
+71. Unique Paths
+72. Minimum Path Sum
+73. Decode Ways
+74. Maximum Product Subarray
+75. Palindromic Substrings
+
+5. Graphs (5 Problems)
+Essential Graph Algorithms:
+76. Number of Islands (DFS/BFS)
+77. Clone Graph (DFS + Hash map)
+78. Course Schedule (Topological sort)
+79. Word Ladder (BFS)
+80. Alien Dictionary (Topological sort)
+
+📚 MEDIUM PRIORITY (Should Solve - 60 Problems)
+1. Advanced Arrays & Strings (15 Problems)
+First Missing Positive
+
+Find the Duplicate Number
+
+Game of Life (In-place)
+
+Insert Delete GetRandom O(1)
+
+Longest Consecutive Sequence
+
+Minimum Window Substring (Optimized)
+
+Sliding Window Maximum (Optimized)
+
+Subarray Sum Equals K
+
+Find All Duplicates in Array
+
+Product of Array Except Self (Space optimized)
+
+Rotate Array (Multiple approaches)
+
+Move Zeroes (Two pointers)
+
+Sort Colors (Dutch national flag)
+
+Maximum Points You Can Obtain from Cards
+
+Jump Game
+
+2. Advanced Trees & Heaps (15 Problems)
+Binary Search Tree Iterator
+
+Flatten Binary Tree to Linked List
+
+Populating Next Right Pointers in Each Node
+
+Vertical Order Traversal of Binary Tree
+
+Boundary of Binary Tree
+
+All Nodes Distance K in Binary Tree
+
+Serialize and Deserialize BST
+
+Kth Largest Element in Array (Quickselect/Heap)
+
+Top K Frequent Elements (Bucket sort/Heap)
+
+Find Median from Data Stream (Two heaps)
+
+Merge K Sorted Lists (Heap optimization)
+
+Task Scheduler
+
+Reorganize String
+
+K Closest Points to Origin
+
+Connect Sticks with Minimum Cost
+
+3. Advanced DP & Backtracking (15 Problems)
+Regular Expression Matching
+
+Wildcard Matching
+
+Burst Balloons
+
+Minimum Insertion Steps to Make String Palindrome
+
+Longest Palindromic Subsequence
+
+Maximum Length of Repeated Subarray
+
+Count Different Palindromic Subsequences
+
+Generate Parentheses (Backtracking)
+
+Permutations (Backtracking)
+
+Combinations (Backtracking)
+
+Subsets (Backtracking)
+
+Palindrome Partitioning
+
+N-Queens
+
+Sudoku Solver
+
+Word Search (Backtracking)
+
+4. Advanced Graphs (15 Problems)
+Graph Valid Tree
+
+Number of Connected Components
+
+Shortest Path in Binary Matrix
+
+Rotting Oranges
+
+Walls and Gates
+
+Course Schedule II
+
+Minimum Height Trees
+
+Reconstruct Itinerary
+
+Cheapest Flights Within K Stops
+
+Network Delay Time
+
+Swim in Rising Water
+
+Critical Connections in Network (Tarjan's)
+
+Word Ladder II
+
+Minimum Genetic Mutation
+
+Evaluate Division
+
+⏳ LOW PRIORITY (Nice to Have - 40 Problems)
+1. System Design & OOP (10 Problems)
+LRU Cache (Optimized implementation)
+
+LFU Cache
+
+Design Twitter
+
+Design Search Autocomplete System
+
+Design Browser History
+
+Design Underground System
+
+Design File System
+
+Design Hit Counter
+
+Design Phone Directory
+
+Design Circular Queue
+
+2. Advanced Data Structures (10 Problems)
+Range Sum Query - Mutable (Segment tree)
+
+Count of Smaller Numbers After Self (Segment tree/BIT)
+
+The Skyline Problem (Line sweep + Heap)
+
+My Calendar I/II/III (Binary search tree)
+
+Data Stream as Disjoint Intervals
+
+Find Median from Data Stream (Follow-ups)
+
+Insert Delete GetRandom O(1) - Duplicates allowed
+
+All O(1) Data Structure
+
+Design Add and Search Words Data Structure (Trie)
+
+Maximum Frequency Stack
+
+3. Mathematical & Bit Manipulation (10 Problems)
+Single Number (Bit manipulation)
+
+Number of 1 Bits
+
+Counting Bits
+
+Reverse Bits
+
+Missing Number
+
+Sum of Two Integers (Bit manipulation)
+
+Reverse Integer
+
+Palindrome Number
+
+Pow(x, n) (Fast power)
+
+Sqrt(x) (Binary search)
+
+4. Advanced Algorithms (10 Problems)
+Find the Celebrity
+
+Meeting Rooms II
+
+Merge Intervals (Follow-ups)
+
+Non-overlapping Intervals
+
+Minimum Number of Arrows to Burst Balloons
+
+Queue Reconstruction by Height
+
+Task Scheduler (Optimized)
+
+Gas Station
+
+Partition Labels
+
+Interval List Intersections
+
+📊 STUDY PLAN BY WEEKS
+Week 1-2: Arrays & Strings Foundation
+markdown
+Daily: 4-5 problems
+Focus: Two pointers, sliding window, hash maps
+Key Problems: 1-25 from High Priority
+Week 3-4: Linked Lists & Trees
+markdown
+Daily: 3-4 problems  
+Focus: Pointers manipulation, tree traversals
+Key Problems: 26-60 from High Priority
+Week 5-6: Dynamic Programming
+markdown
+Daily: 3-4 problems
+Focus: DP patterns, state transitions
+Key Problems: 61-75 from High Priority
+Week 7-8: Graphs & Medium Priority
+markdown
+Daily: 4-5 problems
+Focus: BFS/DFS, topological sort
+Key Problems: 76-110 from High + Medium
+Week 9-10: Advanced Patterns
+markdown
+Daily: 4-5 problems
+Focus: Backtracking, advanced DP, heaps
+Key Problems: 111-140 from Medium Priority
+Week 11-12: System Design & Low Priority
+markdown
+Daily: 3-4 problems
+Focus: Design problems, edge cases
+Key Problems: 141-180 from Low Priority
+🎯 PATTERN-BASED GROUPING
+Sliding Window Pattern:
+javascript
+// Problems: 6, 17, 18, 20, 87, 88
+const slidingWindowProblems = [
+  'Longest Substring Without Repeating Characters',
+  'Minimum Window Substring', 
+  'Sliding Window Maximum',
+  'Find All Anagrams in String'
+];
+Two Pointers Pattern:
+javascript
+// Problems: 1, 8, 16, 23, 92, 93
+const twoPointerProblems = [
+  'Two Sum',
+  'Container With Most Water',
+  'Trapping Rain Water',
+  'Find First and Last Position in Sorted Array'
+];
+DFS/BFS Pattern:
+javascript
+// Problems: 15, 44, 54, 76, 77, 79
+const traversalProblems = [
+  'Word Search',
+  'Binary Tree Level Order Traversal', 
+  'Word Search II',
+  'Number of Islands',
+  'Clone Graph',
+  'Word Ladder'
+];
+Dynamic Programming Pattern:
+javascript
+// Problems: 61-75, 111-117
+const dpProblems = [
+  'Climbing Stairs',
+  'Coin Change',
+  'Longest Increasing Subsequence',
+  'Longest Common Subsequence',
+  'Edit Distance',
+  'Regular Expression Matching'
+];
+💡 COMPANY-SPECIFIC FOCUS
+For Google:
+javascript
+const googleFocus = [
+  7, 8, 16, 18, 19, 52, 53, 54, 67, 68, 76, 77, 79, 113, 114
+];
+// Heavy on: Graphs, DP, Trees, System Design
+For Meta:
+javascript
+const metaFocus = [
+  1, 6, 7, 10, 15, 26, 27, 33, 41, 46, 47, 76, 77, 79, 118
+];
+// Heavy on: Arrays, Strings, Trees, Recursion
+For Amazon:
+javascript
+const amazonFocus = [
+  1, 2, 3, 12, 26, 27, 32, 41, 46, 49, 62, 76, 77, 141, 142
+];
+// Heavy on: Linked Lists, OOP, System Design
+🚀 SUCCESS METRICS
+After High Priority (8 weeks):
+markdown
+✅ Can solve: 2 medium problems in 45 minutes
+✅ Ready for: Mid-size companies, some FAANG
+✅ Confidence: Technical rounds at 70%+ companies
+After Medium Priority (12 weeks):
+markdown
+✅ Can solve: 2-3 medium/hard problems in 45 minutes  
+✅ Ready for: All FAANG companies
+✅ Confidence: Technical rounds at 90%+ companies
+After Complete (16 weeks):
+markdown
+✅ Can solve: Complex system design + coding
+✅ Ready for: Senior roles at top companies
+✅ Confidence: Excel in any technical interview
+This 180-problem list covers everything needed for 1-3+ years experience interviews, prioritized by importance and interview frequency! 🚀
