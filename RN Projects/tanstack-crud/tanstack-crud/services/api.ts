@@ -50,6 +50,25 @@ export const apiServicePosts = {
 };
 
 
+export interface Comments {
+  postId: number;
+  id: number;
+  name: string;
+  email: string;
+  body : string;
+}
+
+export const apiServiceComments = {
+ async getComment () : Promise<Comments[]> {
+   const response = await axios.get(
+     "https://jsonplaceholder.typicode.com/comments"
+   );
+   console.log(response.status);
+   console.log(response.data)
+   return response.data
+ }
+}
+
 
 // More endpoints from JSONPlaceholder
 // const jsonPlaceholderEndpoints = [
