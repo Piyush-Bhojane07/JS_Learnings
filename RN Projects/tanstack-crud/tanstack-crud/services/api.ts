@@ -34,54 +34,73 @@ export const apiService = {
 };
 
 export interface Post {
-  id : number,
+  id: number;
   userId: number;
   title: string;
   body: string;
 }
-
 
 export const apiServicePosts = {
   async getPost(): Promise<Post[]> {
     const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
     // console.log(res.data)
     return res.data;
-  }
+  },
 };
-
 
 export interface Comments {
   postId: number;
   id: number;
   name: string;
   email: string;
-  body : string;
+  body: string;
 }
 
 export const apiServiceComments = {
- async getComment () : Promise<Comments[]> {
-   const response = await axios.get(
-     "https://jsonplaceholder.typicode.com/comments"
-   );
-   console.log(response.status);
-   console.log(response.data)
-   return response.data
- }
+  async getComment(): Promise<Comments[]> {
+    const response = await axios.get(
+      "https://jsonplaceholder.typicode.com/comments"
+    );
+    return response.data;
+  },
+};
+
+export interface Photo {
+  id: number;
+  sol: number;
+  camera: {
+    id: number;
+    name: string;
+    rover_id: number;
+    full_name: string;
+  };
+  img_src: string;
+  earth_date: string;
+  rover: {
+    id: number;
+    name: string;
+    landing_date: string;
+    launch_date: string;
+    status: string;
+  };
+}
+
+export interface NasaResponse {
+  photos: Photo[];
 }
 
 
-// More endpoints from JSONPlaceholder
-// const jsonPlaceholderEndpoints = [
-//   'https://jsonplaceholder.typicode.com/comments',
-//   'https://jsonplaceholder.typicode.com/albums',
-//   'https://jsonplaceholder.typicode.com/photos',
-//   'https://jsonplaceholder.typicode.com/todos'
-// '
-// // ];
-
-// const githubEndpoints = [
-//   "https://api.github.com/users/octocat",
-//   "https://api.github.com/users/octocat/repos",
-//   "https://api.github.com/search/repositories?q=react",
-//   "https://api.github.com/orgs/facebook/repos",
-// ];
+export const apiServiceNasa = {
+  async getNasa(): Promise<Photo[]> {
+    try {
+      const res = await axios.get(
+        "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=DEMO_KEY"
+      );
+      console.log("NASA API Response:", res.data); // Debug log
+      return res.data.photos;
+    } catch (error) {
+      console.error("NASA API Error:", error);
+      throw error;
+    }
+  },
+};

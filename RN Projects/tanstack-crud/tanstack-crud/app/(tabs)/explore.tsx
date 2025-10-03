@@ -52,10 +52,24 @@ export default function ExploreScreen() {
           borderRadius: 8,
           marginVertical: 10,
         }}
-        onPress={() => router.push("/screens/posts")} // Navigate to root (app/index.tsx)
+        onPress={() => router.push("/screens/comments")} // Navigate to root (app/index.tsx)
       >
         <Text style={{ color: "white", fontSize: 18 }}>
-          Go to Home (Post List)
+          Go to Home (comments List)
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={{
+          backgroundColor: "#007AFF",
+          padding: 15,
+          borderRadius: 8,
+          marginVertical: 10,
+        }}
+        onPress={() => router.push("/screens/nasa")} // Navigate to root (app/index.tsx)
+      >
+        <Text style={{ color: "white", fontSize: 18 }}>
+          Go to Home (nasa List)
         </Text>
       </TouchableOpacity>
     </View>
