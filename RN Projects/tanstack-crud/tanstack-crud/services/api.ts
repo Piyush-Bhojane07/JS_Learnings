@@ -104,3 +104,31 @@ export const apiServiceNasa = {
     }
   },
 };
+
+
+
+export interface Coins {
+  id : string,
+  image : string
+  current_price : number
+  market_cap : number
+}
+
+
+export const apiServiceCoins =  {
+  async getCoins () : Promise<Coins[]> {
+    const res = await axios.get(
+      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false"
+    );
+    return res.data;
+  }
+}
+
+
+
+
+
+
+
+
+
