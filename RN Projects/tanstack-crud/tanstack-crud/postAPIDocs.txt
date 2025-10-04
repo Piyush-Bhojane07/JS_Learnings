@@ -1,0 +1,183 @@
+I'll teach you POST API integration with TanStack Query using JSONPlaceholder's create post endpoint.
+
+1. Service Layer (api.ts)
+typescript
+export interface Post {
+  id?: number; // Optional for new posts
+  title: string;
+  body: string;
+  userId: number;
+}
+
+export const apiService = {
+  // GET - Fetch all posts
+  async getPosts(): Promise<Post[]> {
+    const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
+    return res.data;
+  },
+
+  // POST - Create new post
+  async createPost(newPost: Omit<Post, 'id'>): Promise<Post> {
+    const res = await axios.post(
+      "https://jsonplaceholder.typicode.com/posts",
+      newPost
+    );
+    return res.data; // Returns the created post with ID
+  },
+};
+2. React Query Hooks
+typescript
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiService, Post } from "@/services/api";
+
+// GET Hook - for fetching posts
+export const usePosts = () => {
+  return useQuery({
+    queryKey: ["posts"],
+    queryFn: apiService.getPosts,
+  });
+};
+
+// POST Hook - for creating posts
+export const useCreatePost = () => {
+  const queryClient = useQueryClient();
+  
+  return useMutation({
+    mutationFn: apiService.createPost,
+    onSuccess: (newPost) => {
+      // Update the cache with new post
+      queryClient.setQueryData(['posts'], (oldPosts: Post[] = []) => [
+        newPost,
+        ...oldPosts
+      ]);
+    },
+  });
+};
+3. Component Usage
+typescript
+import { useState } from "react";
+import { View, Text, TextInput, Button, FlatList } from "react-native";
+import { usePosts, useCreatePost } from "@/hooks/usePosts";
+
+export default function CreatePostScreen() {
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  
+  // GET - Fetch existing posts
+  const { data: posts, isLoading } = usePosts();
+  
+  // POST - Mutation for creating post
+  const createPostMutation = useCreatePost();
+
+  const handleSubmit = () => {
+    if (!title.trim() || !body.trim()) return;
+
+    createPostMutation.mutate({
+      title: title.trim(),
+      body: body.trim(),
+      userId: 1, // Hardcoded for example
+    });
+
+    // Clear form
+    setTitle("");
+    setBody("");
+  };
+
+  if (isLoading) return <Text>Loading posts...</Text>;
+
+  return (
+    <View style={{ padding: 20 }}>
+      {/* Create Post Form */}
+      <Text style={{ fontSize: 20, marginBottom: 20 }}>Create New Post</Text>
+      
+      <TextInput
+        placeholder="Post Title"
+        value={title}
+        onChangeText={setTitle}
+        style={{ borderWidth: 1, padding: 10, marginBottom: 10 }}
+      />
+      
+      <TextInput
+        placeholder="Post Body"
+        value={body}
+        onChangeText={setBody}
+        multiline
+        style={{ borderWidth: 1, padding: 10, marginBottom: 10, height: 100 }}
+      />
+      
+      <Button
+        title={
+          createPostMutation.isPending ? "Creating..." : "Create Post"
+        }
+        onPress={handleSubmit}
+        disabled={createPostMutation.isPending || !title.trim() || !body.trim()}
+      />
+
+      {createPostMutation.isError && (
+        <Text style={{ color: "red" }}>
+          Error: {createPostMutation.error.message}
+        </Text>
+      )}
+
+      {createPostMutation.isSuccess && (
+        <Text style={{ color: "green" }}>Post created successfully!</Text>
+      )}
+
+      {/* Display Posts */}
+      <Text style={{ fontSize: 18, marginTop: 30, marginBottom: 10 }}>
+        All Posts:
+      </Text>
+      
+      <FlatList
+        data={posts}
+        keyExtractor={(item) => item.id?.toString() || Math.random().toString()}
+        renderItem={({ item }) => (
+          <View style={{ padding: 10, borderBottomWidth: 1 }}>
+            <Text style={{ fontWeight: "bold" }}>{item.title}</Text>
+            <Text>{item.body}</Text>
+          </View>
+        )}
+      />
+    </View>
+  );
+}
+Key Concepts Explained:
+useMutation vs useQuery
+useQuery: For GET requests (reading data)
+
+useMutation: For POST/PUT/DELETE (changing data)
+
+Mutation Process
+mutate: Trigger the mutation
+
+isPending: Loading state during request
+
+isSuccess: When request completes successfully
+
+isError: When request fails
+
+Cache Update
+onSuccess: Updates cache so new post appears immediately
+
+No need to refetch entire list
+
+What JSONPlaceholder Returns
+When you POST to https://jsonplaceholder.typicode.com/posts:
+
+json
+{
+  "id": 101, // Auto-generated ID
+  "title": "Your post title", 
+  "body": "Your post body",
+  "userId": 1
+}
+Practice Exercise:
+Try to add:
+
+Edit post functionality (PUT request)
+
+Delete post functionality (DELETE request)
+
+Error handling for network failures
+
+Form validation
