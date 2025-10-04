@@ -86,6 +86,20 @@ export default function ExploreScreen() {
           Go to Home (coin List)
         </Text>
       </TouchableOpacity>
+
+      <TouchableOpacity
+        style={{
+          backgroundColor: "#007AFF",
+          padding: 15,
+          borderRadius: 8,
+          marginVertical: 10,
+        }}
+        onPress={() => router.push("/screens/forcast")} // Navigate to root (app/index.tsx)
+      >
+        <Text style={{ color: "white", fontSize: 18 }}>
+          Go to Home (forcast List)
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }

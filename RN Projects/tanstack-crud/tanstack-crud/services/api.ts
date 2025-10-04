@@ -125,6 +125,50 @@ export const apiServiceCoins =  {
 }
 
 
+export interface Forecast {
+  latitude: number;
+  longitude: number;
+  hourly_units: {
+    time: string;
+    temperature_2m: string;
+    relativehumidity_2m: string;
+    apparent_temperature: string;
+    precipitation_probability: string;
+    windspeed_10m: string;
+  };
+  hourly: {
+    time: string[];
+    temperature_2m: number[];
+    relativehumidity_2m: number[];
+    apparent_temperature: number[];
+    precipitation_probability: number[];
+    windspeed_10m: number[];
+  };
+  daily_units: {
+    time: string;
+    temperature_2m_max: string;
+    temperature_2m_min: string;
+    sunrise: string;
+    sunset: string;
+  };
+  daily: {
+    time: string[];
+    temperature_2m_max: number[];
+    temperature_2m_min: number[];
+    sunrise: string[];
+    sunset: string[];
+  };
+}
+
+
+export const apiServiceForcast = {
+  async getForcast(): Promise<Forecast> {
+    const res = await axios.get(
+      "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation_probability,windspeed_10m&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=auto"
+    );
+    return res.data as Forecast;
+  },
+};
 
 
 
