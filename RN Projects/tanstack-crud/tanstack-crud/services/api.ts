@@ -172,6 +172,40 @@ export const apiServiceForcast = {
 
 
 
+export const apiServiceAddPost = {
+  async createPost (data : {title : string; body : string; userId : number}){
+    const res = await axios.post("https://jsonplaceholder.typicode.com/posts", data);
+    return res.data
+  }
+}
 
 
+// Endpoint: https://reqres.in/api/users
+// Method: POST  
+// Data: { name: string, job: string }
+// Response: { id: string, name: string, job: string, createdAt: string }
 
+
+// Endpoint: https://jsonplaceholder.typicode.com/todos
+// Method: POST
+// Data: { title: string, completed: boolean, userId: number }
+
+// Endpoint: https://jsonplaceholder.typicode.com/comments
+// Method: POST
+// Data: { postId: number, name: string, email: string, body: string }
+
+
+// Endpoint: https://dummyjson.com/products/add
+// Method: POST
+// Data: { 
+//   title: string, 
+//   description: string, 
+//   price: number, 
+//   discountPercentage: number,
+//   rating: number,
+//   stock: number,
+//   brand: string,
+//   category: string,
+//   thumbnail: string,
+//   images: string[]
+// }

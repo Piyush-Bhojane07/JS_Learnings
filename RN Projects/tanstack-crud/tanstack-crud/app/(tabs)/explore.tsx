@@ -100,6 +100,30 @@ export default function ExploreScreen() {
           Go to Home (forcast List)
         </Text>
       </TouchableOpacity>
+
+      <TouchableOpacity
+        style={{
+          backgroundColor: "#007AFF",
+          padding: 15,
+          borderRadius: 8,
+          marginVertical: 10,
+        }}
+        onPress={() => router.push("/screens/createPost")} // Navigate to root (app/index.tsx)
+      >
+        <Text style={{ color: "white", fontSize: 18 }}>create post</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={{
+          backgroundColor: "#007AFF",
+          padding: 15,
+          borderRadius: 8,
+          marginVertical: 10,
+        }}
+        onPress={() => router.push("/screens/createPost")} // Navigate to root (app/index.tsx)
+      >
+        <Text style={{ color: "white", fontSize: 18 }}>create post</Text>
+      </TouchableOpacity>
     </View>
   );
 }
