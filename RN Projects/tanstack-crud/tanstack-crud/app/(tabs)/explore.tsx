@@ -120,9 +120,9 @@ export default function ExploreScreen() {
           borderRadius: 8,
           marginVertical: 10,
         }}
-        onPress={() => router.push("/screens/createPost")} // Navigate to root (app/index.tsx)
+        onPress={() => router.push("/screens/createUser")} // Navigate to root (app/index.tsx)
       >
-        <Text style={{ color: "white", fontSize: 18 }}>create post</Text>
+        <Text style={{ color: "white", fontSize: 18 }}>create User</Text>
       </TouchableOpacity>
     </View>
   );

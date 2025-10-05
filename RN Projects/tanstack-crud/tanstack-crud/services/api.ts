@@ -180,6 +180,31 @@ export const apiServiceAddPost = {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const apiServiceCreateUser = {
+  async createUser(data : {name : string, job : string}){
+    const res = await axios.post("https://reqres.in/api/users", data);
+    return res.data;
+  }
+}
+
+
 // Endpoint: https://reqres.in/api/users
 // Method: POST  
 // Data: { name: string, job: string }
