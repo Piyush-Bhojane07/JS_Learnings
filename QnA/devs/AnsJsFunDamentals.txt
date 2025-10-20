@@ -1,2 +1,48 @@
 JavaScript Fundamentals 
 
+What is the difference between == and ===? 
+
+
+== (Loose Equality)
+Compares values after type conversion
+
+Converts both values to a common type before comparing
+
+Also called "type coercion"
+
+=== (Strict Equality)
+Compares both value AND type
+
+No type conversion - both must be exactly the same
+
+Examples:
+javascript
+// == (Loose Equality) - with type coercion
+console.log(5 == "5");        // true (string "5" converted to number 5)
+console.log(1 == true);       // true (true converted to number 1)
+console.log(0 == false);      // true (false converted to number 0)
+console.log(null == undefined); // true
+console.log("" == false);     // true
+
+// === (Strict Equality) - no type coercion
+console.log(5 === "5");       // false (number vs string)
+console.log(1 === true);      // false (number vs boolean)
+console.log(0 === false);     // false (number vs boolean)
+console.log(null === undefined); // false
+console.log("" === false);    // false
+Best Practice:
+Always use === (strict equality) unless you have a specific reason to use ==. It's more predictable and prevents unexpected type coercion bugs.
+
+javascript
+// Good practice
+if (age === "25") {
+  // This will only execute if age is exactly string "25"
+}
+
+// Potentially problematic
+if (age == "25") {
+  // This executes for number 25 OR string "25"
+}-----------------------------------------------------
+
+
+Explain JavaScript's event loop and call stack
