@@ -46,3 +46,354 @@ if (age == "25") {
 
 
 Explain JavaScript's event loop and call stack
+
+JavaScript's Event Loop & Call Stack
+1. Call Stack
+What it is: A data structure that tracks function execution (LIFO - Last In, First Out)
+
+How it works: When a function is called, it's pushed to the stack. When it returns, it's popped off.
+
+javascript
+function first() {
+    console.log('First');
+    second();
+}
+
+function second() {
+    console.log('Second');
+    third();
+}
+
+function third() {
+    console.log('Third');
+}
+
+first();
+
+// Call Stack flow:
+// 1. first() enters stack
+// 2. console.log('First') enters stack → executes → leaves stack
+// 3. second() enters stack
+// 4. console.log('Second') enters stack → executes → leaves stack
+// 5. third() enters stack
+// 6. console.log('Third') enters stack → executes → leaves stack
+// 7. All functions leave stack in reverse order
+2. Event Loop
+Purpose: Monitors Call Stack and Callback Queue
+
+How it works: When Call Stack is empty, it moves callbacks from Queue to Stack
+
+The Complete Picture:
+javascript
+console.log('Start');
+
+setTimeout(() => {
+    console.log('Timeout callback');
+}, 0);
+
+Promise.resolve().then(() => {
+    console.log('Promise callback');
+});
+
+console.log('End');
+
+// Output order:
+// "Start"
+// "End" 
+// "Promise callback"  (Microtask queue - higher priority)
+// "Timeout callback"  (Macrotask queue - lower priority)
+Key Components:
+1. Call Stack
+Synchronous function execution
+
+One thing at a time
+
+2. Web APIs (Browser Environment)
+setTimeout, setInterval, DOM events, HTTP requests
+
+Handle asynchronous operations outside JS engine
+
+3. Callback Queues
+Microtask Queue: Promises, MutationObserver (higher priority)
+
+Macrotask Queue: setTimeout, setInterval, I/O operations (lower priority)
+
+Visual Flow:
+text
+Call Stack → Web APIs → Callback Queues → Event Loop → Back to Call Stack
+Detailed Example:
+javascript
+console.log('Script start'); // 1
+
+setTimeout(function() {
+    console.log('setTimeout'); // 4
+}, 0);
+
+Promise.resolve().then(function() {
+    console.log('Promise 1'); // 3
+}).then(function() {
+    console.log('Promise 2'); // 3.1
+});
+
+console.log('Script end'); // 2
+
+// Execution order:
+// 1. "Script start"
+// 2. "Script end"
+// 3. "Promise 1", "Promise 2" (Microtasks)
+// 4. "setTimeout" (Macrotask)
+Key Takeaways:
+JavaScript is single-threaded but can handle async operations
+
+Call Stack handles synchronous code
+
+Event Loop enables non-blocking behavior
+
+Microtasks have higher priority than Macrotasks
+
+Never block the call stack - it freezes the UI
+This architecture allows JavaScript to handle concurrent operations while remaining single-threaded!
+
+------------------------------------------------
+
+What is the difference between let, const, and var?
+
+var, let, and const - Complete Guide
+🎯 Quick Summary
+var: Function-scoped, hoisted, can be redeclared and reassigned
+
+let: Block-scoped, hoisted but in TDZ, can be reassigned but not redeclared
+
+const: Block-scoped, hoisted but in TDZ, cannot be reassigned or redeclared
+
+📝 Detailed Breakdown
+1. var (Legacy - Avoid in Modern Code)
+javascript
+// ✅ Function-scoped
+function varExample() {
+    if (true) {
+        var x = 10;
+    }
+    console.log(x); // 10 - accessible outside the block
+}
+
+// ✅ Hoisted with undefined
+console.log(a); // undefined (not ReferenceError)
+var a = 5;
+
+// ✅ Can be redeclared
+var b = 1;
+var b = 2; // No error
+
+// ✅ Can be reassigned
+var c = 10;
+c = 20; // Allowed
+2. let (Modern - Use when reassignment needed)
+javascript
+// ✅ Block-scoped
+function letExample() {
+    if (true) {
+        let y = 20;
+        console.log(y); // 20
+    }
+    // console.log(y); // ReferenceError: y is not defined
+}
+
+// ❌ Hoisted but in Temporal Dead Zone (TDZ)
+// console.log(d); // ReferenceError: Cannot access 'd' before initialization
+let d = 5;
+
+// ❌ Cannot be redeclared in same scope
+let e = 1;
+// let e = 2; // SyntaxError: Identifier 'e' has already been declared
+
+// ✅ Can be reassigned
+let f = 10;
+f = 20; // Allowed
+
+// ✅ Can be redeclared in different blocks
+if (true) {
+    let g = 1;
+}
+if (true) {
+    let g = 2; // Allowed - different block scope
+}
+3. const (Modern - Use by default)
+javascript
+// ✅ Block-scoped
+function constExample() {
+    if (true) {
+        const z = 30;
+        console.log(z); // 30
+    }
+    // console.log(z); // ReferenceError: z is not defined
+}
+
+// ❌ Must be initialized during declaration
+// const h; // SyntaxError: Missing initializer in const declaration
+const h = 10;
+
+// ❌ Cannot be reassigned
+const i = 10;
+// i = 20; // TypeError: Assignment to constant variable
+
+// ❌ Cannot be redeclared
+const j = 1;
+// const j = 2; // SyntaxError: Identifier 'j' has already been declared
+
+// ✅ But object properties can be modified!
+const person = {
+    name: "John",
+    age: 30
+};
+person.age = 31; // ✅ Allowed
+person.city = "NYC"; // ✅ Allowed
+
+// ✅ Same for arrays
+const numbers = [1, 2, 3];
+numbers.push(4); // ✅ Allowed
+numbers[0] = 10; // ✅ Allowed
+🔍 Deep Dive Examples
+Temporal Dead Zone (TDZ)
+javascript
+// var - hoisted and initialized with undefined
+console.log(varVariable); // undefined
+var varVariable = "hello";
+
+// let/const - hoisted but NOT initialized (TDZ)
+// console.log(letVariable); // ReferenceError: Cannot access 'letVariable' before initialization
+let letVariable = "world";
+
+// console.log(constVariable); // ReferenceError: Cannot access 'constVariable' before initialization
+const constVariable = "!";
+Loop Behavior
+javascript
+// var in loops - problematic
+for (var i = 0; i < 3; i++) {
+    setTimeout(() => console.log(i), 100); // 3, 3, 3
+}
+
+// let in loops - works as expected
+for (let j = 0; j < 3; j++) {
+    setTimeout(() => console.log(j), 100); // 0, 1, 2
+}
+
+// const in loops - each iteration gets new binding
+for (const k of [1, 2, 3]) {
+    console.log(k); // 1, 2, 3
+}
+Object/Array Mutation with const
+javascript
+// ✅ Objects can be modified
+const config = {
+    apiUrl: "https://api.example.com",
+    timeout: 5000
+};
+
+config.timeout = 10000; // ✅ Allowed
+config.retries = 3; // ✅ Allowed
+
+// ❌ But reassignment is not allowed
+// config = { new: "object" }; // TypeError
+
+// ✅ Arrays can be modified
+const fruits = ["apple", "banana"];
+fruits.push("orange"); // ✅ Allowed
+fruits[0] = "grape"; // ✅ Allowed
+
+// To prevent mutation entirely:
+Object.freeze(config);
+// config.newProp = "value"; // Fails silently in non-strict mode
+📊 Comparison Table
+Feature	var	let	const
+Scope	Function	Block	Block
+Hoisting	Yes (initialized)	Yes (TDZ)	Yes (TDZ)
+Redeclaration	✅ Allowed	❌ Not allowed	❌ Not allowed
+Reassignment	✅ Allowed	✅ Allowed	❌ Not allowed
+Temporal Dead Zone	❌ No	✅ Yes	✅ Yes
+Global Property	✅ Creates	❌ Doesn't create	❌ Doesn't create
+🏆 Best Practices
+Use const by default
+javascript
+// ✅ Good
+const API_URL = "https://api.example.com";
+const MAX_RETRIES = 3;
+const userPreferences = { theme: "dark" };
+const availableLanguages = ["en", "es", "fr"];
+
+// Only use let when you need reassignment
+let isLoading = false;
+let currentPage = 1;
+let userInput = "";
+
+// Avoid var in modern code
+// ❌ var oldVariable = "deprecated";
+Practical Usage Patterns
+javascript
+// Configuration objects
+const APP_CONFIG = {
+    apiBaseUrl: "https://api.example.com",
+    version: "1.0.0",
+    features: {
+        darkMode: true,
+        notifications: false
+    }
+};
+
+// Arrays that will be modified
+const TODO_ITEMS = [
+    { id: 1, text: "Learn JavaScript", completed: true },
+    { id: 2, text: "Master React Native", completed: false }
+];
+
+// Variables that change
+let currentUser = null;
+let networkStatus = "online";
+let attemptCount = 0;
+
+// In React Native components
+const UserProfile = () => {
+    const [user, setUser] = useState(null); // const for state setters
+    const navigation = useNavigation(); // const for hooks
+    
+    let temporaryValue = ""; // let for values that change within function
+};
+⚠️ Common Pitfalls & Solutions
+1. Accidental Reassignment
+javascript
+const items = [1, 2, 3];
+// items = [4, 5, 6]; // ❌ Error
+
+// ✅ Solution: Modify instead of reassign
+items.length = 0; // Clear array
+items.push(4, 5, 6); // Add new items
+2. Block Scope Confusion
+javascript
+if (true) {
+    let blockScoped = "I'm here";
+    const alsoBlockScoped = "Me too";
+}
+// console.log(blockScoped); // ❌ ReferenceError
+3. Loop Variables
+javascript
+// ✅ Correct - let creates new binding each iteration
+for (let i = 0; i < 5; i++) {
+    setTimeout(() => console.log(i), 100); // 0, 1, 2, 3, 4
+}
+
+// ❌ Problematic - var shares same binding
+for (var j = 0; j < 5; j++) {
+    setTimeout(() => console.log(j), 100); // 5, 5, 5, 5, 5
+}
+🎯 Interview Ready Summary
+When asked in interviews:
+
+"I use const by default for all variables that won't be reassigned, let for variables that need reassignment, and avoid var due to its function scoping and hoisting behavior which can lead to unexpected bugs. const doesn't make values immutable, it only prevents reassignment of the variable itself."
+
+This answer shows:
+
+Understanding of modern JS practices
+
+Awareness of scope and hoisting implications
+
+Practical experience with real-world usage
