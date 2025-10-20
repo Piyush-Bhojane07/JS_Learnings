@@ -130,6 +130,8 @@ APIs & Networking:
 89. How do you handle different API environments (dev/staging/prod)?
 90. What are the strategies for API caching?
 
+========================================================================
+
 2. JavaScript Fundamentals (80 Questions)
 Core Concepts:
 91. Explain JavaScript's event loop and call stack
