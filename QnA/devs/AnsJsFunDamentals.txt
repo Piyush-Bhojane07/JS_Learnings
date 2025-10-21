@@ -2428,3 +2428,365 @@ obj.method(); // obj
 // 4. Default binding
 checkThis(); // Window/Global/undefined
 Mastering this is crucial for understanding JavaScript's object-oriented patterns and avoiding common bugs! 🚀
+----------------------------------------------------------------------------------------------------------
+
+
+How does JavaScript's prototypal inheritance work?
+99. What are primitive and reference types in JavaScript?
+100. Explain the concept of truthy and falsy values
+I'll answer all four questions comprehensively:
+
+98. How JavaScript's Prototypal Inheritance Works
+🎯 Core Concept
+JavaScript uses prototype-based inheritance instead of classical inheritance. Objects inherit directly from other objects.
+
+🔗 The Prototype Chain
+javascript
+// Every object has a hidden [[Prototype]] property
+const parent = {
+    type: 'animal',
+    breathe() {
+        console.log('Breathing...');
+    }
+};
+
+const child = {
+    name: 'Leo'
+};
+
+// Set up inheritance (modern way)
+Object.setPrototypeOf(child, parent);
+
+// Old way (not recommended): child.__proto__ = parent;
+
+console.log(child.name);     // "Leo" - own property
+console.log(child.type);     // "animal" - inherited
+child.breathe();            // "Breathing..." - inherited method
+
+// Check prototype
+console.log(Object.getPrototypeOf(child) === parent); // true
+🏗️ Constructor Functions & Prototypes
+javascript
+function Animal(name) {
+    this.name = name;
+}
+
+// Add methods to prototype
+Animal.prototype.speak = function() {
+    console.log(`${this.name} makes a sound`);
+};
+
+Animal.prototype.eat = function() {
+    console.log(`${this.name} is eating`);
+};
+
+// Create instances
+const dog = new Animal('Rex');
+const cat = new Animal('Whiskers');
+
+dog.speak(); // "Rex makes a sound"
+cat.speak(); // "Whiskers makes a sound"
+
+// Prototype chain:
+// dog -> Animal.prototype -> Object.prototype -> null
+console.log(dog.__proto__ === Animal.prototype); // true
+console.log(Animal.prototype.__proto__ === Object.prototype); // true
+console.log(Object.prototype.__proto__); // null
+📚 ES6 Classes (Syntactic Sugar)
+javascript
+class Animal {
+    constructor(name) {
+        this.name = name;
+    }
+    
+    speak() {
+        console.log(`${this.name} makes a sound`);
+    }
+    
+    eat() {
+        console.log(`${this.name} is eating`);
+    }
+}
+
+class Dog extends Animal {
+    constructor(name, breed) {
+        super(name); // Call parent constructor
+        this.breed = breed;
+    }
+    
+    speak() {
+        console.log(`${this.name} barks!`);
+    }
+    
+    fetch() {
+        console.log(`${this.name} fetches the ball`);
+    }
+}
+
+const myDog = new Dog('Buddy', 'Golden Retriever');
+myDog.speak(); // "Buddy barks!" (overridden)
+myDog.eat();   // "Buddy is eating" (inherited)
+
+// Prototype chain:
+// myDog -> Dog.prototype -> Animal.prototype -> Object.prototype -> null
+🔧 Prototype Methods & Properties
+javascript
+function Person(name) {
+    this.name = name;
+}
+
+Person.prototype.species = 'Homo sapiens';
+Person.prototype.introduce = function() {
+    console.log(`Hi, I'm ${this.name}`);
+};
+
+const john = new Person('John');
+const jane = new Person('Jane');
+
+console.log(john.species); // "Homo sapiens" (shared)
+console.log(jane.species); // "Homo sapiens" (shared)
+
+// hasOwnProperty - checks if property exists on object itself
+console.log(john.hasOwnProperty('name'));     // true
+console.log(john.hasOwnProperty('species'));  // false
+console.log(john.hasOwnProperty('introduce')); // false
+
+// in operator - checks entire prototype chain
+console.log('name' in john);     // true
+console.log('species' in john);  // true
+console.log('introduce' in john); // true
+99. Primitive vs Reference Types in JavaScript
+📊 Primitive Types (7 types)
+Stored by VALUE - copied when assigned/passed
+
+javascript
+// String, Number, Boolean, Undefined, Null, Symbol, BigInt
+
+let a = 10;
+let b = a; // Copy the value
+b = 20;
+
+console.log(a); // 10 (unchanged)
+console.log(b); // 20
+
+// Examples of primitives
+const str = "hello";          // String
+const num = 42;               // Number
+const bool = true;            // Boolean
+const undef = undefined;      // Undefined
+const empty = null;           // Null
+const sym = Symbol('unique'); // Symbol
+const big = 9007199254740991n; // BigInt
+🏢 Reference Types (Objects)
+Stored by REFERENCE - point to same memory location
+
+javascript
+// Objects, Arrays, Functions, Dates, etc.
+
+let obj1 = { name: 'Alice' };
+let obj2 = obj1; // Copy the reference (both point to same object)
+
+obj2.name = 'Bob';
+
+console.log(obj1.name); // "Bob" (changed!)
+console.log(obj2.name); // "Bob"
+
+// More examples
+const array1 = [1, 2, 3];
+const array2 = array1;
+array2.push(4);
+
+console.log(array1); // [1, 2, 3, 4] (changed!)
+console.log(array2); // [1, 2, 3, 4]
+
+const func1 = function() { return 'hello'; };
+const func2 = func1;
+console.log(func1 === func2); // true (same reference)
+🔄 Comparison Behavior
+javascript
+// Primitives - compared by VALUE
+console.log(5 === 5);           // true
+console.log('hello' === 'hello'); // true
+console.log(true === true);     // true
+
+// References - compared by REFERENCE (memory location)
+console.log({} === {});         // false (different objects)
+console.log([] === []);         // false (different arrays)
+
+const objA = { x: 1 };
+const objB = { x: 1 };
+const objC = objA;
+
+console.log(objA === objB); // false (different references)
+console.log(objA === objC); // true (same reference)
+🛠️ Working with References
+javascript
+// Shallow copy objects
+const original = { a: 1, b: { c: 2 } };
+
+// Spread operator (shallow copy)
+const copy1 = { ...original };
+copy1.a = 10;
+console.log(original.a); // 1 (unchanged)
+console.log(copy1.a);    // 10
+
+// But nested objects still share reference!
+copy1.b.c = 20;
+console.log(original.b.c); // 20 (changed!) - shallow copy issue
+
+// Deep copy solutions
+const deepCopy1 = JSON.parse(JSON.stringify(original));
+const deepCopy2 = structuredClone(original); // Modern browsers
+100. Truthy and Falsy Values
+📝 Falsy Values (6 values that evaluate to false)
+javascript
+// All these evaluate to false in boolean context
+if (false) {}
+if (null) {}
+if (undefined) {}
+if (0) {}
+if (-0) {}
+if (0n) {}        // BigInt zero
+if (NaN) {}
+if ("") {}        // Empty string
+
+// Verification
+console.log(Boolean(false));     // false
+console.log(Boolean(null));      // false
+console.log(Boolean(undefined)); // false
+console.log(Boolean(0));         // false
+console.log(Boolean(-0));        // false
+console.log(Boolean(0n));        // false
+console.log(Boolean(NaN));       // false
+console.log(Boolean(""));        // false
+✅ Truthy Values (Everything else)
+javascript
+// All these evaluate to true in boolean context
+if (true) {}
+if ({}) {}           // Empty object
+if ([]) {}           // Empty array
+if (42) {}           // Non-zero number
+if ("0") {}          // Non-empty string
+if ("false") {}      // Non-empty string
+if (new Date()) {}   // Date object
+if (-42) {}          // Negative number
+if (12n) {}          // BigInt
+if (3.14) {}         // Float
+if (-3.14) {}        // Negative float
+if (Infinity) {}     // Infinity
+if (-Infinity) {}    // Negative Infinity
+
+// Verification
+console.log(Boolean(true));        // true
+console.log(Boolean({}));          // true
+console.log(Boolean([]));          // true
+console.log(Boolean(42));          // true
+console.log(Boolean("0"));         // true
+console.log(Boolean("false"));     // true
+console.log(Boolean(new Date()));  // true
+🎯 Practical Usage Patterns
+javascript
+// 1. Default values with logical OR
+const username = userInput || "Anonymous";
+const count = userCount || 0;
+
+// 2. Optional chaining with nullish coalescing
+const name = user?.profile?.name ?? "Unknown";
+
+// 3. Conditional rendering
+const message = hasError && "Error occurred";
+const greeting = isLoggedIn && `Welcome, ${username}!`;
+
+// 4. Input validation
+function processInput(input) {
+    if (!input) {
+        return "No input provided";
+    }
+    return `Processing: ${input}`;
+}
+
+console.log(processInput(""));     // "No input provided"
+console.log(processInput("hello")); // "Processing: hello"
+
+// 5. Array filtering
+const mixedArray = [0, 1, false, 2, '', 3, null, undefined, 4, NaN];
+const truthyArray = mixedArray.filter(Boolean);
+console.log(truthyArray); // [1, 2, 3, 4]
+⚠️ Common Gotchas & Surprises
+javascript
+// Surprising truthy values
+console.log(Boolean('0'));      // true (non-empty string)
+console.log(Boolean(' '));      // true (space is non-empty)
+console.log(Boolean([]));       // true (empty array)
+console.log(Boolean({}));       // true (empty object)
+console.log(Boolean(function() {})); // true (function)
+
+// Surprising falsy values
+console.log(Boolean(0));        // false
+console.log(Boolean(-0));       // false
+console.log(Boolean(0n));       // false (BigInt zero)
+console.log(Boolean(''));       // false
+
+// Comparison quirks
+console.log(false == 0);        // true (type coercion)
+console.log(false === 0);       // false (strict equality)
+console.log('' == 0);           // true
+console.log('' === 0);          // false
+console.log(null == undefined); // true
+console.log(null === undefined); // false
+🛠️ Real-World Examples
+javascript
+// Form validation
+function validateForm(formData) {
+    if (!formData.username?.trim()) {
+        return "Username is required";
+    }
+    
+    if (!formData.email?.includes('@')) {
+        return "Valid email is required";
+    }
+    
+    if (!formData.age || formData.age < 18) {
+        return "Must be 18 or older";
+    }
+    
+    return "Form valid!";
+}
+
+// API response handling
+async function fetchUserData(userId) {
+    const response = await fetch(`/api/users/${userId}`);
+    const data = await response.json();
+    
+    // Check if data exists and has required properties
+    if (!data?.user?.profile) {
+        throw new Error("Invalid user data received");
+    }
+    
+    return data.user;
+}
+
+// Component rendering logic (React-like)
+function UserProfile({ user }) {
+    if (!user) {
+        return <div>Loading...</div>;
+    }
+    
+    return (
+        <div>
+            <h1>{user.name || 'Anonymous User'}</h1>
+            {user.bio && <p>{user.bio}</p>}
+            {user.isAdmin && <AdminPanel />}
+        </div>
+    );
+}
+🎯 Interview Ready Summary
+Prototypal Inheritance:
+"JavaScript uses prototype-based inheritance where objects inherit directly from other objects. Every object has a hidden [[Prototype]] property pointing to another object. When accessing a property, JavaScript looks up the prototype chain until it finds the property or reaches null."
+
+Primitive vs Reference:
+"Primitives (string, number, boolean, etc.) are stored by value and copied when assigned. Reference types (objects, arrays) are stored by reference, and variables point to the same memory location. This affects comparison behavior and mutation."
+
+Truthy/Falsy:
+"JavaScript has 6 falsy values: false, 0, "", null, undefined, and NaN. Everything else is truthy. This is used extensively for conditional logic, default values, and input validation."
+----------------------------------------------------------------------------------------------------------------------------
