@@ -145,6 +145,8 @@ Core Concepts:
 99. What are primitive and reference types in JavaScript?
 100. Explain the concept of truthy and falsy values
 
+----------------------------------------------------------------------------
+
 ES6+ Features:
 101. What are the main features introduced in ES6?
 102. Explain arrow functions and their differences from regular functions
