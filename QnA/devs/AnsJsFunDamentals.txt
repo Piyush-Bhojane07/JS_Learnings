@@ -3372,3 +3372,1032 @@ console.log(`Result: ${
 const users = [{ name: "John", age: 30 }, { name: "Jane", age: 25 }];
 const userList = users.map(user => `- ${user.name} (${user.age})`).join('\n');
 Template literals make string manipulation in JavaScript much more readable and maintainable! 🚀
+
+------------------------------------------------------------------------
+
+
+Explain destructuring assignment for objects and arrays
+105. What are default parameters and how do they work?
+106. Explain the spread and rest operators
+107. What are enhanced object literals?
+108. Explain the different types of loops (for, for...of, for...in, forEach)
+109. What are Sets, Maps, WeakSet, and WeakMap?
+110. Explain the class syntax and how it differs from prototype-based inheritance
+ES6+ Features - Complete Guide
+🎯 104. Destructuring Assignment
+Array Destructuring
+javascript
+// Basic array destructuring
+const numbers = [1, 2, 3, 4, 5];
+
+const [first, second, third] = numbers;
+console.log(first, second, third); // 1, 2, 3
+
+// Skip elements
+const [a, , c] = numbers;
+console.log(a, c); // 1, 3
+
+// Rest operator with arrays
+const [x, y, ...rest] = numbers;
+console.log(x, y, rest); // 1, 2, [3, 4, 5]
+
+// Default values
+const [p = 10, q = 20] = [1];
+console.log(p, q); // 1, 20
+
+// Swap variables
+let m = 1, n = 2;
+[m, n] = [n, m];
+console.log(m, n); // 2, 1
+
+// Function returning array
+function getCoordinates() {
+    return [40.7128, -74.0060];
+}
+const [lat, lng] = getCoordinates();
+Object Destructuring
+javascript
+// Basic object destructuring
+const user = {
+    name: 'John',
+    age: 30,
+    email: 'john@example.com',
+    address: {
+        city: 'New York',
+        country: 'USA'
+    }
+};
+
+const { name, age, email } = user;
+console.log(name, age, email); // John 30 john@example.com
+
+// Renaming variables
+const { name: userName, age: userAge } = user;
+console.log(userName, userAge); // John 30
+
+// Default values
+const { name, age, isActive = false } = user;
+console.log(isActive); // false
+
+// Nested destructuring
+const { address: { city, country } } = user;
+console.log(city, country); // New York USA
+
+// Rest operator with objects
+const { name, ...rest } = user;
+console.log(rest); // { age: 30, email: 'john@example.com', address: {...} }
+
+// Function parameters destructuring
+function printUser({ name, age, email = 'N/A' }) {
+    console.log(`${name} is ${age} years old. Email: ${email}`);
+}
+printUser(user);
+🎯 105. Default Parameters
+javascript
+// Basic default parameters
+function greet(name = 'Guest', greeting = 'Hello') {
+    return `${greeting}, ${name}!`;
+}
+
+console.log(greet()); // "Hello, Guest!"
+console.log(greet('John')); // "Hello, John!"
+console.log(greet('Jane', 'Hi')); // "Hi, Jane!"
+
+// Expressions as default values
+function createUser(name, id = generateId(), createdAt = new Date()) {
+    return { name, id, createdAt };
+}
+
+function generateId() {
+    return Math.random().toString(36).substr(2, 9);
+}
+
+// Default parameters with destructuring
+function createPost({ title, content, author = 'Anonymous', likes = 0 } = {}) {
+    return { title, content, author, likes };
+}
+
+console.log(createPost({ title: 'My Post', content: 'Hello World' }));
+// { title: 'My Post', content: 'Hello World', author: 'Anonymous', likes: 0 }
+
+// Default parameters are evaluated at call time
+function append(value, array = []) {
+    array.push(value);
+    return array;
+}
+
+console.log(append(1)); // [1]
+console.log(append(2)); // [2] (new array each time)
+🎯 106. Spread and Rest Operators
+Spread Operator (...)
+javascript
+// Arrays - copying and merging
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+
+const combined = [...arr1, ...arr2];
+console.log(combined); // [1, 2, 3, 4, 5, 6]
+
+const copy = [...arr1];
+console.log(copy); // [1, 2, 3] (shallow copy)
+
+// Objects - copying and merging
+const obj1 = { a: 1, b: 2 };
+const obj2 = { c: 3, d: 4 };
+
+const merged = { ...obj1, ...obj2 };
+console.log(merged); // { a: 1, b: 2, c: 3, d: 4 }
+
+const updated = { ...obj1, b: 20 };
+console.log(updated); // { a: 1, b: 20 }
+
+// Function arguments
+const numbers = [1, 2, 3, 4, 5];
+console.log(Math.max(...numbers)); // 5
+
+// String to array
+const str = "hello";
+const chars = [...str];
+console.log(chars); // ['h', 'e', 'l', 'l', 'o']
+Rest Operator (...)
+javascript
+// Function parameters
+function sum(...numbers) {
+    return numbers.reduce((total, num) => total + num, 0);
+}
+
+console.log(sum(1, 2, 3, 4, 5)); // 15
+
+// Mixed with regular parameters
+function logMessage(level, ...messages) {
+    console.log(`[${level}]`, ...messages);
+}
+
+logMessage('ERROR', 'Something went wrong', 'at line 10');
+
+// Array destructuring
+const [first, second, ...others] = [1, 2, 3, 4, 5];
+console.log(first, second, others); // 1, 2, [3, 4, 5]
+
+// Object destructuring
+const { name, ...details } = { name: 'John', age: 30, city: 'NYC' };
+console.log(name, details); // John { age: 30, city: 'NYC' }
+🎯 107. Enhanced Object Literals
+javascript
+// Property shorthand
+const name = 'John';
+const age = 30;
+
+// Old way
+const oldUser = {
+    name: name,
+    age: age
+};
+
+// Enhanced - property shorthand
+const newUser = { name, age };
+console.log(newUser); // { name: 'John', age: 30 }
+
+// Method shorthand
+// Old way
+const oldCalculator = {
+    add: function(a, b) {
+        return a + b;
+    }
+};
+
+// Enhanced - method shorthand
+const calculator = {
+    add(a, b) {
+        return a + b;
+    },
+    multiply(a, b) {
+        return a * b;
+    }
+};
+
+// Computed property names
+const propName = 'score';
+const dynamicKey = 'level';
+
+const game = {
+    [propName]: 100,
+    [`${dynamicKey}Name`]: 'Beginner',
+    // Dynamic method names
+    [`get${dynamicKey}`]() {
+        return this.levelName;
+    }
+};
+
+console.log(game); // { score: 100, levelName: 'Beginner', getlevel: [Function] }
+
+// Object method super calls
+const parent = {
+    greet() {
+        return 'Hello from parent';
+    }
+};
+
+const child = {
+    __proto__: parent,
+    greet() {
+        return super.greet() + ' and child';
+    }
+};
+
+console.log(child.greet()); // "Hello from parent and child"
+🎯 108. Loop Types Comparison
+for Loop
+javascript
+// Traditional for loop
+const arr = [1, 2, 3, 4, 5];
+
+for (let i = 0; i < arr.length; i++) {
+    console.log(arr[i]); // 1, 2, 3, 4, 5
+}
+
+// With break/continue
+for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === 3) break;
+    console.log(arr[i]); // 1, 2
+}
+for...of Loop (Arrays, Strings, Iterables)
+javascript
+// Arrays
+const numbers = [1, 2, 3, 4, 5];
+
+for (const number of numbers) {
+    console.log(number); // 1, 2, 3, 4, 5
+}
+
+// Strings
+const str = "hello";
+for (const char of str) {
+    console.log(char); // h, e, l, l, o
+}
+
+// With entries for index
+for (const [index, value] of numbers.entries()) {
+    console.log(index, value); // 0 1, 1 2, 2 3...
+}
+
+// Can use break/continue
+for (const number of numbers) {
+    if (number === 3) break;
+    console.log(number); // 1, 2
+}
+for...in Loop (Objects)
+javascript
+// Objects - iterates over enumerable properties
+const person = {
+    name: 'John',
+    age: 30,
+    city: 'NYC'
+};
+
+for (const key in person) {
+    console.log(key, person[key]); // name John, age 30, city NYC
+}
+
+// Includes inherited properties (be careful!)
+Array.prototype.customMethod = function() {};
+const arr = [1, 2, 3];
+
+for (const index in arr) {
+    console.log(index); // 0, 1, 2, "customMethod" 😮
+}
+
+// Use hasOwnProperty to avoid inherited
+for (const key in person) {
+    if (person.hasOwnProperty(key)) {
+        console.log(key, person[key]);
+    }
+}
+forEach Method (Arrays)
+javascript
+const numbers = [1, 2, 3, 4, 5];
+
+// forEach - for arrays only
+numbers.forEach(function(number, index, array) {
+    console.log(number, index); // 1 0, 2 1, 3 2...
+});
+
+// Arrow function version
+numbers.forEach((number, index) => {
+    console.log(number, index);
+});
+
+// ❌ Cannot break out of forEach
+numbers.forEach(number => {
+    if (number === 3) return; // This is continue, not break
+    console.log(number); // 1, 2, 4, 5
+});
+Loop Comparison Table
+Loop Type	Use For	Gets	Can Break?	Best For
+for	Anything	Index	✅	Control, performance
+for...of	Iterables	Value	✅	Arrays, strings, maps
+for...in	Objects	Keys	✅	Object properties
+forEach	Arrays	Value, Index	❌	Simple array iteration
+🎯 109. Sets, Maps, WeakSet, WeakMap
+Set (Unique value collection)
+javascript
+const set = new Set();
+
+// Adding values
+set.add(1);
+set.add(2);
+set.add(2); // Duplicate ignored
+set.add('hello');
+set.add({ name: 'John' });
+
+console.log(set.size); // 4
+console.log(set.has(1)); // true
+
+// Iteration
+for (const item of set) {
+    console.log(item); // 1, 2, 'hello', { name: 'John' }
+}
+
+// Array to Set (remove duplicates)
+const numbers = [1, 2, 2, 3, 4, 4, 5];
+const uniqueNumbers = new Set(numbers);
+console.log([...uniqueNumbers]); // [1, 2, 3, 4, 5]
+
+// Set methods
+set.delete(1);
+set.clear();
+Map (Key-Value pairs, any key type)
+javascript
+const map = new Map();
+
+// Any type as key
+map.set('name', 'John');
+map.set(1, 'number one');
+map.set({ id: 1 }, 'object key');
+
+console.log(map.get('name')); // John
+console.log(map.has(1)); // true
+
+// Iteration
+for (const [key, value] of map) {
+    console.log(key, value);
+}
+
+// Map from array
+const entries = [['name', 'John'], ['age', 30]];
+const userMap = new Map(entries);
+
+// Map methods
+console.log(map.size); // 3
+map.delete('name');
+map.clear();
+WeakSet (Weak reference Set)
+javascript
+const weakSet = new WeakSet();
+
+let obj1 = { name: 'John' };
+let obj2 = { name: 'Jane' };
+
+weakSet.add(obj1);
+weakSet.add(obj2);
+
+console.log(weakSet.has(obj1)); // true
+
+obj1 = null; // obj1 can be garbage collected
+
+// ❌ No iteration, no size property
+// ❌ Only objects as values
+// ❌ No primitive values
+WeakMap (Weak reference Map)
+javascript
+const weakMap = new WeakMap();
+
+let key1 = { id: 1 };
+let key2 = { id: 2 };
+
+weakMap.set(key1, 'secret data 1');
+weakMap.set(key2, 'secret data 2');
+
+console.log(weakMap.get(key1)); // 'secret data 1'
+
+key1 = null; // key1 and its value can be garbage collected
+
+// Use case: Private data storage
+const privateData = new WeakMap();
+
+class Person {
+    constructor(name) {
+        privateData.set(this, { name });
+    }
+    
+    getName() {
+        return privateData.get(this).name;
+    }
+}
+🎯 110. Class Syntax vs Prototype Inheritance
+Class Syntax (ES6)
+javascript
+// Class declaration
+class Person {
+    // Constructor
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    // Instance method
+    greet() {
+        return `Hello, I'm ${this.name}`;
+    }
+    
+    // Static method
+    static species() {
+        return 'Homo sapiens';
+    }
+    
+    // Getter
+    get description() {
+        return `${this.name} is ${this.age} years old`;
+    }
+    
+    // Setter
+    set updateAge(newAge) {
+        if (newAge > 0) {
+            this.age = newAge;
+        }
+    }
+}
+
+// Inheritance
+class Student extends Person {
+    constructor(name, age, grade) {
+        super(name, age); // Call parent constructor
+        this.grade = grade;
+    }
+    
+    study() {
+        return `${this.name} is studying`;
+    }
+    
+    // Override method
+    greet() {
+        return `${super.greet()} and I'm a student`;
+    }
+}
+
+// Usage
+const john = new Person('John', 30);
+const student = new Student('Jane', 20, 'A');
+
+console.log(john.greet()); // "Hello, I'm John"
+console.log(student.greet()); // "Hello, I'm Jane and I'm a student"
+console.log(Person.species()); // "Homo sapiens"
+Prototype Inheritance (Pre-ES6)
+javascript
+// Constructor function
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+}
+
+// Methods on prototype
+Person.prototype.greet = function() {
+    return `Hello, I'm ${this.name}`;
+};
+
+// Static method
+Person.species = function() {
+    return 'Homo sapiens';
+};
+
+// Inheritance using prototypes
+function Student(name, age, grade) {
+    Person.call(this, name, age); // Call parent constructor
+    this.grade = grade;
+}
+
+// Set up prototype chain
+Student.prototype = Object.create(Person.prototype);
+Student.prototype.constructor = Student;
+
+// Add method to Student prototype
+Student.prototype.study = function() {
+    return `${this.name} is studying`;
+};
+
+// Usage
+const john = new Person('John', 30);
+const student = new Student('Jane', 20, 'A');
+
+console.log(john.greet()); // "Hello, I'm John"
+console.log(student.greet()); // "Hello, I'm Jane"
+Key Differences
+Feature	Class Syntax	Prototype Inheritance
+Syntax	Clean, familiar	More verbose
+Inheritance	extends keyword	Manual prototype setup
+Constructor	constructor() method	Regular function
+Static methods	static keyword	Direct assignment
+Super calls	super()	ParentClass.call(this)
+Hoisting	Not hoisted	Functions are hoisted
+Private fields	#privateField	Closures or conventions
+Under the Hood
+javascript
+class MyClass {
+    constructor(value) {
+        this.value = value;
+    }
+    
+    getValue() {
+        return this.value;
+    }
+}
+
+// Is roughly equivalent to:
+function MyClass(value) {
+    this.value = value;
+}
+
+MyClass.prototype.getValue = function() {
+    return this.value;
+};
+Classes are primarily syntactic sugar over JavaScript's existing prototype-based inheritance, but provide a cleaner, more intuitive syntax! 🚀
+
+What are Sets, Maps, WeakSet, and WeakMap?
+110. Explain the class syntax and how it differs from prototype-based inheritance
+Sets, Maps, WeakSet, and WeakMap - Complete Guide
+🎯 109. Sets, Maps, WeakSet, and WeakMap
+Set (Collection of Unique Values)
+javascript
+// Creating a Set
+const set = new Set();
+
+// Adding values
+set.add(1);
+set.add(2);
+set.add(2); // Duplicate - ignored
+set.add('hello');
+set.add({ name: 'John' });
+set.add(NaN);
+set.add(NaN); // NaN === NaN in Sets
+
+console.log(set.size); // 5
+console.log(set.has(1)); // true
+console.log(set.has(3)); // false
+
+// Iterating through Set
+for (const item of set) {
+    console.log(item);
+}
+
+// Set to Array
+const uniqueArray = [...set];
+console.log(uniqueArray);
+
+// Practical Use Cases
+// 1. Remove duplicates from array
+const numbers = [1, 2, 2, 3, 4, 4, 5];
+const uniqueNumbers = [...new Set(numbers)];
+console.log(uniqueNumbers); // [1, 2, 3, 4, 5]
+
+// 2. Tracking unique items
+const cart = new Set();
+cart.add('item1');
+cart.add('item2');
+cart.add('item1'); // Won't add duplicate
+console.log(cart.size); // 2
+
+// Set Methods
+set.delete(1); // Remove item
+console.log(set.has(1)); // false
+
+set.clear(); // Remove all
+console.log(set.size); // 0
+Map (Key-Value Collection with Any Key Type)
+javascript
+// Creating a Map
+const map = new Map();
+
+// Setting values - any type as key
+map.set('name', 'John');
+map.set(1, 'number one');
+map.set(true, 'boolean key');
+map.set({ id: 1 }, 'object key');
+map.set([1, 2, 3], 'array key');
+
+console.log(map.size); // 5
+console.log(map.get('name')); // 'John'
+console.log(map.has(1)); // true
+
+// Iterating through Map
+for (const [key, value] of map) {
+    console.log(key, value);
+}
+
+// Map from Array
+const entries = [
+    ['name', 'John'],
+    ['age', 30],
+    ['city', 'NYC']
+];
+const userMap = new Map(entries);
+
+// Practical Use Cases
+// 1. Better object alternative for frequent additions/deletions
+const cache = new Map();
+function expensiveOperation(input) {
+    if (cache.has(input)) {
+        return cache.get(input);
+    }
+    const result = input * 2; // Simulate expensive operation
+    cache.set(input, result);
+    return result;
+}
+
+// 2. Metadata storage
+const elementMetadata = new Map();
+const button = document.createElement('button');
+elementMetadata.set(button, { clicks: 0, lastClicked: null });
+
+// Map Methods
+map.delete('name'); // Remove by key
+console.log(map.has('name')); // false
+
+console.log(map.size); // 4
+
+// Keys, Values, Entries
+console.log([...map.keys()]); // All keys
+console.log([...map.values()]); // All values
+console.log([...map.entries()]); // All [key, value] pairs
+WeakSet (Collection of Objects with Weak References)
+javascript
+// Creating a WeakSet
+const weakSet = new WeakSet();
+
+let obj1 = { name: 'John' };
+let obj2 = { name: 'Jane' };
+let obj3 = { name: 'Bob' };
+
+// Adding objects
+weakSet.add(obj1);
+weakSet.add(obj2);
+weakSet.add(obj3);
+
+console.log(weakSet.has(obj1)); // true
+
+// Removing reference allows garbage collection
+obj1 = null; // obj1 can be garbage collected now
+
+// ❌ Limitations
+// weakSet.add('string'); // TypeError: Invalid value used in weak set
+// console.log(weakSet.size); // undefined - no size property
+// for (const item of weakSet) {} // TypeError: weakSet is not iterable
+
+// Practical Use Case: Tracking objects without preventing GC
+const trackedElements = new WeakSet();
+
+function trackElement(element) {
+    trackedElements.add(element);
+    return element;
+}
+
+function isElementTracked(element) {
+    return trackedElements.has(element);
+}
+
+const div = document.createElement('div');
+trackElement(div);
+console.log(isElementTracked(div)); // true
+
+// When div goes out of scope, it can be garbage collected
+WeakMap (Key-Value with Weakly Referenced Keys)
+javascript
+// Creating a WeakMap
+const weakMap = new WeakMap();
+
+let key1 = { id: 1 };
+let key2 = { id: 2 };
+let key3 = { id: 3 };
+
+// Setting values - keys must be objects
+weakMap.set(key1, 'secret data 1');
+weakMap.set(key2, 'secret data 2');
+weakMap.set(key3, { sensitive: 'information' });
+
+console.log(weakMap.get(key1)); // 'secret data 1'
+console.log(weakMap.has(key2)); // true
+
+// Removing reference allows garbage collection
+key1 = null; // key1 and its value can be garbage collected
+
+// ❌ Limitations
+// weakMap.set('string', 'value'); // TypeError: Invalid value used as weak map key
+// console.log(weakMap.size); // undefined
+// for (const [key, value] of weakMap) {} // Not iterable
+
+// Practical Use Case 1: Private data for classes
+const privateData = new WeakMap();
+
+class Person {
+    constructor(name, age) {
+        // Store private data in WeakMap
+        privateData.set(this, {
+            name: name,
+            age: age,
+            internalId: Math.random()
+        });
+    }
+    
+    getName() {
+        return privateData.get(this).name;
+    }
+    
+    getAge() {
+        return privateData.get(this).age;
+    }
+    
+    // Public property
+    get id() {
+        return privateData.get(this).internalId;
+    }
+}
+
+const john = new Person('John', 30);
+console.log(john.getName()); // 'John'
+console.log(john.id); // 0.234234... (random)
+// console.log(john.internalId); // undefined - truly private!
+
+// Practical Use Case 2: DOM element metadata
+const elementData = new WeakMap();
+
+function attachData(element, data) {
+    elementData.set(element, data);
+}
+
+function getData(element) {
+    return elementData.get(element);
+}
+
+const button = document.createElement('button');
+attachData(button, { clickCount: 0, lastClick: null });
+
+// When button is removed from DOM, it can be garbage collected
+📊 Collection Types Comparison
+Feature	Set	Map	WeakSet	WeakMap
+Value Types	Any	Any keys/values	Objects only	Objects keys only
+Iterable	✅ Yes	✅ Yes	❌ No	❌ No
+Size Property	✅ Yes	✅ Yes	❌ No	❌ No
+Garbage Collection	❌ Prevents	❌ Prevents	✅ Allows	✅ Allows
+Duplicate Keys	❌ No	❌ No	❌ No	❌ No
+Performance	Fast lookups	Fast lookups	Faster cleanup	Faster cleanup
+🎯 110. Class Syntax vs Prototype-Based Inheritance
+Class Syntax (ES6+)
+javascript
+// Class Declaration
+class Person {
+    // Constructor
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+        this.#privateField = 'secret'; // Private field
+    }
+    
+    // Instance method
+    greet() {
+        return `Hello, I'm ${this.name} and I'm ${this.age} years old`;
+    }
+    
+    // Static method
+    static species() {
+        return 'Homo sapiens';
+    }
+    
+    // Getter
+    get description() {
+        return `${this.name} - ${this.age} years`;
+    }
+    
+    // Setter
+    set updateAge(newAge) {
+        if (newAge > 0 && newAge < 150) {
+            this.age = newAge;
+        }
+    }
+    
+    // Private method (ES2022)
+    #privateMethod() {
+        return 'This is private';
+    }
+    
+    // Access private method
+    getSecret() {
+        return this.#privateMethod();
+    }
+}
+
+// Inheritance
+class Student extends Person {
+    constructor(name, age, grade) {
+        super(name, age); // Must call super first
+        this.grade = grade;
+    }
+    
+    // Method override
+    greet() {
+        return `${super.greet()} and I'm in grade ${this.grade}`;
+    }
+    
+    study() {
+        return `${this.name} is studying`;
+    }
+}
+
+// Usage
+const person = new Person('John', 30);
+const student = new Student('Jane', 20, 'A');
+
+console.log(person.greet()); // "Hello, I'm John and I'm 30 years old"
+console.log(student.greet()); // "Hello, I'm Jane and I'm 20 years old and I'm in grade A"
+console.log(Person.species()); // "Homo sapiens"
+console.log(student.getSecret()); // "This is private"
+Prototype-Based Inheritance (Traditional)
+javascript
+// Constructor Function
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+    
+    // "Private" variable using closure
+    let privateVar = 'secret';
+    
+    this.getPrivate = function() {
+        return privateVar;
+    };
+}
+
+// Instance methods on prototype
+Person.prototype.greet = function() {
+    return `Hello, I'm ${this.name} and I'm ${this.age} years old`;
+};
+
+// Static method
+Person.species = function() {
+    return 'Homo sapiens';
+};
+
+// Inheritance
+function Student(name, age, grade) {
+    // Call parent constructor
+    Person.call(this, name, age);
+    this.grade = grade;
+}
+
+// Set up prototype chain
+Student.prototype = Object.create(Person.prototype);
+Student.prototype.constructor = Student;
+
+// Add methods to Student prototype
+Student.prototype.greet = function() {
+    return Person.prototype.greet.call(this) + ` and I'm in grade ${this.grade}`;
+};
+
+Student.prototype.study = function() {
+    return `${this.name} is studying`;
+};
+
+// Usage
+const person = new Person('John', 30);
+const student = new Student('Jane', 20, 'A');
+
+console.log(person.greet()); // "Hello, I'm John and I'm 30 years old"
+console.log(student.greet()); // "Hello, I'm Jane and I'm 20 years old and I'm in grade A"
+console.log(Person.species()); // "Homo sapiens"
+🔄 Under the Hood Comparison
+What Classes Compile To
+javascript
+class MyClass {
+    constructor(value) {
+        this.value = value;
+    }
+    
+    getValue() {
+        return this.value;
+    }
+    
+    static staticMethod() {
+        return 'static';
+    }
+}
+
+// Roughly equivalent to:
+function MyClass(value) {
+    this.value = value;
+}
+
+MyClass.prototype.getValue = function() {
+    return this.value;
+};
+
+MyClass.staticMethod = function() {
+    return 'static';
+};
+Prototype Chain Visualization
+text
+// Class Version
+Student Instance → Student.prototype → Person.prototype → Object.prototype → null
+
+// Prototype Version  
+Student Instance → Student.prototype → Person.prototype → Object.prototype → null
+📊 Key Differences Table
+Feature	Class Syntax	Prototype Syntax
+Syntax	Clean, intuitive	More verbose
+Inheritance	extends keyword	Manual prototype setup
+Constructor	constructor() method	Regular function
+Super calls	super()	Parent.call(this)
+Static methods	static keyword	Direct assignment
+Private fields	#privateField	Closures or conventions
+Hoisting	Not hoisted	Functions are hoisted
+Method definitions	In class body	On prototype
+Readability	High	Lower
+Tooling support	Excellent	Good
+🔧 Advanced Class Features
+Static Blocks
+javascript
+class Database {
+    static connection;
+    static config;
+    
+    // Static initialization block
+    static {
+        this.config = {
+            host: 'localhost',
+            port: 5432,
+            database: 'myapp'
+        };
+        console.log('Database class initialized');
+    }
+    
+    static connect() {
+        this.connection = `Connected to ${this.config.host}`;
+        return this.connection;
+    }
+}
+
+console.log(Database.config); // { host: 'localhost', port: 5432, database: 'myapp' }
+Method and Accessor Properties
+javascript
+class Temperature {
+    constructor(celsius) {
+        this.celsius = celsius;
+    }
+    
+    // Getter
+    get fahrenheit() {
+        return this.celsius * 1.8 + 32;
+    }
+    
+    // Setter
+    set fahrenheit(value) {
+        this.celsius = (value - 32) / 1.8;
+    }
+    
+    // Generator method
+    *tempRange(step = 1) {
+        for (let temp = this.celsius; temp < 100; temp += step) {
+            yield temp;
+        }
+    }
+}
+
+const temp = new Temperature(25);
+console.log(temp.fahrenheit); // 77
+temp.fahrenheit = 100;
+console.log(temp.celsius); // 37.777...
+
+for (const t of temp.tempRange(10)) {
+    console.log(t); // 37, 47, 57, 67, 77, 87, 97
+}
+🎯 When to Use Each
+Use Classes When:
+Building complex object hierarchies
+
+Need clean, readable code
+
+Working with frameworks (React, Angular)
+
+Need private fields/methods
+
+Want better tooling support
+
+Use Prototypes When:
+Working with legacy code
+
+Need fine-grained control over prototype chain
+
+Performance-critical scenarios (rare)
+
+Educational purposes to understand JS fundamentals
+
+Interview Insight:
+"While classes provide cleaner syntax, it's important to understand that they're primarily syntactic sugar over JavaScript's prototype-based inheritance. Both approaches ultimately create the same prototype chain, but classes offer better readability, built-in inheritance patterns, and modern features like private fields."
+
+----------------------------------------------------------------------------------------------
