@@ -2796,3 +2796,571 @@ Truthy/Falsy:
 "JavaScript has 6 falsy values: false, 0, "", null, undefined, and NaN. Everything else is truthy. This is used extensively for conditional logic, default values, and input validation."
 
 ----------------------------------------------------------------------------------------------------------------------------
+
+
+101. What are the main features introduced in ES6?
+102. Explain arrow functions and their differences from regular functions
+103. What are template literals and their advantages?
+ES6+ Features Deep Dive
+101. Main Features Introduced in ES6
+🎯 ES6 (ECMAScript 2015) - The Big Update
+javascript
+// ES5 (Old Way)
+var name = "John";
+var age = 30;
+var message = "Hello " + name + ", you are " + age + " years old";
+
+function multiply(a, b) {
+    return a * b;
+}
+
+// ES6 (New Way) - All these features introduced!
+const name = "John";
+let age = 30;
+const message = `Hello ${name}, you are ${age} years old`;
+
+const multiply = (a, b) => a * b;
+📋 Complete ES6 Feature List:
+1. Variable Declarations
+javascript
+// let & const - block scoping
+let counter = 0;        // Can be reassigned
+const PI = 3.14159;     // Cannot be reassigned
+
+{
+    let blockScoped = "I exist only here";
+    const alsoBlockScoped = "Me too";
+}
+// console.log(blockScoped); // ReferenceError
+2. Arrow Functions
+javascript
+// Concise syntax
+const add = (a, b) => a + b;
+
+// Implicit return
+const square = x => x * x;
+
+// No 'this' binding (major difference)
+const obj = {
+    value: 10,
+    traditional: function() {
+        console.log(this.value); // 10
+    },
+    arrow: () => {
+        console.log(this.value); // undefined (lexical this)
+    }
+};
+3. Template Literals
+javascript
+// String interpolation
+const name = "Alice";
+const age = 25;
+console.log(`Hello ${name}, you are ${age} years old!`);
+
+// Multi-line strings
+const html = `
+    <div class="user">
+        <h1>${name}</h1>
+        <p>Age: ${age}</p>
+    </div>
+`;
+
+// Expressions
+console.log(`Next year you'll be ${age + 1}`);
+4. Destructuring
+javascript
+// Array destructuring
+const numbers = [1, 2, 3];
+const [first, second, third] = numbers;
+console.log(first, second); // 1, 2
+
+// Object destructuring
+const user = { name: "John", age: 30, city: "NYC" };
+const { name, age, country = "USA" } = user;
+console.log(name, country); // John, USA
+
+// Function parameter destructuring
+function greet({ name, age }) {
+    return `Hello ${name}, age ${age}`;
+}
+5. Default Parameters
+javascript
+function createUser(name, age = 18, isActive = true) {
+    return { name, age, isActive };
+}
+
+console.log(createUser("John"));        // {name: "John", age: 18, isActive: true}
+console.log(createUser("Jane", 25));    // {name: "Jane", age: 25, isActive: true}
+6. Spread & Rest Operators
+javascript
+// Spread (...)
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+const combined = [...arr1, ...arr2]; // [1, 2, 3, 4, 5, 6]
+
+const obj1 = { a: 1, b: 2 };
+const obj2 = { ...obj1, c: 3 }; // {a: 1, b: 2, c: 3}
+
+// Rest (...)
+function sum(...numbers) {
+    return numbers.reduce((total, num) => total + num, 0);
+}
+console.log(sum(1, 2, 3, 4)); // 10
+7. Enhanced Object Literals
+javascript
+const name = "John";
+const age = 30;
+
+// Shorthand property names
+const user = { name, age }; // {name: "John", age: 30}
+
+// Method shorthand
+const calculator = {
+    add(a, b) {    // Instead of add: function(a, b)
+        return a + b;
+    },
+    multiply(a, b) {
+        return a * b;
+    }
+};
+
+// Computed property names
+const key = "userStatus";
+const obj = {
+    [key]: "active",
+    [`get${key}`]() {
+        return this[key];
+    }
+};
+8. Promises
+javascript
+const fetchData = () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            Math.random() > 0.5 
+                ? resolve("Data received!") 
+                : reject("Error occurred!");
+        }, 1000);
+    });
+};
+
+fetchData()
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+9. Classes
+javascript
+class Person {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    // Method
+    greet() {
+        return `Hello, I'm ${this.name}`;
+    }
+    
+    // Static method
+    static species = "Homo sapiens";
+}
+
+class Student extends Person {
+    constructor(name, age, grade) {
+        super(name, age);
+        this.grade = grade;
+    }
+    
+    study() {
+        return `${this.name} is studying`;
+    }
+}
+10. Modules
+javascript
+// math.js
+export const PI = 3.14159;
+export function add(a, b) { return a + b; }
+export default function multiply(a, b) { return a * b; }
+
+// app.js
+import multiply, { PI, add } from './math.js';
+console.log(multiply(2, 3)); // 6
+11. New Built-in Methods
+javascript
+// String methods
+"hello".startsWith("he");    // true
+"hello".endsWith("lo");      // true
+"hello".includes("ell");     // true
+"hello".repeat(3);           // "hellohellohello"
+
+// Array methods
+[1, 2, 3].find(x => x > 1);     // 2
+[1, 2, 3].findIndex(x => x > 1); // 1
+[1, 2, 3].fill(0);              // [0, 0, 0]
+
+// Object methods
+Object.assign({}, {a: 1}, {b: 2}); // {a: 1, b: 2}
+Object.is(NaN, NaN);               // true (unlike ===)
+102. Arrow Functions vs Regular Functions
+🎯 Complete Comparison
+javascript
+// REGULAR FUNCTION
+function add(a, b) {
+    return a + b;
+}
+
+// ARROW FUNCTION
+const add = (a, b) => a + b;
+📊 Key Differences Table
+Feature	Regular Function	Arrow Function
+this binding	Dynamic (call-site)	Lexical (enclosing scope)
+arguments object	✅ Available	❌ Not available
+Constructor	✅ Can use new	❌ Cannot use new
+Method definition	✅ Good for methods	❌ Poor for methods
+Hoisting	✅ Fully hoisted	❌ Not hoisted
+🔍 Detailed Examples
+1. this Binding (MAJOR DIFFERENCE)
+javascript
+const obj = {
+    name: "John",
+    
+    // Regular function - 'this' refers to obj
+    regularFunc: function() {
+        console.log("Regular:", this.name); // "John"
+        
+        setTimeout(function() {
+            console.log("Timeout regular:", this.name); // undefined (global)
+        }, 100);
+    },
+    
+    // Arrow function - 'this' refers to lexical scope (obj)
+    arrowFunc: function() {
+        console.log("Arrow outer:", this.name); // "John"
+        
+        setTimeout(() => {
+            console.log("Timeout arrow:", this.name); // "John" (lexical)
+        }, 100);
+    },
+    
+    // ❌ Bad: Arrow function as method
+    badArrow: () => {
+        console.log("Bad arrow:", this.name); // undefined (lexical = global)
+    }
+};
+
+obj.regularFunc();
+obj.arrowFunc();
+obj.badArrow();
+2. arguments Object
+javascript
+function regular() {
+    console.log(arguments); // [1, 2, 3]
+}
+
+const arrow = () => {
+    // console.log(arguments); // ReferenceError: arguments is not defined
+};
+
+regular(1, 2, 3);
+arrow(1, 2, 3);
+
+// ✅ Arrow function alternative: use rest parameters
+const arrowWithRest = (...args) => {
+    console.log(args); // [1, 2, 3]
+};
+3. Constructor Usage
+javascript
+function Person(name) {
+    this.name = name;
+}
+const john = new Person("John"); // ✅ Works
+
+const ArrowPerson = (name) => {
+    this.name = name;
+};
+// const jane = new ArrowPerson("Jane"); // ❌ TypeError: ArrowPerson is not a constructor
+4. Method Definitions
+javascript
+class Calculator {
+    constructor() {
+        this.value = 0;
+    }
+    
+    // ✅ Good: Regular function for methods
+    addRegular(num) {
+        this.value += num;
+        return this;
+    }
+    
+    // ❌ Bad: Arrow function loses 'this' context
+    addArrow = (num) => {
+        this.value += num; // 'this' refers to instance (due to class fields)
+        return this;
+    }
+}
+
+const calc = new Calculator();
+calc.addRegular(5).addRegular(3);
+console.log(calc.value); // 8
+5. Event Handlers
+javascript
+class Button {
+    constructor() {
+        this.clicked = false;
+        this.button = document.createElement('button');
+        
+        // ❌ Problem: 'this' refers to button element
+        this.button.addEventListener('click', function() {
+            this.clicked = true; // ❌ Wrong 'this'
+        });
+        
+        // ✅ Solution 1: Arrow function
+        this.button.addEventListener('click', () => {
+            this.clicked = true; // ✅ Correct 'this'
+        });
+        
+        // ✅ Solution 2: Bind
+        this.button.addEventListener('click', function() {
+            this.clicked = true;
+        }.bind(this));
+    }
+}
+🎯 When to Use Each
+Use Arrow Functions For:
+javascript
+// 1. Callbacks
+[1, 2, 3].map(x => x * 2);
+
+// 2. Short, simple functions
+const double = x => x * 2;
+
+// 3. When you need lexical 'this'
+class Component {
+    constructor() {
+        this.value = 0;
+        setTimeout(() => {
+            this.value++; // 'this' refers to Component instance
+        }, 1000);
+    }
+}
+
+// 4. Functional programming
+const users = users.filter(user => user.isActive);
+Use Regular Functions For:
+javascript
+// 1. Object methods
+const obj = {
+    value: 0,
+    increment: function() {
+        this.value++;
+    }
+};
+
+// 2. Constructor functions
+function User(name) {
+    this.name = name;
+}
+
+// 3. When you need 'arguments'
+function sum() {
+    return Array.from(arguments).reduce((a, b) => a + b);
+}
+
+// 4. Generator functions
+function* generator() {
+    yield 1;
+    yield 2;
+}
+103. Template Literals & Advantages
+🎯 What are Template Literals?
+Template literals are string literals allowing embedded expressions, denoted by backticks (`) instead of quotes.
+
+📝 Basic Syntax
+javascript
+// OLD WAY - String concatenation
+const name = "John";
+const age = 30;
+const message = "Hello " + name + ", you are " + age + " years old";
+
+// NEW WAY - Template literals
+const message = `Hello ${name}, you are ${age} years old`;
+🚀 Key Advantages & Features
+1. String Interpolation
+javascript
+const product = "iPhone";
+const price = 999;
+const rating = 4.5;
+
+console.log(`The ${product} costs $${price} and has ${rating} stars`);
+// "The iPhone costs $999 and has 4.5 stars"
+2. Multi-line Strings
+javascript
+// OLD WAY - Messy
+const html = "<div>\n" +
+             "  <h1>Title</h1>\n" +
+             "  <p>Content</p>\n" +
+             "</div>";
+
+// NEW WAY - Clean
+const html = `
+    <div>
+        <h1>Title</h1>
+        <p>Content</p>
+    </div>
+`;
+3. Expression Evaluation
+javascript
+const a = 5;
+const b = 10;
+
+console.log(`The sum is ${a + b}`); // "The sum is 15"
+console.log(`Is a greater? ${a > b ? 'Yes' : 'No'}`); // "Is a greater? No"
+
+// Complex expressions
+const user = { name: "Alice", age: 25 };
+console.log(`Next year: ${user.age + 1}`); // "Next year: 26"
+4. Function Calls in Templates
+javascript
+function formatCurrency(amount) {
+    return `$${amount.toFixed(2)}`;
+}
+
+const price = 19.99;
+console.log(`Total: ${formatCurrency(price)}`); // "Total: $19.99"
+5. Nested Template Literals
+javascript
+const isMember = true;
+const discount = 0.1;
+const price = 100;
+
+console.log(`Price: $${price} ${isMember ? `(Member discount: $${price * discount})` : ''}`);
+// "Price: $100 (Member discount: $10)"
+🔥 Advanced Features
+1. Tagged Templates
+javascript
+// Custom template processor
+function highlight(strings, ...values) {
+    return strings.reduce((result, string, i) => {
+        const value = values[i] ? `<mark>${values[i]}</mark>` : '';
+        return result + string + value;
+    }, '');
+}
+
+const name = "John";
+const age = 30;
+
+const message = highlight`Hello ${name}, you are ${age} years old`;
+console.log(message); 
+// "Hello <mark>John</mark>, you are <mark>30</mark> years old"
+2. SQL Query Building
+javascript
+function sql(strings, ...values) {
+    return {
+        query: strings.join('?'),
+        params: values
+    };
+}
+
+const userId = 123;
+const status = 'active';
+
+const { query, params } = sql`
+    SELECT * FROM users 
+    WHERE id = ${userId} 
+    AND status = ${status}
+`;
+
+console.log(query); // "SELECT * FROM users WHERE id = ? AND status = ?"
+console.log(params); // [123, 'active']
+3. Localization (i18n)
+javascript
+function localize(strings, ...values) {
+    const translations = {
+        "Hello": "Hola",
+        "years old": "años"
+    };
+    
+    return strings.map((str, i) => 
+        translations[str.trim()] || str + (values[i] || '')
+    ).join('');
+}
+
+const name = "John";
+const age = 30;
+
+console.log(localize`Hello ${name}, you are ${age} years old`);
+// "Hola John, you are 30 años"
+4. CSS-in-JS Styling
+javascript
+function css(strings, ...values) {
+    const style = strings.reduce((result, string, i) => {
+        return result + string + (values[i] || '');
+    }, '');
+    
+    return { __css: style };
+}
+
+const color = "red";
+const size = "16px";
+
+const buttonStyle = css`
+    color: ${color};
+    font-size: ${size};
+    padding: 10px;
+`;
+
+console.log(buttonStyle);
+// { __css: "color: red; font-size: 16px; padding: 10px;" }
+📊 Performance Considerations
+javascript
+// Template literals are generally fast, but...
+
+// ❌ Avoid in hot loops
+for (let i = 0; i < 1000000; i++) {
+    const msg = `Value: ${i}`; // Creates new string each iteration
+}
+
+// ✅ Better for hot loops
+let result = '';
+for (let i = 0; i < 1000000; i++) {
+    result += `Value: ${i}\n`; // More efficient
+}
+🎯 When to Use Template Literals
+✅ Perfect For:
+Dynamic strings with variables
+
+Multi-line content (HTML, SQL, etc.)
+
+Readable string building
+
+Internationalization
+
+Styled components
+
+❌ Stick with Regular Strings For:
+Simple, static strings
+
+Performance-critical loops
+
+When backticks would need escaping
+
+💡 Pro Tips
+javascript
+// 1. Escaping backticks
+const message = `This is a backtick: \` and this is a dollar: \${}`;
+
+// 2. Raw strings
+console.log(String.raw`Hello\nWorld`); // "Hello\\nWorld" (literal \n)
+
+// 3. Nested templates for complex logic
+const condition = true;
+const value = 42;
+console.log(`Result: ${
+    condition 
+        ? `The value is ${value}` 
+        : `No value available`
+}`);
+
+// 4. Template literals with array methods
+const users = [{ name: "John", age: 30 }, { name: "Jane", age: 25 }];
+const userList = users.map(user => `- ${user.name} (${user.age})`).join('\n');
+Template literals make string manipulation in JavaScript much more readable and maintainable! 🚀
