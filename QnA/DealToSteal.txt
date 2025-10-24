@@ -1,4 +1,3 @@
-⚙️ 4. What You Should Do Next (To Seal the Deal)
 📍 Step 1: Active Learning
 
 Don’t just read questions — implement small demos:
