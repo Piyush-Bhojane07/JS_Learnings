@@ -1,0 +1,27 @@
+⚙️ 4. What You Should Do Next (To Seal the Deal)
+📍 Step 1: Active Learning
+
+Don’t just read questions — implement small demos:
+
+Build a mini React Native app using Fabric + Hermes
+
+Implement Redux Toolkit + React Query + AsyncStorage
+
+Write custom hooks, debounce/throttle utilities, error boundaries
+
+📍 Step 2: Coding Practice
+
+Practice 30–40 hands-on JS coding questions:
+
+Polyfills, async/await, Promise chaining
+
+Data structures (arrays, objects, sets/maps)
+
+Implement debounce, throttle, memoize, etc.
+
+📍 Step 3: Mock Interviews
+
+Use platforms like:
+
+Pramp / Interviewing.io / FrontendExpert / Exponent
+to simulate technical rounds (especially system design & async JS).
