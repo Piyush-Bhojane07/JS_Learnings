@@ -2801,6 +2801,7 @@ Truthy/Falsy:
 101. What are the main features introduced in ES6?
 102. Explain arrow functions and their differences from regular functions
 103. What are template literals and their advantages?
+
 ES6+ Features Deep Dive
 101. Main Features Introduced in ES6
 🎯 ES6 (ECMAScript 2015) - The Big Update
@@ -3000,6 +3001,9 @@ javascript
 // Object methods
 Object.assign({}, {a: 1}, {b: 2}); // {a: 1, b: 2}
 Object.is(NaN, NaN);               // true (unlike ===)
+
+--------------------------------------------------------------------------
+
 102. Arrow Functions vs Regular Functions
 🎯 Complete Comparison
 javascript
