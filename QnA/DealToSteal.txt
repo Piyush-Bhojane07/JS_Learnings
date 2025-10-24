@@ -25,3 +25,289 @@ Use platforms like:
 
 Pramp / Interviewing.io / FrontendExpert / Exponent
 to simulate technical rounds (especially system design & async JS).
+
+
+======================================================================================
+
+
+🧭 React Native Interview Master Plan (8 Weeks)
+
+🎯 Goal: Crack RN + Frontend interviews across startups, MNCs, and product/FAANG
+🕒 Duration: 6–8 weeks (2–3 hr/day or weekends 5–6 hr/day)
+📈 Focus: Core mastery → coding → projects → mock interviews
+
+🗓️ Week 1 – Core JavaScript Refresh (Base Layer)
+
+Objective: Rebuild a rock-solid foundation — closures, scope, event loop.
+
+🎯 Topics
+
+JS execution: Call Stack, Event Loop, Micro/Macro tasks
+
+Hoisting, TDZ, Scope Chain, Lexical scope
+
+Closures & Currying
+
+this binding, bind, call, apply
+
+var, let, const
+
+Primitive vs Reference types
+
+Deep vs Shallow copy
+
+Equality: == vs ===
+
+'use strict' mode
+
+Garbage collection & memory leaks
+
+💻 Coding Tasks
+
+Implement: bind(), debounce(), throttle(), deepClone()
+
+Flatten nested array
+
+Compose / Pipe functions
+
+🧠 Practice
+
+JS30 challenge (https://javascript30.com/
+) — pick 3 mini-projects.
+
+Daily LeetCode Easy JS questions (arrays, strings).
+
+🗓️ Week 2 – Modern JS + Asynchronous Mastery
+
+Objective: Master async, promises, and modern syntax.
+
+🎯 Topics
+
+Promises: lifecycle, chaining, Promise.all vs allSettled
+
+async/await (under the hood)
+
+Microtask queue vs Macrotask queue
+
+Error handling (try/catch, rejection)
+
+Event propagation, bubbling, capturing
+
+Fetch API, setTimeout/setInterval internals
+
+Optional chaining, nullish coalescing
+
+ES6 Modules vs CommonJS
+
+Iterators & Generators
+
+Proxy & Reflect
+
+💻 Coding Tasks
+
+Polyfill for Promise.all()
+
+Create an EventEmitter class
+
+Implement retry logic with Promises
+
+Async data fetch with error + timeout handling
+
+🗓️ Week 3 – React & React Native Core
+
+Objective: Deep dive into React fundamentals & RN architecture.
+
+🎯 Topics
+
+Virtual DOM, reconciliation
+
+Hooks: useState, useEffect, useMemo, useCallback, custom hooks
+
+Component lifecycle (Class vs Hooks)
+
+React Native internals:
+
+Bridge, JSI, Fabric, TurboModules
+
+Hermes engine basics
+
+Metro bundler, threading model
+
+Props vs state vs context
+
+StyleSheet API, Flexbox in RN
+
+Native Modules and linking
+
+💻 Tasks
+
+Build a Todo or Notes RN app (hooks only)
+
+Implement a custom hook (e.g., useDebounce, useNetworkStatus)
+
+Profile app with Flipper / RN DevTools
+
+🗓️ Week 4 – TypeScript + State Management
+
+Objective: Become comfortable with large-scale app structure.
+
+🎯 Topics
+
+TS basics: interfaces, generics, utility types
+
+Typing React Components, Props, and Hooks
+
+Redux Toolkit: slices, thunks, selectors
+
+React Query / TanStack Query: caching, mutations, optimistic updates
+
+Context API vs Redux
+
+Zustand / Recoil overview
+
+💻 Tasks
+
+Convert RN app to TypeScript
+
+Add Redux Toolkit store (with async API calls)
+
+Use React Query for data fetching and caching
+
+Type a complex component hierarchy
+
+🗓️ Week 5 – Advanced Topics + Performance Optimization
+
+Objective: Understand what senior engineers know.
+
+🎯 Topics
+
+Debounce vs Throttle in React
+
+Memoization, React.memo, useCallback optimization
+
+Lazy loading & code splitting
+
+Re-renders, reconciliation performance
+
+Hermes profiling & optimization
+
+Memory leaks in RN
+
+Event loop with React Native threads
+
+Pure components, batching updates
+
+Big-O for common JS methods
+
+💻 Tasks
+
+Optimize API-heavy RN screen
+
+Use React Profiler + Flipper for performance
+
+Implement infinite scroll + lazy image loading
+
+🗓️ Week 6 – Testing, Debugging & Tooling
+
+Objective: Prove reliability and debugging skills.
+
+🎯 Topics
+
+Unit testing with Jest
+
+React Native Testing Library (RTL) basics
+
+Detox for E2E tests
+
+Mocking APIs, timers, async tests
+
+Console & DevTools debugging
+
+Crashlytics / Flipper / LogBox usage
+
+Common JS pitfalls (floating-point, undefined errors)
+
+💻 Tasks
+
+Write Jest unit tests for hooks
+
+Create one Detox E2E test
+
+Debug performance & network issues using Flipper
+
+🗓️ Week 7 – Deployment + Native + Ecosystem
+
+Objective: Understand real-world project flow & CI/CD.
+
+🎯 Topics
+
+App signing, versioning, OTA updates (CodePush)
+
+EAS Build, Fastlane pipelines
+
+Native bridge creation (Android/iOS)
+
+Expo vs Bare workflow
+
+Deep linking, environment configs
+
+API Security (HTTPS, tokens, environment variables)
+
+App Store & Play Store process
+
+💻 Tasks
+
+Create a custom native module (e.g., device info)
+
+Deploy a test build via EAS / TestFlight
+
+Add Deep linking support
+
+🗓️ Week 8 – Final Prep (Mock + System Design + Review)
+
+Objective: Interview readiness & project articulation.
+
+🎯 Topics
+
+System design for mobile apps (architecture + data flow)
+
+Handling offline-first apps
+
+App performance strategies
+
+Caching, pagination, optimistic updates
+
+Security, analytics, monitoring
+
+Common interview gotchas
+
+💼 Mock Interview Prep
+
+2 x JS/React rounds (Pramp / Interviewing.io)
+
+1 x RN + System Design round
+
+1 x HR + project storytelling round
+
+🧠 Review Checklist
+
+✅ JS fundamentals
+✅ Async/Promises
+✅ React hooks & lifecycle
+✅ RN architecture
+✅ TS + Redux + Query
+✅ Performance + Testing
+✅ Deployment flow
+✅ 2–3 projects to showcase
+
+🏁 Outcome After 8 Weeks
+
+If you’ve followed this plan:
+
+You’ll be ready for any RN + JS interview, from startup → FAANG
+
+You’ll have hands-on mastery, not just theory
+
+You’ll possess project depth and problem-solving fluency
+
+You’ll stand confidently in ₹6 L–₹25 L+ interviews
