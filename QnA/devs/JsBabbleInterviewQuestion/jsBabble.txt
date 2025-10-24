@@ -1,0 +1,373 @@
+🎯 ADVANCED JAVASCRIPT INTERVIEW QUESTION BANK (By Level)
+🧠 1. Advanced JavaScript Concepts
+🚀 Startup (₹6–12 LPA)
+
+What is event bubbling and how can you stop it?
+
+Difference between event capturing and event bubbling?
+
+How does hoisting work with let and const?
+
+What is a closure and give a real-world example?
+
+Explain scope chain and lexical scoping.
+
+Difference between shallow copy and deep copy.
+
+What is 'use strict' mode and why is it important?
+
+How do modules (import/export) differ from CommonJS?
+
+What are memory leaks and how do you prevent them?
+
+Example of a polyfill (e.g., for Array.map).
+
+🏢 MNC (₹10–18 LPA)
+
+How does JavaScript garbage collection work internally?
+
+Explain execution context creation and the role of variable environment.
+
+What’s the difference between synchronous and asynchronous execution?
+
+How does the JS engine parse and execute code?
+
+How do circular references cause memory leaks?
+
+Write a polyfill for Function.bind().
+
+How does module caching work in Node.js?
+
+Explain Temporal Dead Zone (TDZ).
+
+How do you detect memory leaks in browser or Node?
+
+What are the differences between import, require, and dynamic import?
+
+🦄 FAANG (₹18–25 LPA)
+
+Deep dive: How does the call stack, heap, and event loop interact?
+
+How are closures implemented under the hood?
+
+What are weak references (WeakMap, WeakSet) and when do you use them?
+
+Implement a deep clone function (handle nested arrays, circular refs).
+
+Explain execution phases (Creation, Execution) in JS engine.
+
+What’s the difference between lexical and dynamic scope?
+
+How does garbage collection handle closures?
+
+Implement your own Promise from scratch.
+
+How does V8 optimize memory management?
+
+Explain how polyfills are used in transpilation (Babel).
+
+⚙️ 2. Browser & Environment-Specific JS
+🚀 Startup
+
+Difference between window, document, and navigator.
+
+What are DOM APIs? How do you create and append elements?
+
+How do setTimeout and setInterval work internally?
+
+What is the Fetch API and how does it differ from XMLHttpRequest?
+
+Difference between localStorage, sessionStorage, and cookies.
+
+What is event propagation?
+
+Explain repaint vs reflow.
+
+How do you debounce resize or scroll events?
+
+How can you manipulate DOM elements dynamically?
+
+How does CORS work?
+
+🏢 MNC
+
+What happens during a browser reflow and repaint cycle?
+
+How do you optimize DOM manipulation performance?
+
+Explain service workers and caching in browsers.
+
+How does async rendering affect the UI thread?
+
+How do you handle cross-origin requests?
+
+Explain the lifecycle of a web page (from request to render).
+
+How do timers interact with the event loop?
+
+What is requestAnimationFrame() used for?
+
+Explain shadow DOM and its benefits.
+
+How do web workers improve performance?
+
+🦄 FAANG
+
+Deep dive: Browser rendering pipeline.
+
+How does critical rendering path optimization work?
+
+Explain how microtasks/macrotasks affect rendering performance.
+
+How does the JS runtime in Chrome differ from Node.js?
+
+How do service workers implement offline caching?
+
+How would you optimize paint and composite layers?
+
+How does garbage collection work in the browser JS engine?
+
+How would you profile and fix performance issues using DevTools?
+
+Explain CSP (Content Security Policy).
+
+What is Layout Shift and how to measure it?
+
+🧩 3. Modern & Practical JS Topics
+🚀 Startup
+
+Difference between ES6 modules and CommonJS.
+
+What are optional chaining and nullish coalescing?
+
+How does immutability help prevent bugs?
+
+What is functional programming in JavaScript?
+
+What are iterators and generators?
+
+What is a proxy object used for?
+
+How do bundlers (Webpack, Vite) work?
+
+What is tree-shaking?
+
+How do you handle errors and stack traces?
+
+What are transpilers (Babel) used for?
+
+🏢 MNC
+
+Explain lazy loading and code splitting.
+
+How do iterators and generators help with async programming?
+
+How do Proxies help in state management or validation?
+
+How does Webpack bundling and chunk splitting work?
+
+How does functional composition work in JS?
+
+Explain Symbol and its use cases.
+
+What are Tagged template literals?
+
+How do you implement error boundaries?
+
+How can immutability improve React performance?
+
+How do decorators work?
+
+🦄 FAANG
+
+Explain how V8 handles JIT compilation and optimizations.
+
+Deep dive into Iterators vs Async Iterators.
+
+Write a custom iterable object.
+
+Implement a custom proxy-based state manager.
+
+Explain generators with async/await combination.
+
+How does optional chaining improve safety in large codebases?
+
+Write a code-splitting strategy for modular apps.
+
+Explain how ESBuild achieves such fast bundling.
+
+How does functional purity affect performance?
+
+Implement your own pipe() and compose() utilities.
+
+⚡ 4. Performance & Optimization
+🚀 Startup
+
+Difference between debounce and throttle.
+
+How to reduce reflows during DOM updates?
+
+What are web performance metrics (FCP, LCP)?
+
+What is lazy loading?
+
+How do you use memoization in JS?
+
+What causes memory leaks?
+
+How to analyze bundle size?
+
+What are pure functions?
+
+How do you optimize loops and array operations?
+
+Explain Big-O complexity of common methods (map, filter).
+
+🏢 MNC
+
+Explain virtual DOM vs real DOM performance.
+
+How do you use requestIdleCallback?
+
+How do you measure performance in browsers (Lighthouse)?
+
+Explain code splitting and dynamic imports.
+
+What causes layout thrashing?
+
+How does debouncing scroll improve UX?
+
+How do you find and fix memory leaks in React apps?
+
+What are Web Workers used for?
+
+How do profilers (Chrome, React DevTools) help optimize?
+
+How do you handle heavy computations off the main thread?
+
+🦄 FAANG
+
+Deep dive: How does V8 optimize JS execution?
+
+Explain hidden classes and inline caching.
+
+How to optimize GC performance for large data structures?
+
+What are performance traps of closures?
+
+How does event delegation improve performance?
+
+How to optimize JS heap usage in complex UIs?
+
+How do you measure JS parse/compile time?
+
+Implement a throttle function.
+
+Optimize a 100k record rendering scenario.
+
+Explain Big-O for recursive algorithms.
+
+🧰 5. Testing & Debugging
+🚀 Startup
+
+What are common console methods?
+
+How to use debugger in DevTools?
+
+What is unit testing and why is it important?
+
+How do you test async code?
+
+How to handle API mocks in tests?
+
+What is test coverage?
+
+How do you test pure functions?
+
+Common JS pitfalls (e.g., floating-point precision).
+
+How to debug undefined errors?
+
+How do you debug Promises?
+
+🏢 MNC
+
+How to test React hooks?
+
+Difference between unit, integration, and E2E tests.
+
+What are mocking libraries like jest.fn()?
+
+How to handle snapshots?
+
+How do you measure coverage reports?
+
+How to test throttled/debounced functions?
+
+How to simulate user events?
+
+How do you catch unhandled rejections?
+
+Debugging memory leaks.
+
+How to debug network performance?
+
+🦄 FAANG
+
+How does Jest handle async testing under the hood?
+
+Write a custom test matcher.
+
+How to mock fetch / axios effectively?
+
+How to use source maps for debugging minified code?
+
+How to test React suspense components?
+
+How to debug event loop blocking code?
+
+How does React Profiler work?
+
+How to simulate high-latency environments?
+
+What are flaky tests and how to avoid them?
+
+Explain TDD with real-world JS example.
+
+🧩 6. Coding Practice Questions
+
+Implement debounce() function
+
+Implement throttle() function
+
+Polyfill for bind()
+
+Polyfill for Promise.all()
+
+Implement deepClone() function
+
+Flatten a nested array recursively
+
+Write your own Array.map()
+
+Compose and pipe functions
+
+Implement a simple EventEmitter
+
+Implement a memoize() utility
+
+Implement retry logic for API requests
+
+Implement a simple currying() function
+
+Reverse a linked list using JS
+
+Implement custom reduce()
+
+Group array items by property name
+
+🏁 Summary – What to Focus by Tier
+Company Type	Focus Areas	Example Topics
+Startup (6–12 LPA)	Practical coding + fundamentals	debounce, event loop, closures, promises
+MNC (10–18 LPA)	Depth + performance + async mastery	polyfills, memory leaks, bundlers
+FAANG (18–25+ LPA)	JS internals + engine optimizations	JIT, garbage collection, closures, async iterators
