@@ -133,6 +133,7 @@ APIs & Networking:
 ========================================================================
 
 2. JavaScript Fundamentals (80 Questions)
+
 Core Concepts:
 91. Explain JavaScript's event loop and call stack
 92. What is the difference between let, const, and var?
@@ -145,7 +146,6 @@ Core Concepts:
 99. What are primitive and reference types in JavaScript?
 100. Explain the concept of truthy and falsy values
 
-----------------------------------------------------------------------------
 
 ES6+ Features:
 101. What are the main features introduced in ES6?
