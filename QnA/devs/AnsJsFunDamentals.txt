@@ -2429,6 +2429,7 @@ obj.method(); // obj
 // 4. Default binding
 checkThis(); // Window/Global/undefined
 Mastering this is crucial for understanding JavaScript's object-oriented patterns and avoiding common bugs! 🚀
+
 ----------------------------------------------------------------------------------------------------------
 
 
@@ -2660,6 +2661,9 @@ console.log(Boolean(-0));        // false
 console.log(Boolean(0n));        // false
 console.log(Boolean(NaN));       // false
 console.log(Boolean(""));        // false
+
+-------------------------------------------------------------------------------------------------------------
+
 ✅ Truthy Values (Everything else)
 javascript
 // All these evaluate to true in boolean context
@@ -2790,4 +2794,5 @@ Primitive vs Reference:
 
 Truthy/Falsy:
 "JavaScript has 6 falsy values: false, 0, "", null, undefined, and NaN. Everything else is truthy. This is used extensively for conditional logic, default values, and input validation."
+
 ----------------------------------------------------------------------------------------------------------------------------
