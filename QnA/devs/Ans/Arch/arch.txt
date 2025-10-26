@@ -1,0 +1,24 @@
+archicture sturctures like mvvm and alll for the project sturctue, give me only names
+Architecture Patterns for React Native:
+1. MVVM (Model-View-ViewModel)
+2. MVC (Model-View-Controller)
+3. MVP (Model-View-Presenter)
+4. Clean Architecture
+5. Flux (Facebook)
+6. Redux Architecture
+7. MobX Architecture
+8. VIPER (View-Interactor-Presenter-Entity-Router)
+9. MVI (Model-View-Intent)
+10. Atomic Design
+11. Feature-Sliced Design
+12. Domain-Driven Design (DDD)
+13. Hexagonal Architecture (Ports & Adapters)
+14. Onion Architecture
+15. Layered Architecture
+16. Component-Based Architecture
+17. Event-Driven Architecture
+18. CQRS (Command Query Responsibility Segregation)
+19. Repository Pattern
+20. Service Layer Pattern
+These are the main architectural patterns used in React Native projects. Would you like me to explain any specific one in detail?
+
