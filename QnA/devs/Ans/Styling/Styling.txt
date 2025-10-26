@@ -2170,3 +2170,5 @@ Leverage NativeWind's caching mechanism
 Profile performance with React Native Debugger
 
 NativeWind performs excellently when used properly, but requires careful attention to dynamic styling patterns!
+-------------------------------------------------------------------------------------------------------------------------
+
