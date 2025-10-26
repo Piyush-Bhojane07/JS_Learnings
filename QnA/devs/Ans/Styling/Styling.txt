@@ -2172,3 +2172,697 @@ Profile performance with React Native Debugger
 NativeWind performs excellently when used properly, but requires careful attention to dynamic styling patterns!
 -------------------------------------------------------------------------------------------------------------------------
 
+214. What are Styled Components and how do they work?
+215. How do you implement themes with Styled Components?
+216. How do you handle responsive design with Styled Components?
+217. How do you create polymorphic components?
+218. How do you handle conditional styling?
+219. What are the performance implications?
+220. How do you optimize re-renders with Styled Components?
+214. Styled Components and How They Work
+Styled Components is a CSS-in-JS library that lets you write actual CSS in your JavaScript components.
+
+Basic Usage:
+javascript
+import styled from 'styled-components/native';
+
+// Create styled components
+const Container = styled.View`
+  flex: 1;
+  padding: 20px;
+  background-color: ${props => props.primary ? 'blue' : 'white'};
+`;
+
+const Title = styled.Text`
+  font-size: 24px;
+  color: #333;
+  font-weight: bold;
+`;
+
+const Button = styled.TouchableOpacity`
+  background-color: #007AFF;
+  padding: 15px 20px;
+  border-radius: 8px;
+  align-items: center;
+`;
+
+// Usage
+const MyComponent = () => (
+  <Container primary>
+    <Title>Welcome to Styled Components</Title>
+    <Button onPress={() => console.log('Pressed')}>
+      <Title style={{ color: 'white', fontSize: 16 }}>Click Me</Title>
+    </Button>
+  </Container>
+);
+How It Works:
+javascript
+// Behind the scenes:
+// 1. Template literals are parsed
+// 2. CSS is converted to React Native style objects
+// 3. Dynamic props are injected
+// 4. Unique class names are generated (for web)
+// 5. Styles are applied to components
+
+// Example transformation:
+const StyledView = styled.View`
+  padding: 20px;
+  background-color: ${props => props.bg || 'white'};
+`;
+
+// Becomes something like:
+const generatedStyle = (props) => ({
+  padding: 20,
+  backgroundColor: props.bg || 'white',
+});
+215. Implementing Themes with Styled Components
+Theme Provider Setup:
+javascript
+// theme.js
+export const theme = {
+  colors: {
+    primary: '#007AFF',
+    secondary: '#5856D6',
+    success: '#34C759',
+    danger: '#FF3B30',
+    warning: '#FF9500',
+    background: '#FFFFFF',
+    text: '#1C1C1E',
+    textSecondary: '#8E8E93',
+  },
+  spacing: {
+    xs: 4,
+    sm: 8,
+    md: 16,
+    lg: 24,
+    xl: 32,
+  },
+  typography: {
+    title: 24,
+    subtitle: 18,
+    body: 16,
+    caption: 14,
+  },
+  borderRadius: {
+    sm: 4,
+    md: 8,
+    lg: 12,
+  }
+};
+
+export const darkTheme = {
+  ...theme,
+  colors: {
+    ...theme.colors,
+    background: '#000000',
+    text: '#FFFFFF',
+    textSecondary: '#98989F',
+  }
+};
+Theme Provider Implementation:
+javascript
+// App.js
+import React, { useState } from 'react';
+import { ThemeProvider } from 'styled-components/native';
+import { theme, darkTheme } from './theme';
+
+const App = () => {
+  const [isDark, setIsDark] = useState(false);
+  
+  return (
+    <ThemeProvider theme={isDark ? darkTheme : theme}>
+      <YourApp toggleTheme={() => setIsDark(!isDark)} />
+    </ThemeProvider>
+  );
+};
+Using Themes in Components:
+javascript
+import styled from 'styled-components/native';
+
+const Container = styled.View`
+  flex: 1;
+  padding: ${props => props.theme.spacing.md}px;
+  background-color: ${props => props.theme.colors.background};
+`;
+
+const Heading = styled.Text`
+  font-size: ${props => props.theme.typography.title}px;
+  color: ${props => props.theme.colors.text};
+  font-weight: bold;
+  margin-bottom: ${props => props.theme.spacing.sm}px;
+`;
+
+const Card = styled.View`
+  background-color: ${props => props.theme.colors.background};
+  padding: ${props => props.theme.spacing.md}px;
+  border-radius: ${props => props.theme.borderRadius.md}px;
+  shadow-color: #000;
+  shadow-offset: 0px 2px;
+  shadow-opacity: 0.1;
+  shadow-radius: 3px;
+  elevation: 3;
+`;
+
+// Usage with theme
+const ProfileScreen = () => (
+  <Container>
+    <Heading>Profile</Heading>
+    <Card>
+      <Text style={{ color: theme.colors.textSecondary }}>
+        Welcome back!
+      </Text>
+    </Card>
+  </Container>
+);
+Theme Hook:
+javascript
+import { useTheme } from 'styled-components/native';
+
+const ThemedComponent = () => {
+  const theme = useTheme();
+  
+  return (
+    <View style={{
+      padding: theme.spacing.md,
+      backgroundColor: theme.colors.primary,
+    }}>
+      <Text style={{ color: theme.colors.background }}>
+        Using theme hook
+      </Text>
+    </View>
+  );
+};
+216. Responsive Design with Styled Components
+Method 1: Using useWindowDimensions Hook
+javascript
+import styled from 'styled-components/native';
+import { useWindowDimensions } from 'react-native';
+
+const ResponsiveContainer = styled.View`
+  flex: 1;
+  padding: ${props => {
+    const { width } = props.dimensions;
+    return width > 768 ? '40px' : '20px';
+  }};
+  flex-direction: ${props => 
+    props.dimensions.width > 768 ? 'row' : 'column'
+  };
+`;
+
+const ResponsiveComponent = () => {
+  const dimensions = useWindowDimensions();
+  
+  return (
+    <ResponsiveContainer dimensions={dimensions}>
+      <View style={{ 
+        width: dimensions.width > 768 ? '50%' : '100%' 
+      }}>
+        <Text>Sidebar</Text>
+      </View>
+      <View style={{ 
+        width: dimensions.width > 768 ? '50%' : '100%' 
+      }}>
+        <Text>Content</Text>
+      </View>
+    </ResponsiveContainer>
+  );
+};
+Method 2: Responsive Utility Functions
+javascript
+// utils/responsive.js
+import { Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
+
+export const breakpoints = {
+  phone: 375,
+  tablet: 768,
+  desktop: 1024,
+};
+
+export const isPhone = width < breakpoints.tablet;
+export const isTablet = width >= breakpoints.tablet && width < breakpoints.desktop;
+export const isDesktop = width >= breakpoints.desktop;
+
+export const responsiveValue = (phone, tablet, desktop) => {
+  if (isPhone) return phone;
+  if (isTablet) return tablet;
+  return desktop;
+};
+Method 3: Responsive Styled Components
+javascript
+import styled from 'styled-components/native';
+import { responsiveValue } from '../utils/responsive';
+
+const Container = styled.View`
+  flex: 1;
+  padding: ${responsiveValue('16px', '24px', '32px')};
+  flex-direction: ${responsiveValue('column', 'row', 'row')};
+`;
+
+const Grid = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
+
+const GridItem = styled.View`
+  width: ${responsiveValue('100%', '48%', '32%')};
+  margin-bottom: ${responsiveValue('16px', '16px', '24px')};
+  padding: ${responsiveValue('12px', '16px', '20px')};
+  background-color: white;
+  border-radius: 8px;
+`;
+
+// Usage
+const ResponsiveGrid = () => (
+  <Container>
+    <Grid>
+      {[1, 2, 3, 4, 5, 6].map(item => (
+        <GridItem key={item}>
+          <Text>Item {item}</Text>
+        </GridItem>
+      ))}
+    </Grid>
+  </Container>
+);
+217. Polymorphic Components
+Polymorphic components can change their underlying DOM element/component while maintaining the same styling.
+
+Basic Polymorphic Component:
+javascript
+import styled from 'styled-components/native';
+
+// Method 1: Using "as" prop
+const Box = styled.View`
+  padding: 16px;
+  background-color: ${props => props.bg || 'white'};
+  border-radius: 8px;
+`;
+
+// Usage - render as different components
+const PolymorphicExample = () => (
+  <>
+    {/* Renders as View */}
+    <Box bg="#f0f0f0">
+      <Text>This is a View</Text>
+    </Box>
+    
+    {/* Renders as TouchableOpacity */}
+    <Box as={TouchableOpacity} bg="#007AFF" onPress={() => alert('Pressed!')}>
+      <Text style={{ color: 'white' }}>This is a Button</Text>
+    </Box>
+    
+    {/* Renders as Text */}
+    <Box as={Text} bg="transparent">
+      This is actually Text component!
+    </Box>
+  </>
+);
+Advanced Polymorphic Component with Type Safety:
+javascript
+import React from 'react';
+import styled from 'styled-components/native';
+
+const StyledBox = styled.View`
+  padding: ${props => props.padding || '16px'};
+  background-color: ${props => props.backgroundColor || 'white'};
+  border-radius: ${props => props.borderRadius || '8px'};
+  ${props => props.center && `
+    justify-content: center;
+    align-items: center;
+  `}
+`;
+
+// Polymorphic component with TypeScript
+const Box = React.forwardRef(({ 
+  as: Component = View, 
+  children, 
+  ...props 
+}, ref) => {
+  return (
+    <StyledBox as={Component} ref={ref} {...props}>
+      {children}
+    </StyledBox>
+  );
+});
+
+// Usage examples
+const App = () => (
+  <>
+    {/* Default (View) */}
+    <Box padding="20px" backgroundColor="#f5f5f5">
+      <Text>Regular Box</Text>
+    </Box>
+    
+    {/* As TouchableOpacity */}
+    <Box 
+      as={TouchableOpacity} 
+      backgroundColor="#007AFF"
+      padding="12px"
+      center
+      onPress={() => console.log('Pressed')}
+    >
+      <Text style={{ color: 'white', fontWeight: 'bold' }}>
+        Button Box
+      </Text>
+    </Box>
+    
+    {/* As ScrollView */}
+    <Box as={ScrollView} backgroundColor="transparent">
+      <Text>Item 1</Text>
+      <Text>Item 2</Text>
+      <Text>Item 3</Text>
+    </Box>
+    
+    {/* As Text */}
+    <Box as={Text} backgroundColor="transparent" padding="0">
+      This is text with box styling!
+    </Box>
+  </>
+);
+218. Conditional Styling
+Method 1: Props-Based Conditional Styling
+javascript
+import styled from 'styled-components/native';
+
+const Button = styled.TouchableOpacity`
+  padding: 12px 24px;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  
+  /* Variant based on props */
+  background-color: ${props => {
+    switch (props.variant) {
+      case 'primary': return '#007AFF';
+      case 'secondary': return '#6C757D';
+      case 'success': return '#28A745';
+      case 'danger': return '#DC3545';
+      default: return '#007AFF';
+    }
+  }};
+  
+  /* Size based on props */
+  padding: ${props => {
+    switch (props.size) {
+      case 'sm': return '8px 16px';
+      case 'lg': return '16px 32px';
+      default: return '12px 24px';
+    }
+  }};
+  
+  /* Disabled state */
+  opacity: ${props => props.disabled ? 0.6 : 1};
+  
+  /* Outline variant */
+  ${props => props.outline && `
+    background-color: transparent;
+    border: 2px solid ${props.variant ? getColor(props.variant) : '#007AFF'};
+  `}
+`;
+
+const getColor = (variant) => {
+  const colors = {
+    primary: '#007AFF',
+    secondary: '#6C757D', 
+    success: '#28A745',
+    danger: '#DC3545',
+  };
+  return colors[variant] || colors.primary;
+};
+
+// Usage
+const ButtonExamples = () => (
+  <>
+    <Button variant="primary" onPress={() => {}}>
+      <Text style={{ color: 'white' }}>Primary</Text>
+    </Button>
+    
+    <Button variant="success" size="lg" onPress={() => {}}>
+      <Text style={{ color: 'white' }}>Success Large</Text>
+    </Button>
+    
+    <Button variant="danger" outline onPress={() => {}}>
+      <Text style={{ color: getColor('danger') }}>Danger Outline</Text>
+    </Button>
+    
+    <Button disabled onPress={() => {}}>
+      <Text style={{ color: 'white' }}>Disabled</Text>
+    </Button>
+  </>
+);
+Method 2: CSS Helper Function
+javascript
+import styled, { css } from 'styled-components/native';
+
+const Card = styled.View`
+  padding: 16px;
+  border-radius: 8px;
+  background-color: white;
+  
+  /* Base shadow */
+  shadow-color: #000;
+  shadow-offset: 0px 2px;
+  shadow-opacity: 0.1;
+  shadow-radius: 3px;
+  elevation: 2;
+  
+  /* Conditional styles using css helper */
+  ${props => props.elevated && css`
+    shadow-opacity: 0.2;
+    shadow-radius: 6px;
+    elevation: 6;
+  `}
+  
+  ${props => props.interactive && css`
+    shadow-opacity: 0.15;
+    elevation: 4;
+  `}
+  
+  ${props => props.selected && css`
+    border: 2px solid #007AFF;
+    background-color: #F0F8FF;
+  `}
+  
+  ${props => props.disabled && css`
+    opacity: 0.5;
+    background-color: #F8F9FA;
+  `}
+`;
+
+// Usage
+const CardExamples = () => (
+  <>
+    <Card>
+      <Text>Regular Card</Text>
+    </Card>
+    
+    <Card elevated>
+      <Text>Elevated Card</Text>
+    </Card>
+    
+    <Card interactive selected>
+      <Text>Selected Interactive Card</Text>
+    </Card>
+    
+    <Card disabled>
+      <Text>Disabled Card</Text>
+    </Card>
+  </>
+);
+219. Performance Implications
+Performance Concerns:
+javascript
+// ❌ PROBLEMATIC - Dynamic styles in render
+const DynamicComponent = ({ items, user, theme }) => {
+  // New styled component created on every render!
+  const DynamicBox = styled.View`
+    padding: ${items.length * 2}px;
+    background-color: ${user.preferences.color};
+    border-radius: ${theme.borderRadius}px;
+  `;
+  
+  return <DynamicBox />;
+};
+
+// ✅ BETTER - Static styled components
+const StaticBox = styled.View`
+  padding: ${props => props.padding}px;
+  background-color: ${props => props.backgroundColor};
+  border-radius: ${props => props.borderRadius}px;
+`;
+
+const OptimizedComponent = ({ items, user, theme }) => (
+  <StaticBox 
+    padding={items.length * 2}
+    backgroundColor={user.preferences.color}
+    borderRadius={theme.borderRadius}
+  />
+);
+Performance Issues:
+Runtime style computation - CSS parsing happens in JavaScript
+
+Dynamic component creation - New components created during render
+
+Prop changes - Frequent style recalculations
+
+Memory usage - Cache growth with dynamic styles
+
+220. Optimizing Re-renders with Styled Components
+Method 1: useMemo for Dynamic Styles
+javascript
+import React, { useMemo } from 'react';
+import styled from 'styled-components/native';
+
+const StaticBox = styled.View`
+  padding: 16px;
+  background-color: ${props => props.bg};
+  border-radius: 8px;
+`;
+
+const OptimizedComponent = ({ user, items, isActive }) => {
+  // Memoize dynamic props to prevent unnecessary re-renders
+  const boxProps = useMemo(() => ({
+    bg: isActive ? user.preferences.activeColor : user.preferences.inactiveColor,
+  }), [isActive, user.preferences.activeColor, user.preferences.inactiveColor]);
+  
+  return (
+    <StaticBox {...boxProps}>
+      <Text>Items: {items.length}</Text>
+    </StaticBox>
+  );
+};
+Method 2: React.memo with Styled Components
+javascript
+import React, { memo } from 'react';
+import styled from 'styled-components/native';
+
+const CardContainer = styled.View`
+  padding: 16px;
+  background-color: ${props => props.theme.colors.background};
+  border-radius: 8px;
+  margin-bottom: 12px;
+`;
+
+const CardTitle = styled.Text`
+  font-size: 18px;
+  font-weight: bold;
+  color: ${props => props.theme.colors.text};
+  margin-bottom: 8px;
+`;
+
+// Use React.memo to prevent unnecessary re-renders
+const Card = memo(({ title, content, isFeatured }) => {
+  return (
+    <CardContainer style={{
+      borderLeftWidth: isFeatured ? 4 : 0,
+      borderLeftColor: isFeatured ? '#007AFF' : 'transparent',
+    }}>
+      <CardTitle>{title}</CardTitle>
+      <Text style={{ color: '#666' }}>{content}</Text>
+    </CardContainer>
+  );
+});
+
+// Custom comparison function
+const areEqual = (prevProps, nextProps) => {
+  return prevProps.title === nextProps.title && 
+         prevProps.content === nextProps.content &&
+         prevProps.isFeatured === nextProps.isFeatured;
+};
+
+const OptimizedCard = memo(Card, areEqual);
+Method 3: Avoiding Inline Styled Components
+javascript
+// ❌ BAD - Inline styled component in render
+const BadComponent = ({ type }) => {
+  const DynamicBox = styled.View`
+    background-color: ${type === 'error' ? 'red' : 'blue'};
+    padding: 20px;
+  `;
+  
+  return <DynamicBox />;
+};
+
+// ✅ GOOD - Predefined with props
+const Box = styled.View`
+  background-color: ${props => 
+    props.type === 'error' ? 'red' : 'blue'};
+  padding: 20px;
+`;
+
+const GoodComponent = ({ type }) => {
+  return <Box type={type} />;
+};
+Method 4: Style Extraction Pattern
+javascript
+import styled from 'styled-components/native';
+
+// Extract dynamic calculations outside styled component
+const getDynamicStyles = (props) => {
+  const { size, variant, disabled } = props;
+  
+  return `
+    padding: ${size === 'large' ? '24px' : '16px'};
+    background-color: ${disabled ? '#CCCCCC' : 
+      variant === 'primary' ? '#007AFF' : '#6C757D'};
+    opacity: ${disabled ? 0.6 : 1};
+  `;
+};
+
+const OptimizedButton = styled.TouchableOpacity`
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  ${props => getDynamicStyles(props)}
+`;
+
+// Usage
+const App = () => (
+  <OptimizedButton size="large" variant="primary" disabled={false}>
+    <Text style={{ color: 'white' }}>Optimized Button</Text>
+  </OptimizedButton>
+);
+Method 5: Using attrs for Static Props
+javascript
+import styled from 'styled-components/native';
+
+// Use attrs for props that don't change frequently
+const OptimizedInput = styled.TextInput.attrs(props => ({
+  placeholderTextColor: props.theme.colors.textSecondary,
+  selectionColor: props.theme.colors.primary,
+}))`
+  padding: 16px;
+  border-radius: 8px;
+  background-color: ${props => props.theme.colors.background};
+  border: 1px solid ${props => props.theme.colors.textSecondary};
+  color: ${props => props.theme.colors.text};
+  font-size: 16px;
+`;
+
+// Static values are set once in attrs
+const StaticButton = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.8,
+})`
+  padding: 16px;
+  background-color: #007AFF;
+  border-radius: 8px;
+  align-items: center;
+`;
+Performance Best Practices Summary:
+Avoid creating styled components in render
+
+Use React.memo for expensive components
+
+Memoize dynamic props with useMemo
+
+Extract complex logic outside styled components
+
+Use attrs for static properties
+
+Keep styled components pure and predictable
+
+These optimizations ensure Styled Components remain performant even in complex applications!
+
+------------------------------------------------------------------------------------------
