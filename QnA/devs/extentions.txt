@@ -1,0 +1,90 @@
+Productivity & Code Quality
+
+React Native Tools
+Official extension by Microsoft offering debugging, IntelliSense, and commands for React Native projects.
+
+ES7+ React/Redux/React-Native Snippets
+Provides shortcuts for common React Native patterns like components, hooks, and Redux boilerplate.
+
+Prettier – Code Formatter
+Automatically formats your code to ensure consistent styling across your project.
+
+ESLint
+Integrates ESLint into VS Code to identify and fix problems in your JavaScript code.
+
+GitLens
+Enhances Git capabilities in VS Code, providing insights into code authorship, history, and more.
+
+🎨 UI & Styling
+
+React Native Style Injector
+Automatically injects missing styles into your StyleSheet.create() block, streamlining your styling workflow.
+
+Tailwind CSS IntelliSense
+Provides autocomplete and linting for Tailwind CSS classes, improving productivity when using Tailwind with React Native.
+
+Bracket Pair Colorizer 2
+Colorizes matching brackets to make it easier to identify code blocks.
+
+Path Intellisense
+Autocompletes filenames and paths in your import statements, reducing errors and speeding up development.
+
+⚡ Performance & Debugging
+
+Import Cost
+Displays the size of imported JavaScript packages, helping you manage bundle size effectively.
+
+Error Lens
+Highlights errors and warnings inline, making them more visible and easier to address.
+
+Thunder Client
+A lightweight REST API client for testing APIs directly within VS Code.
+
+🚀 AI & Automation
+
+App Developer Copilot
+An AI-powered extension that generates React Native/Expo code based on your app idea descriptions.
+
+Tabnine
+An AI code completion tool that suggests context-aware code snippets, improving coding speed.
+
+Code Spell Checker
+Detects and corrects spelling errors in your code, comments, and strings.  React Native Tools
+
+ES7+ React/Redux/React-Native Snippets
+
+Prettier – Code Formatter
+
+ESLint
+
+Auto Rename Tag
+
+GitLens
+
+Path Intellisense
+
+Bracket Pair Colorizer 2
+
+React Native Storybook
+
+React Native Tools Preview
+
+VS Code Icons
+
+React Developer Tools
+
+Tailwind CSS IntelliSense
+
+Color Highlight
+
+Import Cost
+
+Thunder Client (API testing)
+
+Code Spell Checker
+
+TODO Highlight
+
+Tabnine (AI autocompletion)
+
+GitHub Copilot
