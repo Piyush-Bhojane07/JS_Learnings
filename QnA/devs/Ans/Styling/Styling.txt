@@ -1211,5 +1211,427 @@ For startups/MVPs: NativeWind (speed, consistency)
 Both are excellent choices - it depends on your team, project requirements, and priorities!
 ---------------------------------------------------------------------------------------------
 
+207. What is NativeWind and how does it bring Tailwind to React Native?
+208. How do you configure tailwind.config.js for React Native?
+209. How do you handle dark mode with NativeWind?
+207. What is NativeWind and How It Brings Tailwind to React Native
+NativeWind is a library that brings Tailwind CSS utility classes to React Native, allowing you to use Tailwind's familiar syntax for styling mobile apps.
 
+How It Works:
+javascript
+// Traditional React Native
+<View style={{ padding: 20, backgroundColor: 'white', borderRadius: 8 }}>
+  <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Hello</Text>
+</View>
+
+// With NativeWind
+<View style={tw`p-5 bg-white rounded-lg`}>
+  <Text style={tw`text-base font-bold`}>Hello</Text>
+</View>
+Architecture:
+javascript
+// Behind the scenes - NativeWind process:
+// 1. String parsing: "p-4 bg-blue-500" 
+// 2. Style resolution: { padding: 16, backgroundColor: '#3b82f6' }
+// 3. Caching: Store computed styles for performance
+// 4. React Native rendering: Apply styles to components
+
+// Installation:
+npm install nativewind
+npm install tailwindcss --save-dev
+
+// The magic happens through:
+// - Babel plugin (compile-time optimization)
+// - Runtime parser (dynamic class handling)
+Key Features:
+Utility-first - Use Tailwind classes directly
+
+Responsive design - Breakpoints (sm, md, lg)
+
+Dark mode - Easy dark theme switching
+
+Pseudo-classes - hover, focus, active states
+
+Performance - Caching and optimizations
+
+208. How to Configure tailwind.config.js for React Native
+Basic Configuration:
+javascript
+// tailwind.config.js
+module.exports = {
+  content: [
+    './App.{js,jsx,ts,tsx}',
+    './src/**/*.{js,jsx,ts,tsx}',
+    './components/**/*.{js,jsx,ts,tsx}'
+  ],
+  theme: {
+    extend: {
+      // Custom colors
+      colors: {
+        primary: '#007AFF',
+        secondary: '#5856D6',
+        success: '#34C759',
+        danger: '#FF3B30',
+        custom: {
+          50: '#fef2f2',
+          100: '#fee2e2',
+          // ... more shades
+        }
+      },
+      
+      // Custom spacing
+      spacing: {
+        '13': '3.25rem',
+        '15': '3.75rem',
+        '128': '32rem',
+      },
+      
+      // Custom font sizes
+      fontSize: {
+        '2xs': '0.625rem', // 10px
+        '3xl': '1.875rem', // 30px
+      },
+      
+      // Custom border radius
+      borderRadius: {
+        '4xl': '2rem',
+      }
+    },
+  },
+  plugins: [],
+}
+React Native Specific Configuration:
+javascript
+// tailwind.config.js - Mobile optimized
+module.exports = {
+  content: [
+    './App.{js,jsx,ts,tsx}',
+    './src/**/*.{js,jsx,ts,tsx}'
+  ],
+  theme: {
+    extend: {
+      colors: {
+        // iOS system colors
+        system: {
+          blue: '#007AFF',
+          green: '#34C759',
+          indigo: '#5856D6',
+          orange: '#FF9500',
+          pink: '#FF2D55',
+          purple: '#AF52DE',
+          red: '#FF3B30',
+          teal: '#5AC8FA',
+          yellow: '#FFCC00',
+        },
+        
+        // Material Design colors
+        material: {
+          primary: '#6200EE',
+          secondary: '#03DAC6',
+        }
+      },
+      
+      // Mobile-first spacing scale
+      spacing: {
+        '0.5': '2px',
+        '1': '4px',
+        '1.5': '6px',
+        '2': '8px',
+        '2.5': '10px',
+        '3': '12px',
+        '3.5': '14px',
+        '4': '16px',
+        '5': '20px',
+        '6': '24px',
+        '7': '28px',
+        '8': '32px',
+        '9': '36px',
+        '10': '40px',
+      },
+      
+      // Mobile font sizes
+      fontSize: {
+        'xs': ['12px', { lineHeight: '16px' }],
+        'sm': ['14px', { lineHeight: '20px' }],
+        'base': ['16px', { lineHeight: '24px' }],
+        'lg': ['18px', { lineHeight: '28px' }],
+        'xl': ['20px', { lineHeight: '28px' }],
+        '2xl': ['24px', { lineHeight: '32px' }],
+      },
+      
+      // Safe areas for notches
+      padding: {
+        'safe-top': 'env(safe-area-inset-top)',
+        'safe-bottom': 'env(safe-area-inset-bottom)',
+        'safe-left': 'env(safe-area-inset-left)',
+        'safe-right': 'env(safe-area-inset-right)',
+      }
+    },
+  },
+  
+  // Mobile-specific plugins
+  plugins: [
+    // Custom plugin for platform-specific utilities
+    function({ addUtilities }) {
+      const newUtilities = {
+        '.shadow-ios': {
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.1,
+          shadowRadius: 3.84,
+        },
+        '.shadow-android': {
+          elevation: 5,
+        },
+      }
+      addUtilities(newUtilities)
+    }
+  ],
+}
+Babel Configuration:
+javascript
+// babel.config.js
+module.exports = {
+  presets: ['module:metro-react-native-babel-preset'],
+  plugins: [
+    'nativewind/babel',
+    // other plugins...
+  ],
+};
+209. How to Handle Dark Mode with NativeWind
+Method 1: Using useColorScheme Hook
+javascript
+// App.js or _layout.js (Expo)
+import { useColorScheme } from 'react-native';
+import { ThemeProvider } from 'nativewind';
+
+function App() {
+  const colorScheme = useColorScheme();
+  
+  return (
+    <ThemeProvider value={colorScheme === 'dark' ? 'dark' : 'light'}>
+      <YourApp />
+    </ThemeProvider>
+  );
+}
+Method 2: Manual Theme Toggle
+javascript
+// ThemeContext.js
+import React, { createContext, useContext, useState } from 'react';
+import { ThemeProvider } from 'nativewind';
+
+const ThemeContext = createContext();
+
+export const useTheme = () => useContext(ThemeContext);
+
+export const AppThemeProvider = ({ children }) => {
+  const [theme, setTheme] = useState('light');
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <ThemeProvider value={theme}>
+        {children}
+      </ThemeProvider>
+    </ThemeContext.Provider>
+  );
+};
+
+// Usage in components
+const MyComponent = () => {
+  const { theme, toggleTheme } = useTheme();
+  
+  return (
+    <View style={tw`flex-1 bg-white dark:bg-gray-900`}>
+      <Text style={tw`text-gray-900 dark:text-white`}>
+        Current theme: {theme}
+      </Text>
+      <TouchableOpacity 
+        onPress={toggleTheme}
+        style={tw`p-4 bg-blue-500 dark:bg-blue-700 rounded-lg`}
+      >
+        <Text style={tw`text-white`}>Toggle Theme</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
+Method 3: Complete Dark Mode Implementation
+javascript
+// tailwind.config.js - Dark mode configuration
+module.exports = {
+  darkMode: 'class', // Use class-based dark mode
+  content: ['./App.{js,jsx,ts,tsx}', './src/**/*.{js,jsx,ts,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        // Light theme colors
+        background: '#FFFFFF',
+        surface: '#F8F9FA',
+        text: '#1F2937',
+        
+        // Dark theme colors
+        dark: {
+          background: '#0F172A',
+          surface: '#1E293B', 
+          text: '#F1F5F9',
+        }
+      }
+    },
+  },
+}
+
+// hooks/useTheme.js
+import { useColorScheme } from 'react-native';
+import { useColorScheme as useNativeWindColorScheme } from 'nativewind';
+
+export const useTheme = () => {
+  const deviceColorScheme = useColorScheme();
+  const { colorScheme, setColorScheme } = useNativeWindColorScheme();
+  
+  const toggleColorScheme = () => {
+    setColorScheme(colorScheme === 'light' ? 'dark' : 'light');
+  };
+
+  return {
+    colorScheme: colorScheme || deviceColorScheme,
+    toggleColorScheme,
+    isDark: (colorScheme || deviceColorScheme) === 'dark',
+  };
+};
+
+// components/ThemeToggle.js
+import { Switch } from 'react-native';
+import { useTheme } from '../hooks/useTheme';
+
+export const ThemeToggle = () => {
+  const { colorScheme, toggleColorScheme, isDark } = useTheme();
+  
+  return (
+    <View style={tw`flex-row items-center p-4 bg-gray-100 dark:bg-gray-800`}>
+      <Text style={tw`flex-1 text-gray-900 dark:text-white`}>
+        Dark Mode
+      </Text>
+      <Switch
+        value={isDark}
+        onValueChange={toggleColorScheme}
+        trackColor={{ false: '#767577', true: '#81b0ff' }}
+        thumbColor={isDark ? '#f5dd4b' : '#f4f3f4'}
+      />
+    </View>
+  );
+};
+Method 4: Advanced Dark Mode with Persistence
+javascript
+// hooks/usePersistedTheme.js
+import { useState, useEffect } from 'react';
+import { useColorScheme } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+export const usePersistedTheme = () => {
+  const deviceTheme = useColorScheme();
+  const [theme, setTheme] = useState(deviceTheme);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    loadTheme();
+  }, []);
+
+  const loadTheme = async () => {
+    try {
+      const savedTheme = await AsyncStorage.getItem('app-theme');
+      if (savedTheme) {
+        setTheme(savedTheme);
+      }
+    } catch (error) {
+      console.log('Error loading theme:', error);
+    } finally {
+      setIsLoaded(true);
+    }
+  };
+
+  const toggleTheme = async (newTheme) => {
+    const themeToSet = newTheme || (theme === 'light' ? 'dark' : 'light');
+    setTheme(themeToSet);
+    try {
+      await AsyncStorage.setItem('app-theme', themeToSet);
+    } catch (error) {
+      console.log('Error saving theme:', error);
+    }
+  };
+
+  return {
+    theme: isLoaded ? theme : deviceTheme,
+    toggleTheme,
+    isDark: theme === 'dark',
+    isLoaded,
+  };
+};
+
+// App.js
+import { ThemeProvider } from 'nativewind';
+import { usePersistedTheme } from './hooks/usePersistedTheme';
+
+function App() {
+  const { theme, toggleTheme } = usePersistedTheme();
+
+  return (
+    <ThemeProvider value={theme}>
+      <YourApp onThemeChange={toggleTheme} />
+    </ThemeProvider>
+  );
+}
+Dark Mode Usage Examples:
+javascript
+// Comprehensive dark mode styling
+const ProfileScreen = () => {
+  return (
+    <View style={tw`flex-1 bg-white dark:bg-gray-900`}>
+      {/* Header */}
+      <View style={tw`p-6 bg-blue-500 dark:bg-blue-800`}>
+        <Text style={tw`text-white text-2xl font-bold`}>Profile</Text>
+      </View>
+      
+      {/* Content */}
+      <View style={tw`p-6 bg-gray-50 dark:bg-gray-800 flex-1`}>
+        <View style={tw`bg-white dark:bg-gray-700 rounded-lg p-4 shadow-sm`}>
+          <Text style={tw`text-gray-900 dark:text-white text-lg font-semibold`}>
+            John Doe
+          </Text>
+          <Text style={tw`text-gray-600 dark:text-gray-300 mt-2`}>
+            Software Developer
+          </Text>
+        </View>
+        
+        {/* Settings list */}
+        <View style={tw`mt-4 bg-white dark:bg-gray-700 rounded-lg`}>
+          <View style={tw`p-4 border-b border-gray-200 dark:border-gray-600`}>
+            <Text style={tw`text-gray-900 dark:text-white`}>Notifications</Text>
+          </View>
+          <View style={tw`p-4 border-b border-gray-200 dark:border-gray-600`}>
+            <Text style={tw`text-gray-900 dark:text-white`}>Privacy</Text>
+          </View>
+          <View style={tw`p-4`}>
+            <Text style={tw`text-gray-900 dark:text-white`}>Help & Support</Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  );
+};
+Key Benefits of NativeWind Dark Mode:
+
+✅ Automatic color switching with dark: prefix
+
+✅ Consistent theming across entire app
+
+✅ Performance optimized - no re-renders on theme change
+
+✅ Flexible control - device theme or manual override
+
+✅ Persistence - remember user preference
+
+This makes implementing dark mode in React Native incredibly straightf
 
