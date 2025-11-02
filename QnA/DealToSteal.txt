@@ -329,5 +329,15 @@ skills ->  that you worked on , made projects (imp)
 Frontend -> react , redux, ... (key skills for Frontend)
 
 experienced -> what you imporove in projects,  reduce load time by 30% (eg)
+imp projects only , 
+achivementss -> hack thons , runner up only relevant
 
-achivementss -> hack thons , runner up
+education - clg, % 
+
+plain and simple , single page
+
+pdf format only , test on multiple mobiles 
+
+resume version ->  master version (Frontend), backend, full stack 
+
+ats score above 90
