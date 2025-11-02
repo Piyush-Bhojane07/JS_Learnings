@@ -310,3 +310,24 @@ You’ll have hands-on mastery, not just theory
 You’ll possess project depth and problem-solving fluency
 
 You’ll stand confidently in ₹6 L–₹25 L+ interviews
+
+
+
+//resume
+
+https://www.youtube.com/watch?v=eKIPvjCx_RQ
+
+
+sigle packag
+key points that requiter wants
+
+key points that Required in resume ->  
+header name  , mail id , git hub link linked lists
+summary -> 2 3 lines -> experienced -> point that you worked on
+
+skills ->  that you worked on , made projects (imp)
+Frontend -> react , redux, ... (key skills for Frontend)
+
+experienced -> what you imporove in projects,  reduce load time by 30% (eg)
+
+achivementss -> hack thons , runner up
