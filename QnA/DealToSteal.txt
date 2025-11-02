@@ -336,8 +336,15 @@ education - clg, %
 
 plain and simple , single page
 
-pdf format only , test on multiple mobiles 
+pdf format only , test on multiple mobiles 11pxx 12px
 
 resume version ->  master version (Frontend), backend, full stack 
 
 ats score above 90
+
+///////////////// 
+
+daily half n hr
+learn practices revise
+
+Don’t make project in 1 day, just 1/2 to 1 hr daily 
