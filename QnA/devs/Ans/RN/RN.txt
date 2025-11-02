@@ -126,3 +126,364 @@ Performance.observe('measure', (entry) => {
     console.warn(`Slow operation: ${entry.name} took ${entry.duration}ms`);
   }
 });
+
+
+
+
+---------------------------------------------------
+
+
+what is custom hooks
+Custom Hooks Explained Simply
+Custom Hooks are JavaScript functions that let you reuse stateful logic across multiple components, without duplicating code.
+
+🎯 What They Solve:
+Without Custom Hooks:
+
+typescript
+// Same logic repeated in multiple components
+function ComponentA() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  
+  useEffect(() => {
+    fetchData().then(setData);
+  }, []);
+  // Duplicated in every component that needs data fetching
+}
+
+function ComponentB() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  
+  useEffect(() => {
+    fetchData().then(setData);
+  }, []);
+  // Same code repeated 😕
+}
+With Custom Hooks:
+
+typescript
+// Create once, use anywhere
+function useFetchData() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  
+  useEffect(() => {
+    fetchData().then(setData);
+  }, []);
+  
+  return { data, loading };
+}
+
+// Clean components
+function ComponentA() {
+  const { data, loading } = useFetchData();
+  // Clean and reusable ✅
+}
+
+function ComponentB() {
+  const { data, loading } = useFetchData();
+  // Same logic, no duplication ✅
+}
+📝 Rules for Custom Hooks:
+Must start with use (e.g., useVoterData, useAuth)
+
+Can call other Hooks inside them
+
+Reusable across components
+
+🏗️ Real Examples from Your EMS Project:
+1. useVoterData Hook:
+
+typescript
+// Handles all voter-related operations
+function useVoterData(boothId: string) {
+  const { data: voters, isLoading } = useQuery({
+    queryKey: ['voters', boothId],
+    queryFn: fetchVotersByBooth
+  });
+  
+  const updateVoterStatus = useMutation({
+    mutationFn: updateVoter,
+    onSuccess: () => {
+      // Refresh data
+    }
+  });
+  
+  const segmentedVoters = useMemo(() => {
+    return segmentVoters(voters); // Against/Favoured/Voted/Non-Voted
+  }, [voters]);
+  
+  return {
+    voters,
+    segmentedVoters,
+    isLoading,
+    updateVoterStatus,
+    refetch: () => queryClient.invalidateQueries(['voters'])
+  };
+}
+
+// Usage in component:
+function BoothScreen() {
+  const { segmentedVoters, updateVoterStatus } = useVoterData('booth-123');
+  // Clean and focused ✅
+}
+2. usePrediction Hook:
+
+typescript
+// Handles election prediction logic
+function usePrediction(wardId: string) {
+  const [prediction, setPrediction] = useState(null);
+  
+  const calculatePrediction = useCallback((voterData) => {
+    const favoured = voterData.filter(v => v.status === 'favoured').length;
+    const against = voterData.filter(v => v.status === 'against').length;
+    
+    return {
+      favouredPercentage: (favoured / voterData.length) * 100,
+      againstPercentage: (against / voterData.length) * 100,
+      predictedWinner: favoured > against ? 'Party A' : 'Party B'
+    };
+  }, []);
+  
+  return { prediction, calculatePrediction };
+}
+3. usePagination Hook:
+
+typescript
+// Handles pagination logic
+function usePagination(data = [], itemsPerPage = 10) {
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const paginatedData = data.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+  
+  const nextPage = () => setCurrentPage(prev => Math.min(prev + 1, totalPages));
+  const prevPage = () => setCurrentPage(prev => Math.max(prev - 1, 1));
+  
+  return {
+    currentPage,
+    totalPages,
+    paginatedData,
+    nextPage,
+    prevPage,
+    setCurrentPage
+  };
+}
+🎯 Why Custom Hooks Matter in Your EMS:
+✅ Code Reuse: Same voter logic across Admin, Booth, Town screens
+✅ Clean Components: Complex logic hidden in hooks
+✅ Easy Testing: Test hooks separately from UI
+✅ Team Collaboration: Standardized patterns
+✅ Maintenance: Fix logic in one place, not 10 components
+
+💡 When to Create Custom Hooks:
+Data fetching (API calls)
+
+Form handling and validation
+
+Authentication logic
+
+LocalStorage operations
+
+Complex state calculations
+
+Any logic used in multiple components
+
+Custom hooks turn your complex component logic into reusable pieces, making your code cleaner and more maintainable - exactly what you demonstrated in your EMS project!
+
+pass data from 1 component to antoher
+Here are the common ways to pass data between components in React Native:
+
+1. Props (Parent to Child)
+typescript
+// Parent Component
+function Parent() {
+  const [voterData, setVoterData] = useState({ name: 'John', age: 25 });
+  
+  return <Child voter={voterData} />;
+}
+
+// Child Component
+function Child({ voter }) {
+  return <Text>{voter.name} - {voter.age}</Text>;
+}
+2. Callback Functions (Child to Parent)
+typescript
+// Parent Component
+function Parent() {
+  const handleVoterUpdate = (updatedVoter) => {
+    console.log('Updated voter:', updatedVoter);
+  };
+  
+  return <Child onVoterUpdate={handleVoterUpdate} />;
+}
+
+// Child Component
+function Child({ onVoterUpdate }) {
+  return (
+    <Button 
+      title="Update Voter" 
+      onPress={() => onVoterUpdate({ name: 'Jane', age: 30 })} 
+    />
+  );
+}
+3. React Context API (Anywhere in App)
+typescript
+// 1. Create Context
+const VoterContext = createContext();
+
+// 2. Create Provider
+function VoterProvider({ children }) {
+  const [voters, setVoters] = useState([]);
+  
+  return (
+    <VoterContext.Provider value={{ voters, setVoters }}>
+      {children}
+    </VoterContext.Provider>
+  );
+}
+
+// 3. Use in any component
+function ComponentA() {
+  const { voters, setVoters } = useContext(VoterContext);
+  
+  const addVoter = () => {
+    setVoters([...voters, { name: 'New Voter', age: 25 }]);
+  };
+  
+  return <Button title="Add Voter" onPress={addVoter} />;
+}
+
+function ComponentB() {
+  const { voters } = useContext(VoterContext);
+  
+  return (
+    <View>
+      {voters.map(voter => <Text>{voter.name}</Text>)}
+    </View>
+  );
+}
+4. State Management (Zustand/Redux)
+typescript
+// Zustand Store
+const useVoterStore = create((set) => ({
+  voters: [],
+  addVoter: (voter) => set((state) => ({ voters: [...state.voters, voter] })),
+  updateVoter: (id, updatedData) => set((state) => ({
+    voters: state.voters.map(v => v.id === id ? { ...v, ...updatedData } : v)
+  }))
+}));
+
+// Use in any component
+function ComponentA() {
+  const addVoter = useVoterStore((state) => state.addVoter);
+  
+  return (
+    <Button 
+      title="Add Voter" 
+      onPress={() => addVoter({ id: 1, name: 'John' })} 
+    />
+  );
+}
+
+function ComponentB() {
+  const voters = useVoterStore((state) => state.voters);
+  
+  return (
+    <View>
+      {voters.map(voter => <Text>{voter.name}</Text>)}
+    </View>
+  );
+}
+5. Navigation Params (Between Screens)
+typescript
+// From Screen A
+navigation.navigate('VoterDetails', {
+  voterId: 123,
+  voterName: 'John Doe',
+  onGoBack: (updatedData) => {
+    console.log('Data from details screen:', updatedData);
+  }
+});
+
+// In Screen B
+function VoterDetails({ route, navigation }) {
+  const { voterId, voterName, onGoBack } = route.params;
+  
+  const handleSave = () => {
+    onGoBack({ status: 'updated' });
+    navigation.goBack();
+  };
+  
+  return (
+    <View>
+      <Text>Editing: {voterName}</Text>
+      <Button title="Save" onPress={handleSave} />
+    </View>
+  );
+}
+6. Event Emitters (Complex Communication)
+typescript
+// Create event emitter
+const eventEmitter = new EventEmitter();
+
+// Component A - Listen
+useEffect(() => {
+  const subscription = eventEmitter.addListener('voterUpdated', (data) => {
+    console.log('Voter updated:', data);
+  });
+  
+  return () => subscription.remove();
+}, []);
+
+// Component B - Emit
+const updateVoter = () => {
+  eventEmitter.emit('voterUpdated', { id: 1, name: 'Updated Name' });
+};
+7. Using Ref (Imperative Handling)
+typescript
+// Parent Component
+function Parent() {
+  const childRef = useRef();
+  
+  const triggerChildFunction = () => {
+    childRef.current?.updateData('New Data from parent');
+  };
+  
+  return (
+    <View>
+      <ChildComponent ref={childRef} />
+      <Button title="Trigger Child" onPress={triggerChildFunction} />
+    </View>
+  );
+}
+
+// Child Component (with forwardRef)
+const ChildComponent = forwardRef((props, ref) => {
+  const [data, setData] = useState('');
+  
+  useImperativeHandle(ref, () => ({
+    updateData: (newData) => {
+      setData(newData);
+    }
+  }));
+  
+  return <Text>{data}</Text>;
+});
+🎯 When to Use Which:
+Props: Simple parent-child communication
+
+Context: App-wide state (theme, user data)
+
+Zustand/Redux: Complex global state
+
+Navigation Params: Passing data between screens
+
+Event Emitters: Cross-component events
+
+Refs: Imperative control over child components
