@@ -49,6 +49,7 @@ Style ID referencing: Instead of sending full style objects to native side
 Memoization: Styles are cached and reused
 
 Reduced bridge traffic: Less data passed between JS and native threads
+------------------------------------------------------------------------------
 
 201. Creating and Using StyleSheets
 javascript
@@ -82,7 +83,10 @@ const MyComponent = () => {
     </View>
   );
 };
+----------------------------------------------------------------------
+
 202. Handling Dynamic Styles with StyleSheet
+
 javascript
 import { StyleSheet } from 'react-native';
 
@@ -149,6 +153,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'gray',
   },
 });
+-------------------------------------------------------------------------
+
 Best Practices:
 javascript
 // ✅ Good - Static styles in StyleSheet
@@ -173,6 +179,7 @@ Avoid creating new style objects in render methods
 Use StyleSheet.flatten() when you need computed style values
 
 This approach gives you the best of both worlds: performance of StyleSheet with flexibility of dynamic styling!
+---------------------------------------------------------------------------------------------
 
 203. How do you combine multiple styles?
 204. How do you create responsive designs with StyleSheet?
