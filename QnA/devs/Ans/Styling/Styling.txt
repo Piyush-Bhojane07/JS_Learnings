@@ -153,7 +153,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'gray',
   },
 });
--------------------------------------------------------------------------
 
 Best Practices:
 javascript
