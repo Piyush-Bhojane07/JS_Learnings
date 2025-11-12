@@ -1,0 +1,398 @@
+🔷 JavaScript (50 Questions)
+Core Concepts
+What is the difference between let, const, and var?
+
+Explain JavaScript's event loop
+
+What is hoisting in JavaScript?
+
+Difference between null and undefined
+
+What are closures and provide an example?
+
+Explain the this keyword in different contexts
+
+What is the difference between == and ===?
+
+How does JavaScript handle asynchronous operations?
+
+What are arrow functions and how do they differ from regular functions?
+
+Explain call, apply, and bind methods
+
+ES6+ Features
+What are template literals?
+
+Explain destructuring assignment
+
+What are default parameters?
+
+Explain the spread and rest operators
+
+What are Promises and how do they work?
+
+Explain async/await syntax
+
+What are JavaScript modules (import/export)?
+
+What are Map and Set objects?
+
+Explain Object.keys(), Object.values(), Object.entries()
+
+What are generators and how do they work?
+
+Advanced Concepts
+What is the prototype chain?
+
+Explain event delegation
+
+What is currying in JavaScript?
+
+Difference between deep copy and shallow copy
+
+How does setTimeout and setInterval work?
+
+What is memoization and provide an example?
+
+Explain JavaScript's memory management
+
+What are Web Workers?
+
+Explain the Module Pattern
+
+What is the Revealing Module Pattern?
+
+Array Methods
+Difference between map, filter, and reduce
+
+When would you use forEach vs map?
+
+Explain some and every array methods
+
+What does Array.prototype.flat() do?
+
+How does Array.prototype.find() work?
+
+Explain Array.prototype.includes() vs Array.prototype.indexOf()
+
+What is the purpose of Array.prototype.splice()?
+
+How to remove duplicates from an array?
+
+Explain Array.prototype.sort() method
+
+How to flatten a nested array?
+
+Object & Functions
+How to check if an object is empty?
+
+Difference between Object.create() and constructor functions
+
+What are getters and setters?
+
+Explain function composition
+
+What are higher-order functions?
+
+How to merge two objects in JavaScript?
+
+What is method chaining?
+
+Explain the Factory Pattern
+
+What is the Singleton Pattern?
+
+How to prevent object modification?
+
+⚛️ React Native (50 Questions)
+Core Concepts
+What is React Native and how is it different from React?
+
+Explain the bridge architecture in React Native
+
+Difference between React Native and Flutter
+
+What are the main components in React Native?
+
+How does React Native communicate with native modules?
+
+What is the difference between View and ScrollView?
+
+When would you use FlatList vs ScrollView?
+
+Explain the VirtualizedList component
+
+What is the purpose of SafeAreaView?
+
+How do you handle different screen sizes in React Native?
+
+Components & APIs
+Difference between TextInput and Text components
+
+How do you handle touch events in React Native?
+
+Explain the TouchableOpacity component
+
+What is the ActivityIndicator component used for?
+
+How do you implement pull-to-refresh?
+
+Explain the Modal component
+
+What is StatusBar and how do you customize it?
+
+How to use the Alert API?
+
+Explain the KeyboardAvoidingView component
+
+How to handle device orientation changes?
+
+Navigation
+What are the main navigation libraries in React Native?
+
+How do you implement stack navigation?
+
+Explain tab navigation implementation
+
+How to pass parameters between screens?
+
+What is deep linking in React Native?
+
+How to handle authentication flow with navigation?
+
+Explain navigation lifecycle methods
+
+How to prevent going back to a specific screen?
+
+What is the purpose of navigationRef?
+
+How to handle conditional navigation?
+
+Performance & Optimization
+How do you optimize React Native app performance?
+
+What is Hermes and what are its benefits?
+
+How to reduce bundle size in React Native?
+
+Explain the useMemo hook in React Native context
+
+When to use useCallback in React Native?
+
+How to implement lazy loading of components?
+
+What are the common performance bottlenecks?
+
+How to use the Performance API?
+
+Explain how to debug React Native apps
+
+What is Flipper and how is it used?
+
+Native Modules & Deployment
+How do you create a native module?
+
+What is CodePush and how does it work?
+
+Explain the difference between development and production builds
+
+How to handle different environments (dev, staging, prod)?
+
+What are the app store submission requirements?
+
+How to handle versioning in React Native apps?
+
+What is Fastlane and how is it used?
+
+How to implement in-app purchases?
+
+Explain push notification implementation
+
+How to handle deep linking in React Native?
+
+🎨 Styling (20 Questions)
+Core Styling
+What are the different ways to style React Native components?
+
+Difference between inline styles and StyleSheet API
+
+How does Flexbox work in React Native?
+
+Explain the main Flexbox properties
+
+How to handle responsive design in React Native?
+
+What is the difference between width: '100%' and flex: 1?
+
+How to implement dark/light theme?
+
+What are styled-components and how to use them in RN?
+
+How to handle platform-specific styles?
+
+Explain the transform property in React Native
+
+Advanced Styling
+How to create custom animations?
+
+What is the LayoutAnimation API?
+
+How to use the Animated API?
+
+Difference between Animated.timing and Animated.spring
+
+How to create gradient backgrounds?
+
+What is react-native-vector-icons and how to use it?
+
+How to handle text overflow and ellipsis?
+
+Explain zIndex and stacking context in React Native
+
+How to create shadow effects on both iOS and Android?
+
+What is the PixelRatio API and when to use it?
+
+🗃️ Redux (30 Questions)
+Core Concepts
+What is Redux and why is it used?
+
+Explain the three principles of Redux
+
+What are actions in Redux?
+
+What are reducers and how do they work?
+
+What is the Redux store?
+
+Explain the Redux data flow
+
+What is the difference between Redux and Context API?
+
+When should you use Redux vs local state?
+
+What are action creators?
+
+How to handle asynchronous actions in Redux?
+
+Middleware & Async
+What is Redux Thunk and how does it work?
+
+How is Redux Saga different from Redux Thunk?
+
+What are Redux middleware and how do they work?
+
+How to implement custom middleware?
+
+Explain the applyMiddleware function
+
+How to handle side effects in Redux?
+
+What is redux-persist and how to use it?
+
+How to implement optimistic updates in Redux?
+
+What is normalizing state shape?
+
+How to handle errors in Redux?
+
+React-Redux & Tools
+What is the connect function in react-redux?
+
+How to use the useSelector hook?
+
+How to use the useDispatch hook?
+
+What is the purpose of the Provider component?
+
+How to structure a Redux application?
+
+What is Redux Toolkit and why is it recommended?
+
+Explain createSlice in Redux Toolkit
+
+What is createAsyncThunk and how to use it?
+
+How to use Redux DevTools?
+
+How to implement code splitting with Redux?
+
+🔄 TanStack Query (20 Questions)
+Core Concepts
+What is TanStack Query and what problems does it solve?
+
+How is TanStack Query different from Redux?
+
+Explain the main concepts of TanStack Query
+
+What are query keys and how are they used?
+
+How does caching work in TanStack Query?
+
+What is stale time vs cache time?
+
+How to handle pagination with TanStack Query?
+
+Explain infinite queries
+
+How to implement prefetching?
+
+What is background fetching and how does it work?
+
+Advanced Features
+How to handle mutations with useMutation?
+
+What are query invalidation strategies?
+
+How to implement optimistic updates?
+
+What is the QueryClient and its responsibilities?
+
+How to handle errors in TanStack Query?
+
+What are query retries and how to configure them?
+
+How to implement dependent queries?
+
+What is the useQueries hook used for?
+
+How to handle offline support?
+
+How to test components that use TanStack Query?
+
+🎯 Quick Preparation Tips:
+For JavaScript:
+
+Practice array methods and async/await patterns
+
+Understand closure and this keyword thoroughly
+
+Be ready to write code snippets
+
+For React Native:
+
+Focus on performance optimization techniques
+
+Know navigation patterns thoroughly
+
+Understand native module integration
+
+For State Management:
+
+Compare different state management solutions
+
+Understand when to use each tool
+
+Be prepared to discuss trade-offs
+
+General Tips:
+
+Practice explaining concepts in simple terms
+
+Have real project examples ready
+
+Be honest about what you don't know
+
+Show enthusiasm for learning
+
+Good luck with your interview! Remember to relate answers to your 1-year experience with specific examples from your projects. 🚀
