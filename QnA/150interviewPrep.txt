@@ -181,12 +181,693 @@ In modern development, use const by default and let when you need reassignment. 
 -------------------------------------------------
 
 Explain JavaScript's event loop
+JavaScript Event Loop - Complete Explanation
+The Event Loop is JavaScript's concurrency model that enables non-blocking I/O operations despite JavaScript being single-threaded.
+
+🔄 Core Components
+javascript
+// Visualizing the Event Loop Architecture
+/*
+┌───────────────────────────┐
+│        Call Stack         │  <- Functions currently executing
+└───────────────────────────┘
+┌───────────────────────────┐
+│        Web APIs           │  <- Browser/Runtime APIs (setTimeout, fetch, etc.)
+└───────────────────────────┘
+┌───────────────────────────┐
+│   Callback Queue (Task)   │  <- setTimeout, setInterval, I/O callbacks
+└───────────────────────────┘
+┌───────────────────────────┐
+│  Microtask Queue          │  <- Promises, queueMicrotask, MutationObserver
+└───────────────────────────┘
+┌───────────────────────────┐
+│     Event Loop            │  <- Coordinates everything
+└───────────────────────────┘
+*/
+📝 How It Works - Step by Step
+1. Basic Example
+javascript
+console.log('1 - Start');
+
+setTimeout(() => {
+    console.log('2 - Timeout callback');
+}, 0);
+
+Promise.resolve().then(() => {
+    console.log('3 - Promise callback');
+});
+
+console.log('4 - End');
+
+// Output:
+// 1 - Start
+// 4 - End
+// 3 - Promise callback
+// 2 - Timeout callback
+2. Detailed Execution Flow
+javascript
+function main() {
+    console.log('A');
+    
+    setTimeout(() => {
+        console.log('B - Timeout');
+    }, 0);
+    
+    Promise.resolve().then(() => {
+        console.log('C - Promise');
+    });
+    
+    console.log('D');
+}
+
+main();
+console.log('E');
+
+/*
+EXECUTION STEPS:
+1. Call Stack: [main]
+   - Log: "A"
+   - setTimeout → Web API
+   - Promise.then → Microtask Queue
+   - Log: "D"
+   - main() pops from stack
+
+2. Call Stack: [ ]
+   - Log: "E"
+
+3. Call Stack empty → Check Microtask Queue
+   - Execute Promise callback
+   - Log: "C - Promise"
+
+4. Call Stack empty → Check Callback Queue
+   - Execute setTimeout callback
+   - Log: "B - Timeout"
+*/
+🎯 Queue Priority System
+Priority Order:
+Call Stack (synchronous code)
+
+Microtask Queue (Promises, queueMicrotask)
+
+Callback Queue (setTimeout, setInterval, I/O)
+
+javascript
+console.log('Script start');
+
+// Macro-task (Callback Queue)
+setTimeout(() => {
+    console.log('setTimeout');
+}, 0);
+
+// Micro-task (Microtask Queue)
+Promise.resolve().then(() => {
+    console.log('Promise 1');
+});
+
+// Another Micro-task
+queueMicrotask(() => {
+    console.log('queueMicrotask');
+});
+
+// Synchronous code
+console.log('Script end');
+
+/*
+OUTPUT:
+Script start
+Script end
+Promise 1          ← Microtask (higher priority)
+queueMicrotask     ← Microtask
+setTimeout         ← Macro-task (lower priority)
+*/
+🔥 Advanced Examples
+Example 1: Nested Promises & Timeouts
+javascript
+console.log('Start');
+
+setTimeout(() => console.log('Timeout 1'), 0);
+
+Promise.resolve()
+    .then(() => {
+        console.log('Promise 1');
+        return Promise.resolve();
+    })
+    .then(() => {
+        console.log('Promise 2');
+        setTimeout(() => {
+            console.log('Timeout from Promise');
+        }, 0);
+    });
+
+setTimeout(() => console.log('Timeout 2'), 0);
+
+console.log('End');
+
+/*
+OUTPUT:
+Start
+End
+Promise 1
+Promise 2
+Timeout 1
+Timeout 2
+Timeout from Promise
+*/
+Example 2: Microtasks Blocking the Event Loop
+javascript
+console.log('Start');
+
+// This microtask will block the event loop until complete
+Promise.resolve().then(() => {
+    console.log('Microtask 1 start');
+    // Long synchronous operation
+    for (let i = 0; i < 1000000000; i++) {} // Blocking!
+    console.log('Microtask 1 end');
+});
+
+setTimeout(() => {
+    console.log('Timeout - delayed by microtask');
+}, 0);
+
+console.log('End');
+
+/*
+OUTPUT:
+Start
+End
+Microtask 1 start
+... (long delay) ...
+Microtask 1 end
+Timeout - delayed by microtask
+*/
+Example 3: Real-world Async Operations
+javascript
+// Simulating API calls and user interactions
+function fetchUserData() {
+    console.log('1. Starting API call...');
+    
+    // This goes to Web API, then Callback Queue
+    setTimeout(() => {
+        console.log('4. API Response received');
+        
+        // Promise goes to Microtask Queue
+        Promise.resolve().then(() => {
+            console.log('5. Processing response data');
+        });
+    }, 1000);
+    
+    // This goes to Microtask Queue immediately
+    Promise.resolve().then(() => {
+        console.log('2. Setting up UI');
+    });
+}
+
+console.log('0. App started');
+fetchUserData();
+console.log('3. Waiting for data...');
+
+/*
+OUTPUT:
+0. App started
+1. Starting API call...
+3. Waiting for data...
+2. Setting up UI
+4. API Response received
+5. Processing response data
+*/
+⚡ React Native Specific Examples
+Example 1: Network Requests in React Native
+javascript
+import { useState, useEffect } from 'react';
+
+const UserComponent = () => {
+    const [user, setUser] = useState(null);
+    
+    useEffect(() => {
+        console.log('1. Effect started');
+        
+        // Macro-task - goes to Web API
+        const timeoutId = setTimeout(() => {
+            console.log('4. Timeout - simulating debounce');
+        }, 1000);
+        
+        // Micro-task - higher priority
+        Promise.resolve().then(() => {
+            console.log('2. Setting initial state');
+            setUser({ name: 'Loading...' });
+        });
+        
+        // Async function execution
+        const fetchData = async () => {
+            console.log('3. Starting fetch...');
+            
+            try {
+                // fetch goes to Web API
+                const response = await fetch('/api/user');
+                // await puts the rest in Microtask Queue
+                const data = await response.json();
+                
+                console.log('5. Data received');
+                setUser(data);
+            } catch (error) {
+                console.log('5. Error handling');
+            }
+        };
+        
+        fetchData();
+        
+        console.log('6. Effect setup complete');
+        
+        return () => {
+            clearTimeout(timeoutId);
+            console.log('Cleanup');
+        };
+    }, []);
+    
+    return null;
+};
+
+/*
+OUTPUT:
+1. Effect started
+6. Effect setup complete
+2. Setting initial state
+3. Starting fetch...
+5. Data received (or Error handling)
+4. Timeout - simulating debounce
+*/
+Example 2: Animation and State Updates
+javascript
+const handleButtonPress = () => {
+    console.log('1. Button pressed');
+    
+    // State update (React batches these in microtasks)
+    setLoading(true);
+    
+    // Macro-task - animation frame
+    requestAnimationFrame(() => {
+        console.log('4. Animation frame');
+    });
+    
+    // Micro-task - Promise
+    Promise.resolve().then(() => {
+        console.log('3. State updated, UI re-rendered');
+    });
+    
+    // Macro-task - timeout
+    setTimeout(() => {
+        console.log('5. Timeout completed');
+        setLoading(false);
+    }, 1000);
+    
+    console.log('2. Event handler finished');
+};
+
+/*
+OUTPUT:
+1. Button pressed
+2. Event handler finished
+3. State updated, UI re-rendered
+4. Animation frame
+5. Timeout completed
+*/
+🎯 Interview Answer Summary
+"The Event Loop is JavaScript's mechanism for handling asynchronous operations. It consists of:
+
+Call Stack - Executes synchronous code
+
+Web APIs - Browser-provided async functions (setTimeout, fetch)
+
+Callback Queue - Holds macro-tasks (setTimeout, setInterval, I/O)
+
+Microtask Queue - Holds micro-tasks (Promises, queueMicrotask)
+
+The Event Loop constantly checks:
+
+First: Is Call Stack empty?
+
+Second: Execute all Microtasks
+
+Third: Execute one Macro-task
+
+Repeat
+
+This ensures non-blocking execution while maintaining single-threaded semantics."
+
+💡 Key Takeaways for Interview:
+Microtasks have higher priority than Macrotasks
+
+Promises execute before setTimeout, even with 0 delay
+
+Async/Await uses Promises (microtasks)
+
+Heavy microtasks can block the event loop
+
+Understanding this helps debug tricky timing issues
+--------------------------------------------------------
 
 What is hoisting in JavaScript?
+JavaScript Hoisting - Complete Explanation
+Hoisting is JavaScript's behavior of moving declarations to the top of their scope during the compilation phase, before code execution.
+
+📝 Types of Hoisting
+1. var Hoisting
+javascript
+// Example 1: Basic var hoisting
+console.log(name); // undefined (not ReferenceError)
+var name = 'John';
+console.log(name); // 'John'
+
+// How JavaScript interprets it:
+var name;          // Declaration hoisted (initialized as undefined)
+console.log(name); // undefined
+name = 'John';     // Assignment remains in place
+console.log(name); // 'John'
+2. let and const Hoisting (Temporal Dead Zone)
+javascript
+// Example 2: let/const hoisting with TDZ
+console.log(age); // ReferenceError: Cannot access 'age' before initialization
+let age = 25;
+
+// How JavaScript interprets it:
+let age;          // Declaration hoisted BUT not initialized
+console.log(age); // ❌ Throws error - Temporal Dead Zone
+age = 25;         // Assignment
+
+// Same for const
+console.log(PI); // ReferenceError
+const PI = 3.14;
+3. Function Hoisting
+javascript
+// Example 3: Function declarations are fully hoisted
+sayHello(); // "Hello!" - works fine
+
+function sayHello() {
+    console.log("Hello!");
+}
+
+// How JavaScript interprets it:
+function sayHello() {  // Entire function is hoisted
+    console.log("Hello!");
+}
+sayHello(); // Works!
+4. Function Expressions Hoisting
+javascript
+// Example 4: Function expressions follow variable hoisting rules
+// Function expression with var
+sayHi(); // TypeError: sayHi is not a function
+var sayHi = function() {
+    console.log("Hi!");
+};
+
+// How JavaScript interprets it:
+var sayHi;            // undefined
+sayHi();              // ❌ TypeError - trying to call undefined
+sayHi = function() {  // Assignment
+    console.log("Hi!");
+};
+
+// Function expression with let/const
+sayBye(); // ReferenceError: Cannot access 'sayBye' before initialization
+const sayBye = function() {
+    console.log("Bye!");
+};
+🔥 Advanced Hoisting Scenarios
+Example 1: Mixed Declarations
+javascript
+var x = 1;
+function test() {
+    console.log(x); // undefined (not 1!)
+    var x = 2;
+    console.log(x); // 2
+}
+test();
+
+// How JavaScript interprets it:
+var x = 1;
+function test() {
+    var x;          // Declaration hoisted to top of function
+    console.log(x); // undefined (local variable shadows global)
+    x = 2;          // Assignment
+    console.log(x); // 2
+}
+test();
+Example 2: Functions vs Variables
+javascript
+// Scenario 1: Function declaration vs var
+console.log(typeof myFunc); // "function" - function wins
+
+var myFunc = "I'm a variable";
+function myFunc() {
+    return "I'm a function";
+}
+
+console.log(typeof myFunc); // "string" - variable assignment wins
+
+// How JavaScript interprets it:
+function myFunc() {         // Function hoisted first
+    return "I'm a function";
+}
+var myFunc;                 // var declaration (ignored since name exists)
+console.log(typeof myFunc); // "function"
+myFunc = "I'm a variable";  // Assignment
+console.log(typeof myFunc); // "string"
+Example 3: Multiple Declarations
+javascript
+var a = 10;
+function hoistTest() {
+    console.log(a); // undefined
+    if (false) {
+        var a = 20; // Still hoisted even though block never executes!
+    }
+    console.log(a); // undefined
+}
+hoistTest();
+
+// How JavaScript interprets it:
+var a = 10;
+function hoistTest() {
+    var a;          // Hoisted to top of function (initialized as undefined)
+    console.log(a); // undefined
+    if (false) {
+        a = 20;     // Never executes
+    }
+    console.log(a); // undefined
+}
+hoistTest();
+Example 4: Class Hoisting
+javascript
+// Classes are NOT hoisted like functions
+const person = new Person(); // ReferenceError: Cannot access 'Person' before initialization
+
+class Person {
+    constructor(name) {
+        this.name = name;
+    }
+}
+
+// This works:
+const Person = class { /* ... */ };
+const person = new Person(); // OK - but this is different syntax
+⚡ Real-World React Native Examples
+Example 1: Component Function Hoisting
+javascript
+import React from 'react';
+import { View, Text } from 'react-native';
+
+// ✅ Function declarations are hoisted - can call before definition
+const App = () => {
+    return (
+        <View>
+            <WelcomeMessage />  {/* Works due to hoisting */}
+            <UserProfile />
+        </View>
+    );
+};
+
+// Function declaration - hoisted
+function WelcomeMessage() {
+    return <Text>Welcome to our app!</Text>;
+}
+
+// Function expression - not hoisted (if using const/let)
+const UserProfile = () => {
+    return <Text>User Profile</Text>;
+};
+
+// ❌ This would cause issues:
+const AnotherComponent = () => {
+    return (
+        <View>
+            <NonHoistedComponent /> {/* ReferenceError if using const/let */}
+        </View>
+    );
+};
+
+const NonHoistedComponent = () => <Text>Not hoisted</Text>;
+Example 2: Hook Usage and Hoisting
+javascript
+import { useState, useEffect } from 'react';
+
+// ✅ Correct - hooks at top level, functions can be called later
+function UserContainer() {
+    const [user, setUser] = useState(null);
+    
+    // useEffect can call functions defined later
+    useEffect(() => {
+        fetchUserData();
+    }, []);
+    
+    // Function declaration - hoisted, so useEffect can call it
+    function fetchUserData() {
+        fetch('/api/user')
+            .then(response => response.json())
+            .then(data => setUser(data));
+    }
+    
+    return <UserDisplay user={user} />;
+}
+
+// ❌ Problematic - function expression with const
+function ProblematicComponent() {
+    const [data, setData] = useState(null);
+    
+    useEffect(() => {
+        fetchData(); // ReferenceError!
+    }, []);
+    
+    const fetchData = () => {  // Not hoisted
+        // fetch logic
+    };
+    
+    return null;
+}
+Example 3: Import Hoisting Behavior
+javascript
+// In React Native, imports are effectively "hoisted"
+import React, { useState } from 'react';
+import { View, Text } from 'react-native';
+
+// All imports are available throughout the module
+const Component = () => {
+    const [state, setState] = useState(); // useState available everywhere
+    
+    return (
+        <View>
+            <Text>Hello</Text>
+        </View>
+    );
+};
+🎯 Hoisting Rules Summary
+Declaration Type	Hoisting Behavior	Initial Value	Temporal Dead Zone
+var	✅ Hoisted	undefined	❌ No
+let	✅ Hoisted	Not initialized	✅ Yes
+const	✅ Hoisted	Not initialized	✅ Yes
+function	✅ Hoisted	Function itself	❌ No
+function expression (with var)	✅ Hoisted	undefined	❌ No
+function expression (with let/const)	✅ Hoisted	Not initialized	✅ Yes
+class	❌ Not hoisted	-	✅ Yes
+💡 Best Practices for Modern JavaScript
+✅ DO:
+javascript
+// Use const/let and declare at the top
+const initializeApp = () => {
+    const user = getUser();
+    const config = loadConfig();
+    
+    // Use functions
+    return renderUI(user, config);
+};
+
+// Function declarations are fine for utilities
+function getUser() {
+    return { name: 'John' };
+}
+
+function renderUI(user, config) {
+    // rendering logic
+}
+❌ DON'T:
+javascript
+// Avoid relying on var hoisting
+function problematicFunction() {
+    console.log(value); // undefined - confusing!
+    processData();      // Might work or might not
+    
+    var value = 10;
+    var processData = function() {
+        // logic
+    };
+}
+🎯 Interview Answer Summary
+"Hoisting is JavaScript's mechanism where variable and function declarations are moved to the top of their containing scope during compilation.
+
+Key points:
+
+var declarations are hoisted and initialized with undefined
+
+let/const declarations are hoisted but not initialized (Temporal Dead Zone)
+
+Function declarations are fully hoisted with their definition
+
+Function expressions follow variable hoisting rules
+
+Classes are not hoisted
+
+In practice, we use const/let and declare variables at the top to avoid confusion with hoisting behavior."
+--------------------------------------------------------------
+
 
 Difference between null and undefined
+In JavaScript, null and undefined are both primitive values that represent “nothing” or “no value,” but they are not the same.
+
+Here’s a clear breakdown 👇
+
+Feature	undefined	null
+Meaning	A variable has been declared but not assigned a value.	A variable has been explicitly assigned “no value.”
+Type	"undefined"	"object" (this is actually a historical bug in JavaScript)
+Default value	Default for uninitialized variables, missing function parameters, and missing object properties.	Not a default — must be explicitly set by the programmer.
+Example	js\nlet a;\nconsole.log(a); // undefined\n	js\nlet b = null;\nconsole.log(b); // null\n
+Comparison (==)	null == undefined → true	
+Strict comparison (===)	null === undefined → false	
+Typical use case	Indicates a variable or property hasn’t been assigned a value yet.	Indicates intentional absence of a value (like “nothing here”).
+Example:
+let x;
+let y = null;
+
+console.log(x);        // undefined (no value assigned)
+console.log(y);        // null (explicitly set to "no value")
+
+console.log(x == y);   // true  (loose equality)
+console.log(x === y);  // false (strict equality)
+
+Summary:
+
+Use undefined when a variable is not initialized.
+
+Use null when you intentionally want to represent “no value.”
+-------------------------------------------------
+
 
 What are closures and provide an example?
+You said:
+in simpl words with basic example
+You said:
+function greet() {
+  let name = "Alice";
+
+  function sayHello() {
+    console.log("Hello " + name);
+  }
+
+  return sayHello;
+}
+//why greet method not called at below ine
+const hello = greet(); 
+hello(); // prints "Hello Alice"
+You said:
+do explaning in code itselft
+------------------------------------------------------
 
 Explain the this keyword in different contexts
 
