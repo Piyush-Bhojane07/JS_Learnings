@@ -2,6 +2,184 @@
 Core Concepts
 What is the difference between let, const, and var?
 
+var, let, and const - Complete Explanation
+1. var (Function-Scoped)
+javascript
+// 1. FUNCTION SCOPE
+function testVar() {
+    var x = 10;
+    if (true) {
+        var x = 20; // Same variable!
+        console.log(x); // 20
+    }
+    console.log(x); // 20 (not 10!)
+}
+testVar();
+
+// 2. HOISTING
+console.log(y); // undefined (not ReferenceError)
+var y = 5;
+console.log(y); // 5
+
+// The above is interpreted as:
+var y;
+console.log(y); // undefined
+y = 5;
+console.log(y); // 5
+
+// 3. RE-DECLARATION ALLOWED
+var z = 10;
+var z = 20; // No error
+console.log(z); // 20
+2. let (Block-Scoped)
+javascript
+// 1. BLOCK SCOPE
+function testLet() {
+    let x = 10;
+    if (true) {
+        let x = 20; // Different variable!
+        console.log(x); // 20
+    }
+    console.log(x); // 10 (not affected by inner block)
+}
+testLet();
+
+// 2. HOISTING (Temporal Dead Zone)
+// console.log(a); // ReferenceError: Cannot access 'a' before initialization
+let a = 5;
+console.log(a); // 5
+
+// 3. NO RE-DECLARATION IN SAME SCOPE
+let b = 10;
+// let b = 20; // SyntaxError: Identifier 'b' has already been declared
+
+// But different scopes are fine
+let c = 10;
+if (true) {
+    let c = 20; // Different scope - no error
+    console.log(c); // 20
+}
+console.log(c); // 10
+3. const (Block-Scoped + Constant)
+javascript
+// 1. MUST BE INITIALIZED
+// const PI; // SyntaxError: Missing initializer in const declaration
+const PI = 3.14159;
+
+// 2. CANNOT REASSIGN PRIMITIVE VALUES
+const MAX_SIZE = 100;
+// MAX_SIZE = 200; // TypeError: Assignment to constant variable
+
+// 3. BUT OBJECTS/ARRAYS ARE MUTABLE!
+const person = { name: "John", age: 30 };
+person.age = 31; // ✅ This is allowed!
+console.log(person); // { name: "John", age: 31 }
+
+// But you cannot reassign the entire object
+// person = { name: "Jane" }; // TypeError: Assignment to constant variable
+
+const numbers = [1, 2, 3];
+numbers.push(4); // ✅ This is allowed!
+console.log(numbers); // [1, 2, 3, 4]
+
+// numbers = [5, 6, 7]; // TypeError: Assignment to constant variable
+📊 Comparison Table
+Feature	var	let	const
+Scope	Function	Block	Block
+Hoisting	Yes (initialized as undefined)	Yes (TDZ - cannot access before declaration)	Yes (TDZ - cannot access before declaration)
+Re-declaration	✅ Allowed	❌ Not allowed	❌ Not allowed
+Re-assignment	✅ Allowed	✅ Allowed	❌ Not allowed (for primitives)
+Temporal Dead Zone	❌ No	✅ Yes	✅ Yes
+🔍 Real-World Examples
+React Native Example:
+javascript
+import React, { useState, useEffect } from 'react';
+import { View, Text } from 'react-native';
+
+const UserProfile = () => {
+    // ✅ Good - use const for state since we don't reassign the setter
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+    
+    useEffect(() => {
+        // ✅ Good - use let for values that might change
+        let isMounted = true;
+        
+        const fetchUser = async () => {
+            try {
+                // ✅ Good - const for API responses
+                const response = await fetch('/api/user');
+                const userData = await response.json();
+                
+                if (isMounted) {
+                    setUser(userData);
+                    setLoading(false);
+                }
+            } catch (error) {
+                // ✅ Good - const for error objects
+                const errorMessage = error.message;
+                console.error(errorMessage);
+            }
+        };
+        
+        fetchUser();
+        
+        return () => {
+            isMounted = false; // ✅ let allows reassignment for cleanup
+        };
+    }, []);
+    
+    // ❌ Bad - this would cause issues
+    // var count = 0; // Function-scoped, could cause bugs
+    
+    // ✅ Good
+    let count = 0; // Block-scoped, safer
+    
+    if (loading) {
+        count = 1; // Reassignment is fine with let
+        return <Text>Loading...</Text>;
+    }
+    
+    return (
+        <View>
+            <Text>Welcome, {user.name}!</Text>
+        </View>
+    );
+};
+Common Patterns:
+javascript
+// ✅ Use const by default
+const API_URL = 'https://api.example.com';
+const DEFAULT_CONFIG = { timeout: 5000 };
+
+// ✅ Use let when you need to reassign
+let retryCount = 0;
+let isLoading = false;
+
+// ❌ Avoid var in modern code
+// var oldVariable = "don't use this";
+
+// Loop examples
+for (let i = 0; i < 5; i++) {
+    setTimeout(() => console.log(i), 100); // 0, 1, 2, 3, 4
+}
+
+// With var it would be different:
+for (var j = 0; j < 5; j++) {
+    setTimeout(() => console.log(j), 100); // 5, 5, 5, 5, 5
+}
+🎯 Interview Answer Summary:
+"The main differences are:
+
+var is function-scoped and hoisted with undefined initialization
+
+let and const are block-scoped and hoisted but cannot be accessed before declaration (Temporal Dead Zone)
+
+let allows reassignment, const does not (though objects/arrays are still mutable)
+
+In modern development, use const by default and let when you need reassignment. Avoid var."
+-------------------------------------------------
+
 Explain JavaScript's event loop
 
 What is hoisting in JavaScript?
