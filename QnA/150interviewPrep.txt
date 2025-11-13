@@ -1325,9 +1325,169 @@ A Promise is a structured way to handle asynchronous code — it avoids callback
 ---------------------------------------------------------------
 
 Explain async/await syntax
+async/await is modern JavaScript syntax for handling asynchronous operations in a way that looks and behaves like synchronous code, but still runs asynchronously under the hood.
+It’s built on top of Promises — not a replacement.
 
+1. async Function
+
+Declaring a function with async makes it automatically return a Promise.
+
+Whatever you return becomes a resolved value.
+
+If you throw, it becomes a rejected promise.
+
+async function greet() {
+  return "Hello";
+}
+
+greet().then(msg => console.log(msg)); // Hello
+
+2. await Keyword
+
+await pauses the execution of an async function until the promise resolves or rejects.
+
+It can only be used inside an async function.
+
+function fetchData() {
+  return new Promise(resolve => setTimeout(() => resolve("Data loaded"), 2000));
+}
+
+async function load() {
+  console.log("Fetching...");
+  const data = await fetchData(); // waits here until resolved
+  console.log(data); // Data loaded
+  console.log("Done!");
+}
+
+load();
+
+
+Output:
+
+Fetching...
+(wait 2 sec)
+Data loaded
+Done!
+
+3. Error Handling with try...catch
+
+Use try...catch for clean error management — replaces .catch() chains:
+
+async function getData() {
+  try {
+    const result = await fetch("https://api.example.com");
+    const data = await result.json();
+    console.log(data);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+4. Running Promises in Parallel
+
+If you don’t need sequential waiting, use Promise.all():
+
+async function loadAll() {
+  const [user, posts] = await Promise.all([
+    fetch("/user"),
+    fetch("/posts")
+  ]);
+}
+
+
+✅ In short:
+
+async makes a function return a Promise.
+
+await pauses execution until the promise resolves.
+
+Together, they make async code look synchronous, easier to read, and simpler to debug.
+-------------------------------------------------------------
 
 What are JavaScript modules (import/export)?
+JavaScript modules let you split your code into separate files, each with its own scope — making your code organized, reusable, and maintainable.
+
+They work using export and import keywords.
+
+1. Exporting
+
+You can export variables, functions, classes, or objects from a file so they can be used elsewhere.
+
+Named Exports
+
+You can export multiple items:
+
+// math.js
+export const add = (a, b) => a + b;
+export const multiply = (a, b) => a * b;
+
+Default Export
+
+You can export one main thing per file:
+
+// logger.js
+export default function log(msg) {
+  console.log(msg);
+}
+
+2. Importing
+
+You bring exported items into another file.
+
+Importing Named Exports
+
+Use curly braces and exact names:
+
+import { add, multiply } from './math.js';
+console.log(add(2, 3)); // 5
+
+
+You can also rename imports:
+
+import { add as sum } from './math.js';
+
+Importing Default Exports
+
+No braces needed:
+
+import log from './logger.js';
+log("Hello World!");
+
+
+You can import both default and named together:
+
+import log, { add } from './mathUtils.js';
+
+3. Exporting All
+
+You can re-export everything from another module:
+
+export * from './math.js';
+
+4. Module Scope
+
+Each module has its own scope — variables declared inside aren’t global:
+
+// inside math.js
+const secret = 42; // not accessible outside
+
+5. How to Use
+
+Works natively in browsers with <script type="module">.
+
+In Node.js, modules use .mjs extension or "type": "module" in package.json.
+
+<script type="module" src="app.js"></script>
+
+
+✅ In short:
+
+export → makes code available to other files.
+
+import → brings exported code into your file.
+
+Modules = cleaner, modular, reusable code with isolated scope.
+---------------------------------------------------------
 
 What are Map and Set objects?
 
