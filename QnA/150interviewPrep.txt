@@ -1250,8 +1250,82 @@ Rest → packs values.
 
 
 What are Promises and how do they work?
+A Promise in JavaScript is an object that represents the eventual completion (or failure) of an asynchronous operation — and its resulting value.
+It’s a cleaner way to handle async tasks than messy callback chains (“callback hell”).
+
+1. States of a Promise
+
+A Promise can be in one of three states:
+
+State	Meaning
+Pending	The operation is still running.
+Fulfilled	The operation completed successfully (resolve() called).
+Rejected	The operation failed (reject() called).
+
+Once fulfilled or rejected, a promise becomes settled and cannot change state again.
+
+2. Basic Syntax
+const promise = new Promise((resolve, reject) => {
+  const success = true;
+
+  if (success) resolve("Operation successful!");
+  else reject("Something went wrong!");
+});
+
+3. Consuming a Promise
+
+You handle the result using .then() and .catch():
+
+promise
+  .then(result => console.log(result))   // runs if resolved
+  .catch(error => console.error(error))  // runs if rejected
+  .finally(() => console.log("Done"));   // runs always
+
+4. Real Example (Async Operation)
+function getData() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("Data loaded");
+    }, 2000);
+  });
+}
+
+getData()
+  .then(data => console.log(data))  // "Data loaded" after 2 sec
+  .catch(err => console.error(err));
+
+5. Promise Chaining
+
+You can chain .then() calls to run sequential async actions:
+
+fetchUser()
+  .then(user => fetchPosts(user.id))
+  .then(posts => console.log(posts))
+  .catch(error => console.error(error));
+
+
+Each .then() returns a new promise, enabling smooth chaining.
+
+6. Async/Await (Modern Syntax)
+
+async/await makes working with promises look synchronous:
+
+async function loadData() {
+  try {
+    const result = await getData();
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+
+✅ In short:
+A Promise is a structured way to handle asynchronous code — it avoids callback hell and gives you clean control over success and failure paths using .then(), .catch(), and async/await.
+---------------------------------------------------------------
 
 Explain async/await syntax
+
 
 What are JavaScript modules (import/export)?
 
