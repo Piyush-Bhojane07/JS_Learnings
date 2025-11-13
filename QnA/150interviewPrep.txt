@@ -1179,6 +1179,75 @@ Default parameters ensure functions have fallback values — preventing undefine
 
 
 Explain the spread and rest operators
+The spread (...) and rest (...) operators use the same syntax (...), but they do opposite things depending on where they’re used.
+
+1. Spread Operator (...)
+Purpose:
+
+Expands (spreads) elements of an array or object into individual items.
+
+Examples:
+
+Array expansion:
+
+const nums = [1, 2, 3];
+const newNums = [...nums, 4, 5];
+console.log(newNums); // [1, 2, 3, 4, 5]
+
+
+Object expansion:
+
+const user = { name: "Piyush", age: 22 };
+const updated = { ...user, country: "India" };
+console.log(updated); // { name: "Piyush", age: 22, country: "India" }
+
+
+Function arguments:
+
+const arr = [5, 10, 15];
+console.log(Math.max(...arr)); // 15
+
+2. Rest Operator (...)
+Purpose:
+
+Collects multiple elements into a single array or object — the reverse of spread.
+
+Examples:
+
+Function parameters:
+
+function sum(...numbers) {
+  return numbers.reduce((a, b) => a + b);
+}
+
+console.log(sum(1, 2, 3, 4)); // 10
+
+
+Array destructuring:
+
+const [first, ...rest] = [10, 20, 30, 40];
+console.log(first); // 10
+console.log(rest);  // [20, 30, 40]
+
+
+Object destructuring:
+
+const { name, ...info } = { name: "Piyush", age: 22, country: "India" };
+console.log(name); // Piyush
+console.log(info); // { age: 22, country: "India" }
+
+Quick Summary
+Operator	Meaning	Used In	Example
+Spread (...)	Expands values	Arrays, Objects, Function calls	sum(...arr)
+Rest (...)	Collects values	Function params, Destructuring	function fn(...args)
+
+✅ In short:
+
+Spread → unpacks values.
+
+Rest → packs values.
+-------------------------------------------------
+
 
 What are Promises and how do they work?
 
