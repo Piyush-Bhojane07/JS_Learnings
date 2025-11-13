@@ -1490,6 +1490,91 @@ Modules = cleaner, modular, reusable code with isolated scope.
 ---------------------------------------------------------
 
 What are Map and Set objects?
+Map and Set are built-in JavaScript objects (introduced in ES6) that provide more efficient and flexible ways to store collections of data compared to plain objects or arrays.
+
+1. Map
+
+A Map stores key–value pairs, like an object — but with key flexibility and predictable iteration.
+
+Key Features
+
+Keys can be any type (objects, functions, primitives).
+
+Maintains insertion order.
+
+Has built-in methods for size, iteration, and existence checks.
+
+Example
+const map = new Map();
+
+map.set("name", "Piyush");
+map.set("age", 22);
+map.set({ id: 1 }, "Developer");
+
+console.log(map.get("name")); // Piyush
+console.log(map.size);        // 3
+console.log(map.has("age"));  // true
+
+map.delete("age");
+map.clear(); // removes everything
+
+Iteration
+const users = new Map([
+  ["id", 1],
+  ["name", "Piyush"]
+]);
+
+for (const [key, value] of users) {
+  console.log(key, value);
+}
+// id 1
+// name Piyush
+
+2. Set
+
+A Set stores unique values — no duplicates, no key–value pairs.
+
+Key Features
+
+Values are unique (duplicates automatically removed).
+
+Maintains insertion order.
+
+Can store any type of value.
+
+Example
+const set = new Set();
+
+set.add(10);
+set.add(20);
+set.add(10); // duplicate ignored
+
+console.log(set.size);     // 2
+console.log(set.has(20));  // true
+
+set.delete(10);
+set.clear(); // removes all
+
+Iteration
+const numbers = new Set([1, 2, 3, 3]);
+for (const num of numbers) {
+  console.log(num);
+}
+// 1 2 3
+
+3. Quick Comparison
+Feature	Map	Set
+Structure	Key–Value pairs	Unique values
+Keys	Any type	N/A
+Duplicates	Allowed in values	Not allowed
+Useful for	Lookups, caching	Unique collections, filtering duplicates
+
+✅ In short:
+
+Map = object-like structure with any-type keys and ordered entries.
+
+Set = array-like structure that stores unique values efficiently.
+----------------------------------------------------
 
 Explain Object.keys(), Object.values(), Object.entries()
 
