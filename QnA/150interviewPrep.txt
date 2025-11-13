@@ -966,6 +966,126 @@ Explain call, apply, and bind methods
 ES6+ Features
 What are template literals?
 
+The call, apply, and bind methods in JavaScript are Function methods that let you explicitly control the value of this when invoking a function.
+They’re tools for function borrowing and manual context binding, especially useful when dealing with methods that depend on this.
+
+Let’s dissect them cleanly and without fluff.
+
+1. call()
+Purpose:
+
+Calls a function immediately, with a specified this value and individual arguments.
+
+Syntax:
+func.call(thisArg, arg1, arg2, ...)
+
+Example:
+function greet(greeting, punctuation) {
+  console.log(`${greeting}, ${this.name}${punctuation}`);
+}
+
+const person = { name: "Piyush" };
+
+greet.call(person, "Hello", "!"); // Hello, Piyush!
+
+
+Here, this inside greet is explicitly set to person.
+
+The arguments "Hello" and "!" are passed individually.
+
+2. apply()
+Purpose:
+
+Almost identical to call(), but arguments are passed as an array or array-like object.
+
+Syntax:
+func.apply(thisArg, [arg1, arg2, ...])
+
+Example:
+greet.apply(person, ["Hi", "!!"]); // Hi, Piyush!!
+
+
+The only difference: arguments are passed as an array.
+
+Historically used before the spread operator (...) existed.
+
+Modern equivalent:
+greet.call(person, ...["Hi", "!!"]); // Same as apply
+
+3. bind()
+Purpose:
+
+Creates a new function with a permanently bound this value and optional preset arguments.
+It does not execute immediately — it returns a new function.
+
+Syntax:
+const newFunc = func.bind(thisArg, arg1, arg2, ...);
+
+Example:
+const greetPiyush = greet.bind(person, "Hey");
+greetPiyush("?"); // Hey, Piyush?
+
+
+bind() locks this to person.
+
+You can call the new function later, and this will always refer to person.
+
+4. Practical Differences
+Method	When It Executes	Argument Style	Returns a New Function?	Main Use
+call()	Immediately	Comma-separated	❌ No	Immediate invocation with custom this
+apply()	Immediately	Array	❌ No	Immediate invocation when args are in an array
+bind()	Later	Comma-separated	✅ Yes	Permanent binding for future calls
+5. Common Use Cases
+a. Function Borrowing
+
+Use methods from one object in another:
+
+const person1 = { name: "Piyush" };
+const person2 = { name: "Alex" };
+
+function sayHello() {
+  console.log(`Hello, ${this.name}`);
+}
+
+sayHello.call(person2); // Hello, Alex
+
+b. Working with setTimeout
+
+When this context is lost:
+
+const user = {
+  name: "Piyush",
+  greet() {
+    setTimeout(function() {
+      console.log(`Hi, ${this.name}`); // 'this' is undefined or global
+    }.bind(this), 1000);
+  }
+};
+
+user.greet(); // Hi, Piyush
+
+c. Using apply for Math operations
+
+Borrowing methods from the Math object:
+
+const nums = [5, 10, 2, 8];
+const max = Math.max.apply(null, nums); // 10
+
+
+(null because Math.max doesn’t care about this)
+
+In summary:
+
+call — same as normal call, but lets you specify this and arguments directly.
+
+apply — same as call, but arguments go in an array.
+
+bind — doesn’t call the function immediately; returns a new function with fixed this.
+
+Bottom Line
+
+If you need a one-time control over this, use call or apply.
+If you need to lock this for later, use bind.
 Explain destructuring assignment
 
 What are default parameters?
