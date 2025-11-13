@@ -1086,8 +1086,70 @@ Bottom Line
 
 If you need a one-time control over this, use call or apply.
 If you need to lock this for later, use bind.
+------------------------------------------------------------
+
 Explain destructuring assignment
 
+Destructuring assignment in JavaScript lets you unpack values from arrays or extract properties from objects into separate variables — all in one concise statement.
+
+1. Array Destructuring
+const nums = [10, 20, 30];
+const [a, b, c] = nums;
+
+console.log(a); // 10
+console.log(b); // 20
+console.log(c); // 30
+
+
+You can skip elements:
+
+const [first, , third] = [1, 2, 3];
+console.log(third); // 3
+
+
+Set default values:
+
+const [x = 5, y = 10] = [7];
+console.log(x, y); // 7 10
+
+2. Object Destructuring
+const user = { name: "Piyush", age: 22 };
+const { name, age } = user;
+
+console.log(name); // Piyush
+console.log(age);  // 22
+
+
+Rename variables:
+
+const { name: username } = user;
+console.log(username); // Piyush
+
+
+Set defaults:
+
+const { country = "India" } = user;
+console.log(country); // India
+
+3. Nested Destructuring
+const person = { info: { first: "Piyush", last: "Kumar" } };
+const { info: { first, last } } = person;
+console.log(first, last); // Piyush Kumar
+
+4. Function Parameters
+
+You can destructure directly in function arguments:
+
+function greet({ name, age }) {
+  console.log(`Hi ${name}, age ${age}`);
+}
+
+greet({ name: "Piyush", age: 22 }); // Hi Piyush, age 22
+
+
+✅ In short:
+Destructuring lets you extract multiple values from arrays or objects elegantly and efficiently — making your code shorter, cleaner, and easier to read.
+------------------------------------------------
 What are default parameters?
 
 Explain the spread and rest operators
