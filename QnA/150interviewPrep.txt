@@ -1151,6 +1151,32 @@ greet({ name: "Piyush", age: 22 }); // Hi Piyush, age 22
 Destructuring lets you extract multiple values from arrays or objects elegantly and efficiently — making your code shorter, cleaner, and easier to read.
 ------------------------------------------------
 What are default parameters?
+Default parameters let you assign a default value to a function parameter if no argument is provided (or if it's undefined).
+
+Example
+function greet(name = "Guest") {
+  console.log(`Hello, ${name}!`);
+}
+
+greet("Piyush"); // Hello, Piyush!
+greet();         // Hello, Guest!
+
+Key Points
+
+Defaults apply only when the argument is undefined, not null or 0.
+
+You can use expressions as defaults:
+
+function add(a, b = a * 2) {
+  return a + b;
+}
+console.log(add(3)); // 9
+
+
+✅ In short:
+Default parameters ensure functions have fallback values — preventing undefined results when arguments are missing.
+------------------------------------------
+
 
 Explain the spread and rest operators
 
