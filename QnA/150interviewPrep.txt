@@ -1577,6 +1577,64 @@ Set = array-like structure that stores unique values efficiently.
 ----------------------------------------------------
 
 Explain Object.keys(), Object.values(), Object.entries()
+The methods Object.keys(), Object.values(), and Object.entries() are built-in JavaScript functions for working with object properties.
+They make it easy to extract an object’s keys, values, or key–value pairs in array form — often used for iteration or transformation.
+
+1. Object.keys()
+
+Returns an array of the object’s own property names (keys).
+
+Example:
+const user = { name: "Piyush", age: 22, country: "India" };
+console.log(Object.keys(user));
+// ["name", "age", "country"]
+
+
+✅ Use when you need the property names to loop or check for existence.
+
+2. Object.values()
+
+Returns an array of the object’s property values.
+
+Example:
+console.log(Object.values(user));
+// ["Piyush", 22, "India"]
+
+
+✅ Use when you only care about the values, not the keys.
+
+3. Object.entries()
+
+Returns an array of key–value pairs, where each pair is itself an array [key, value].
+
+Example:
+console.log(Object.entries(user));
+// [["name", "Piyush"], ["age", 22], ["country", "India"]]
+
+
+✅ Useful for iteration with destructuring:
+
+for (const [key, value] of Object.entries(user)) {
+  console.log(`${key}: ${value}`);
+}
+// name: Piyush
+// age: 22
+// country: India
+
+4. Summary Table
+Method	Returns	Example Output	Use Case
+Object.keys(obj)	Array of keys	["name", "age"]	Looping over property names
+Object.values(obj)	Array of values	["Piyush", 22]	Getting only values
+Object.entries(obj)	Array of [key, value] pairs	[["name","Piyush"],["age",22]]	Iteration, destructuring
+
+✅ In short:
+
+keys() → property names
+
+values() → property values
+
+entries() → both keys and values together
+-------------------------------------------------------------------
 
 What are generators and how do they work?
 
