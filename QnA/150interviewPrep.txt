@@ -1800,6 +1800,7 @@ Updating only what's changed in the real DOM
 
 It’s an optimization layer for cleaner, smarter rendering.
 -----------------------------------------------
+
 Advanced Concepts
 What is the prototype chain?
 
