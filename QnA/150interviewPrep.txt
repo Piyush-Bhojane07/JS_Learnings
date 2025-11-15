@@ -2040,10 +2040,46 @@ If your callback is slow, intervals will drift or pile up.
 * **setTimeout:** run once after a delay.
 * **setInterval:** run repeatedly at fixed intervals.
   Both rely on the **event loop**, and delays are never guaranteed to be exact.
-
+----------------------------------------------------------------------------------
 
 
 What is memoization and provide an example?
+
+Memoization is **caching the result of a function call** so future calls with the **same arguments** return the stored result instantly instead of recomputing.
+It’s a performance hack for expensive or repetitive calculations.
+
+---
+
+## **Example**
+
+```js
+function memoize(fn) {
+  const cache = {};
+  return function (x) {
+    if (cache[x] !== undefined) return cache[x];
+    const result = fn(x);
+    cache[x] = result;
+    return result;
+  };
+}
+
+function slowSquare(n) {
+  // pretend this is expensive
+  return n * n;
+}
+
+const fastSquare = memoize(slowSquare);
+
+console.log(fastSquare(5)); // computed
+console.log(fastSquare(5)); // cached
+```
+
+---
+
+## **Short version**
+
+Memoization = **store results → skip recomputation → speed boost**.
+-----------------------------------------------------------------
 
 Explain JavaScript's memory management
 
