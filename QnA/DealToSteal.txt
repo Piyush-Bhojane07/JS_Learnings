@@ -348,3 +348,42 @@ daily half n hr
 learn practices revise
 
 Don’t make project in 1 day, just 1/2 to 1 hr daily 
+
+
+
+
+
+
+
+
+
+
+
+//roadmap 
+
+## Core Technologies
+JavaScript | TypeScript | React Native | Expo | Kotlin | Swift | XML
+
+## State Management
+Redux | Zustand | Context API | React Query
+
+## UI & Styling
+NativeWind | Styled-Components | React Native Paper | Tamagui
+
+## Navigation & Forms
+React Navigation | React Hook Form | Zod | Yup
+
+## Animation & Performance
+React Native Reanimated | React Native Gesture Handler | Performance Optimization
+
+## Testing
+Jest | React Native Testing Library | Detox
+
+## Tooling & DevOps
+Git | GitHub | Fastlane | CI/CD | CodePush | Flipper
+
+## Backend & Storage
+MySQL | Firebase | REST APIs | GraphQL
+
+## Architecture & Patterns
+Clean Architecture | Repository Pattern | Custom Hooks | Error Boundaries
