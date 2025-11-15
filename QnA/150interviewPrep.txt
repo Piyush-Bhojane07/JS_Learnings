@@ -2082,6 +2082,88 @@ Memoization = **store results → skip recomputation → speed boost**.
 -----------------------------------------------------------------
 
 Explain JavaScript's memory management
+JavaScript’s memory management is straightforward on the surface but brutal underneath: **you don’t control memory directly — the garbage collector does — and you can still screw things up by holding references you shouldn’t.**
+
+Here’s the concise, accurate breakdown:
+
+---
+
+## **How JS memory works**
+
+### **1. Allocation**
+
+When you create variables, objects, arrays, functions, JS grabs memory for them automatically.
+
+```js
+let x = 10;          // value stored directly
+let obj = { a: 1 };  // reference stored, object lives elsewhere
+```
+
+Primitive values go on the **stack**, complex objects go on the **heap**.
+
+---
+
+## **2. Reachability**
+
+The garbage collector only cares about **reachability**.
+
+A value is “reachable” if the program can still access it through:
+
+* global variables
+* function scopes
+* closures
+* active references
+
+If nothing references it, it becomes **garbage**.
+
+---
+
+## **3. Garbage collection**
+
+JavaScript uses **mark-and-sweep**:
+
+1. Start from roots (global, active function scopes).
+2. Mark everything reachable.
+3. Delete (“sweep”) everything not marked.
+
+It's automatic **but not magic** — you can easily create memory leaks.
+
+---
+
+## **4. The real problem: accidental memory leaks**
+
+The engine handles cleanup, **you** create leaks when you keep references alive that shouldn’t exist:
+
+### **Common leak sources**
+
+* **Uncleared timers**
+
+  ```js
+  setInterval(() => {}, 1000); // never cleared → forever reachable
+  ```
+* **Unused event listeners**
+
+  ```js
+  element.addEventListener("click", handler);
+  // element removed but listener still references it
+  ```
+* **Closures that trap variables**
+
+  ```js
+  function outer() {
+    const huge = new Array(1_000_000);
+    return () => console.log("trapped"); // huge stays alive
+  }
+  ```
+* **Global variables** (the easiest way to poison memory)
+
+---
+
+## **Short version**
+
+JavaScript allocates and frees memory automatically using **reachability-based garbage collection**, but you can still leak memory by keeping unnecessary references alive. The engine handles the mechanics; you’re responsible for not sabotaging it.
+
+-----------------------------------------------------------------------
 
 What are Web Workers?
 
