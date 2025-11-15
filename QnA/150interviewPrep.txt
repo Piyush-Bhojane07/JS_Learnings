@@ -1940,6 +1940,58 @@ Currying breaks a multi-argument function into a sequence of single-argument fun
 ------------------------------------------------
 
 Difference between deep copy and shallow copy
+A **shallow copy** copies only the **top-level** values.
+A **deep copy** copies **everything**, including nested objects.
+
+---
+
+## **Shallow Copy**
+
+Copies references of nested objects — not the objects themselves.
+
+```js
+const original = { a: 1, b: { c: 2 } };
+const copy = { ...original };
+
+copy.b.c = 99;
+
+console.log(original.b.c); // 99  (changed!)
+```
+
+### Why?
+
+Because `b` was **not** duplicated — both objects share the same inner reference.
+
+---
+
+## **Deep Copy**
+
+Creates a **fully independent** clone, including nested structures.
+
+```js
+const original = { a: 1, b: { c: 2 } };
+const deep = JSON.parse(JSON.stringify(original));
+
+deep.b.c = 99;
+
+console.log(original.b.c); // 2  (unchanged)
+```
+
+### Better deep copy tools:
+
+* `structuredClone()`
+* Recursive functions
+* Libraries like Lodash (`_.cloneDeep`)
+
+---
+
+## **Short version**
+
+* **Shallow copy:** duplicates top-level properties, but nested objects **share references**.
+* **Deep copy:** duplicates **everything**, producing a completely independent object.
+
+-----------------------------------------------------------
+
 
 How does setTimeout and setInterval work?
 
