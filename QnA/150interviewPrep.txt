@@ -2166,6 +2166,49 @@ JavaScript allocates and frees memory automatically using **reachability-based g
 -----------------------------------------------------------------------
 
 What are Web Workers?
+Web Workers let you run JavaScript **in background threads**, separate from the main UI thread.
+They exist because the main thread freezes if you run heavy code — workers prevent that.
+
+---
+
+## **What they do**
+
+* Run CPU-heavy tasks **without blocking the UI**
+* Have their **own thread**
+* Communicate with the main thread via **message passing**
+* Cannot access the DOM (and shouldn’t)
+
+---
+
+## **Basic example**
+
+**main.js**
+
+```js
+const worker = new Worker("worker.js");
+
+worker.postMessage(10);
+
+worker.onmessage = (e) => {
+  console.log("Result:", e.data);
+};
+```
+
+**worker.js**
+
+```js
+onmessage = (e) => {
+  let num = e.data;
+  postMessage(num * 2);
+};
+```
+
+---
+
+## **Short version**
+
+Web Workers = **background JS threads** for heavy work so the main thread stays smooth. They communicate via messages and cannot touch the DOM.
+------------------------------------------------------------
 
 Explain the Module Pattern
 
