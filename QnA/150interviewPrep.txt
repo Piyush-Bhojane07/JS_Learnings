@@ -1859,7 +1859,53 @@ p → Person.prototype → Object.prototype → null
 The **prototype chain** is the linked chain of objects JS searches through when resolving properties. It’s how JavaScript implements inheritance.
 
 ----------------------------------------------------------------------
+
 Explain event delegation
+Event delegation is a technique where you **attach one event listener to a parent element** instead of attaching separate listeners to every child.
+The parent catches events because events **bubble up** the DOM.
+
+---
+
+## **How it works**
+
+1. An event happens on a child (e.g., a button inside a list).
+2. The event **bubbles** to the parent.
+3. The parent’s single listener checks **which child triggered it** using `event.target`.
+
+---
+
+## **Example**
+
+```js
+document.querySelector("#list").addEventListener("click", (e) => {
+  if (e.target.matches("li")) {
+    console.log("Clicked:", e.target.textContent);
+  }
+});
+```
+
+You avoid attaching individual listeners like:
+
+```js
+li.addEventListener("click", ...)
+```
+
+---
+
+## **Why event delegation matters**
+
+* You **save memory** (one listener instead of many).
+* You avoid constantly re-attaching listeners when elements are added/removed.
+* You control a dynamic UI with minimal event wiring.
+
+---
+
+## **Short version**
+
+Event delegation = **listen on the parent, catch events from children**, and handle them based on `event.target`. It’s the only scalable way to manage large or dynamic DOM structures.
+--------------------------------------------------------------
+
+
 
 What is currying in JavaScript?
 
