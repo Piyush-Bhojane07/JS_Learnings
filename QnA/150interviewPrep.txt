@@ -1803,7 +1803,62 @@ It’s an optimization layer for cleaner, smarter rendering.
 
 Advanced Concepts
 What is the prototype chain?
+The **prototype chain** is JavaScript’s **inheritance mechanism**.
+Every object has a hidden link called **`[[Prototype]]`** that points to another object.
+When you try to access a property, JavaScript **walks up this chain** until it finds the property or hits `null`.
 
+---
+
+## **How it works**
+
+```js
+const obj = {};
+```
+
+Prototype chain:
+
+```
+obj → Object.prototype → null
+```
+
+If you call:
+
+```js
+obj.toString();
+```
+
+JS checks:
+
+1. `obj` — not found
+2. `Object.prototype` — found → use it
+3. If it wasn't there, it would stop at `null`
+
+---
+
+## **With constructor functions**
+
+```js
+function Person(name) {
+  this.name = name;
+}
+Person.prototype.sayHi = function() {};
+
+const p = new Person("Piyush");
+```
+
+Chain:
+
+```
+p → Person.prototype → Object.prototype → null
+```
+
+---
+
+## **Short answer**
+
+The **prototype chain** is the linked chain of objects JS searches through when resolving properties. It’s how JavaScript implements inheritance.
+
+----------------------------------------------------------------------
 Explain event delegation
 
 What is currying in JavaScript?
