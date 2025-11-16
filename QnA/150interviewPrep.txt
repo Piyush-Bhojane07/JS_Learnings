@@ -2706,9 +2706,163 @@ Explain the Factory Pattern
 What is the Singleton Pattern?
 
 How to prevent object modification?
+1. What is Method Chaining?
+
+Method chaining is a pattern where each method returns the object itself, allowing you to call multiple methods in a single statement.
+
+class Counter {
+  constructor() {
+    this.value = 0;
+  }
+  inc() { this.value++; return this; }
+  dec() { this.value--; return this; }
+  log() { console.log(this.value); return this; }
+}
+
+new Counter().inc().inc().dec().log();
+
+
+Why it matters:
+
+Cleaner APIs
+
+Fluent, readable operations
+
+Common in libraries like jQuery, Lodash, Mongoose
+
+2. Explain the Factory Pattern
+
+A factory is just a function that creates and returns objects — no new, no class, no constructor fuss.
+
+function createUser(name, age) {
+  return {
+    name,
+    age,
+    greet() {
+      console.log(`Hi, I'm ${this.name}`);
+    }
+  };
+}
+
+const user = createUser("Piyush", 22);
+
+
+Why it exists:
+
+Flexible object creation
+
+Can hide logic, control defaults, and avoid new
+
+Useful when creating multiple similar objects with slight variations
+
+Factories = “object creator functions with full control.”
+
+3. What is the Singleton Pattern?
+
+Singleton = only one instance of a class or object exists in the entire application.
+
+const Singleton = (function () {
+  let instance;
+
+  function createInstance() {
+    return { id: Math.random() };
+  }
+
+  return {
+    getInstance() {
+      if (!instance) instance = createInstance();
+      return instance;
+    }
+  };
+})();
+
+
+Usage:
+
+const a = Singleton.getInstance();
+const b = Singleton.getInstance();
+console.log(a === b); // true
+
+
+Why it’s used:
+
+Global settings
+
+Caches
+
+Database connections
+
+Logging utilities
+
+One instance → consistent shared state.
+
+4. How to Prevent Object Modification
+
+JavaScript gives you multiple levels of locking. Know the difference:
+
+Freeze (full lockdown)
+Object.freeze(obj);
+
+
+Prevents:
+
+adding properties
+
+removing properties
+
+changing values
+
+BUT nested objects are not frozen (shallow).
+
+Seal (partial lockdown)
+Object.seal(obj);
+
+
+Prevents:
+
+adding
+
+deleting
+
+Allows:
+
+modifying existing values
+
+Prevent extensions (weakest form)
+Object.preventExtensions(obj);
+
+
+Prevents adding new properties only.
+
+Deep freeze (full recursive lock)
+
+You must write it yourself:
+
+function deepFreeze(obj) {
+  Object.freeze(obj);
+  for (const key in obj) {
+    if (typeof obj[key] === "object" && obj[key] !== null) {
+      deepFreeze(obj[key]);
+    }
+  }
+  return obj;
+}
+
+Short, brutal summary
+
+Method chaining: methods return this so you can chain calls.
+
+Factory pattern: functions that create and return objects.
+
+Singleton: guarantees only one instance exists.
+
+Prevent modification: use Object.freeze(), seal(), or preventExtensions(), depending on how strict you want to be.
+-----------------------------------------------------------------------------------
+
 
 ⚛️ React Native (50 Questions)
 Core Concepts
+
 What is React Native and how is it different from React?
 
 Explain the bridge architecture in React Native
