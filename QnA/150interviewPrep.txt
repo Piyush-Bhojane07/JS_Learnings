@@ -2233,6 +2233,121 @@ How to remove duplicates from an array?
 
 Explain Array.prototype.sort() method
 
+1. some()
+
+Checks whether at least one element passes a condition.
+
+[1, 2, 3].some(n => n > 2); // true
+
+
+Returns true as soon as it finds a match.
+
+Stops early.
+
+If the callback never returns true → false.
+
+2. every()
+
+Checks whether all elements pass a condition.
+
+[1, 2, 3].every(n => n > 0); // true
+
+
+Returns false as soon as one element fails.
+
+Stops early.
+
+3. What does Array.prototype.flat() do?
+
+It flattens nested arrays.
+
+[1, [2, [3]]].flat();      // [1, 2, [3]]
+[1, [2, [3]]].flat(2);     // [1, 2, 3]
+
+
+Default depth is 1.
+
+4. How does find() work?
+
+Returns the first element that satisfies the callback.
+
+[1, 5, 10].find(n => n > 5); // 10
+
+
+If no element matches → undefined.
+
+Does not return an index — it returns the value.
+
+5. includes() vs indexOf()
+includes()
+
+Checks if a value exists.
+
+Returns true/false.
+
+Handles NaN correctly.
+
+[1, 2, NaN].includes(NaN); // true
+
+indexOf()
+
+Returns the index or -1.
+
+Fails with NaN.
+
+[1, 2, NaN].indexOf(NaN); // -1 (broken check)
+
+6. What is the purpose of splice()?
+
+It mutates the array by adding/removing elements.
+
+const arr = [1, 2, 3, 4];
+arr.splice(1, 2, 99); // remove 2 items at index 1, insert 99
+// arr → [1, 99, 4]
+
+
+First arg = start index
+
+Second arg = how many to delete
+
+Rest = items to insert
+
+It modifies the original array.
+
+7. How to remove duplicates from an array?
+
+Fastest and cleanest:
+
+const unique = [...new Set(arr)];
+
+
+Alternative:
+
+const unique = arr.filter((v, i) => arr.indexOf(v) === i);
+
+8. Explain Array.prototype.sort()
+
+The default sort is lexicographical, not numerical.
+
+[10, 2, 5].sort(); // ["10", "2", "5"]
+
+
+To sort numbers correctly, supply a comparator:
+
+[10, 2, 5].sort((a, b) => a - b); // [2, 5, 10]
+
+
+Sort mutates the original array.
+
+Comparator function:
+
+return < 0 → a comes before b
+
+return > 0 → a comes after b
+
+return 0 → keep order
+--------------------------------------------------------
+
 How to flatten a nested array?
 
 Object & Functions
