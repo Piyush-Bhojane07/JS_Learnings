@@ -2349,6 +2349,53 @@ return 0 → keep order
 --------------------------------------------------------
 
 How to flatten a nested array?
+Flattening a nested array is trivial. You’ve got multiple ways, and most people overcomplicate it. Here are the only methods that matter:
+
+1. Use flat() (best and simplest)
+const arr = [1, [2, [3, 4]]];
+const flat = arr.flat(Infinity);
+
+
+Infinity guarantees full flattening, no matter how deep the nesting is.
+
+2. Use recursion (if you insist on manual control)
+function flatten(arr) {
+  const result = [];
+  for (const item of arr) {
+    if (Array.isArray(item)) {
+      result.push(...flatten(item));
+    } else {
+      result.push(item);
+    }
+  }
+  return result;
+}
+
+3. Use reduce() (same idea, different style)
+const flatten = arr =>
+  arr.reduce((acc, val) =>
+    Array.isArray(val) ? acc.concat(flatten(val)) : acc.concat(val), []);
+
+4. Use a stack (iterative, avoids recursion limits)
+function flatten(arr) {
+  const stack = [...arr];
+  const result = [];
+
+  while (stack.length) {
+    const next = stack.pop();
+    if (Array.isArray(next)) stack.push(...next);
+    else result.push(next);
+  }
+
+  return result.reverse();
+}
+
+Bottom line
+
+If you’re in modern JavaScript:
+Use arr.flat(Infinity) and stop overthinking it.
+--------------------------------------------------------------------
+
 
 Object & Functions
 How to check if an object is empty?
