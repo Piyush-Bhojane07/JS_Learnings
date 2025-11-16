@@ -2503,8 +2503,121 @@ If you want class-like object construction: use constructors or ES6 classes.
 
 
 What are getters and setters?
+Getters and setters are special object methods that let you control how properties are read and written.
+
+They look like normal properties but behave like functions.
+
+1. Getter (get)
+
+Runs when you access a property.
+
+const user = {
+  first: "Piyush",
+  last: "Kumar",
+  get fullName() {
+    return `${this.first} ${this.last}`;
+  }
+};
+
+console.log(user.fullName); // "Piyush Kumar"
+
+
+Looks like a property
+
+Executes logic
+
+No parentheses
+
+2. Setter (set)
+
+Runs when you assign a value.
+
+const user = {
+  first: "Piyush",
+  last: "Kumar",
+  set fullName(value) {
+    const [f, l] = value.split(" ");
+    this.first = f;
+    this.last = l;
+  }
+};
+
+user.fullName = "John Doe";
+console.log(user.first); // "John"
+
+
+Allows validation, transformation, side effects
+
+Controls how data is stored
+
+Why they exist
+
+Hide internal logic
+
+Validate inputs
+
+Compute derived properties
+
+Encapsulate behavior without changing the API
+
+Short answer
+
+Getters let you run code when reading a property.
+Setters let you run code when writing to a property.
+Both make method-like behavior look like simple property access.
+--------------------------------------------------------------------
+
 
 Explain function composition
+Function composition is the process of combining multiple functions so the output of one becomes the input of the next.
+It’s how you build clean, pipeline-style logic instead of writing bloated, repetitive code.
+
+Core idea
+If you have two functions:
+const f = x => x + 2;
+const g = x => x * 3;
+
+Composition creates a new function:
+const composed = x => f(g(x));
+
+Call it:
+composed(5); // f(g(5)) = f(15) = 17
+
+You’re stacking behaviors without writing new logic.
+
+A reusable compose function
+const compose = (...fns) => (value) =>
+  fns.reduceRight((acc, fn) => fn(acc), value);
+
+Usage:
+const double = x => x * 2;
+const square = x => x * x;
+
+const fn = compose(double, square);
+fn(3); // square(3) → 9 → double(9) = 18
+
+
+Why it matters
+
+
+Forces small, pure, reusable functions
+
+
+Eliminates duplicated steps
+
+
+Makes logic predictable and testable
+
+
+Builds pipelines without clutter
+
+
+
+Short version
+Function composition = chain functions together so each function feeds the next.
+It’s the backbone of clean functional programming.
+-----------------------------------------------------------
+
 
 What are higher-order functions?
 
