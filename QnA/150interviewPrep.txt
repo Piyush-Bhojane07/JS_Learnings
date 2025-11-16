@@ -2399,6 +2399,35 @@ Use arr.flat(Infinity) and stop overthinking it.
 
 Object & Functions
 How to check if an object is empty?
+You want to know if an object is empty? There are only a few correct ways. Everything else is noise.
+
+1. The proper modern way
+Object.keys(obj).length === 0
+
+If there are no own enumerable properties, it’s empty.
+This is the standard check — stop pretending there’s something “cleaner.”
+
+2. Full check (keys, values, entries — all identical result)
+Object.values(obj).length === 0
+Object.entries(obj).length === 0
+
+Same logic. Same result.
+
+3. JSON trick (works but unnecessary)
+JSON.stringify(obj) === "{}"
+
+Avoid it unless you enjoy wasting time and CPU cycles.
+
+4. Defensive check (handles null or non-objects)
+function isEmpty(obj) {
+  return obj && typeof obj === "object" && Object.keys(obj).length === 0;
+}
+
+
+Blunt truth
+If you’re not using Object.keys(obj).length === 0, you’re overcomplicating something that should take one line.
+----------------------------------------------------------------------------------
+
 
 Difference between Object.create() and constructor functions
 
