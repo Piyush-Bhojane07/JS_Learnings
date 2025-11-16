@@ -2622,6 +2622,82 @@ It’s the backbone of clean functional programming.
 What are higher-order functions?
 
 How to merge two objects in JavaScript?
+1. What are Higher-Order Functions?
+A higher-order function (HOF) is any function that either:
+
+
+takes another function as an argument, or
+
+
+returns a function.
+
+
+That’s it. No mystique — just functions manipulating functions.
+Examples:
+Built-in HOFs:
+[1, 2, 3].map(x => x * 2);
+[1, 2, 3].filter(x => x > 1);
+[1, 2, 3].reduce((a, b) => a + b);
+
+Returning a function:
+function multiplier(x) {
+  return function (y) {
+    return x * y;
+  };
+}
+
+const double = multiplier(2);
+double(5); // 10
+
+HOFs are the backbone of functional programming — you abstract behavior, not data.
+
+2. How to Merge Two Objects in JavaScript
+There are only a few correct methods that matter.
+
+Method 1: Spread operator (best)
+const merged = { ...obj1, ...obj2 };
+
+
+
+Rightmost object overrides keys from the left.
+
+
+Clean, modern, readable.
+
+
+
+Method 2: Object.assign()
+const merged = Object.assign({}, obj1, obj2);
+
+Equivalent to spread but older.
+
+Method 3: Deep merge (if nested objects)
+Spread and Object.assign() are shallow.
+For deep merging, you need recursion or a library like Lodash.
+Example (manual):
+function deepMerge(a, b) {
+  const result = { ...a };
+  for (const key in b) {
+    if (typeof b[key] === "object" && !Array.isArray(b[key])) {
+      result[key] = deepMerge(result[key] || {}, b[key]);
+    } else {
+      result[key] = b[key];
+    }
+  }
+  return result;
+}
+
+
+Short blunt summary
+
+
+Higher-order functions = functions that take or return other functions.
+
+
+Merging objects = use {...a, ...b} unless you need deep merging, in which case you must handle it manually.
+
+-----------------------------------------------------------------------------
+
 
 What is method chaining?
 
