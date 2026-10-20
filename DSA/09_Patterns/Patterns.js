@@ -53,6 +53,20 @@ console.log("================");
 //     1 2 3 4
 //     1 2 3 4 5
 
+function loopFour(rows) {
+  for (let i = 0; i < rows; i++) {
+     let count = 1;
+    for (let j = 0; j <= i; j++) {
+          process.stdout.write(count + " ");
+          count++
+    }
+    console.log();
+  }
+}
+
+loopFour(5, 5);
+console.log();
+console.log("================");
 
 // 5.  *
 //     **
