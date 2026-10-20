@@ -37,7 +37,8 @@ function loopTwo(rows, cols) {
 }
 
 loopTwo(5, 5);
-
+console.log();
+console.log("================");
 
 // 3.  *****
 //     ****
