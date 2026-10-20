@@ -173,8 +173,10 @@ git push
 - Run tests before pushing.
 - Use `git status` to check staged and unstaged changes.
 
+
 ### My current JavaScript practice commit
 ```bash
+
 git add .
 git commit -m "feat: add JavaScript loop and pattern exercises"
 git push
