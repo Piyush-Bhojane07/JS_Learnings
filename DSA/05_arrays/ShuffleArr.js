@@ -6,9 +6,7 @@ function shuffleArr(nums, n) {
   for (let i = 0; i < nums.length / 2 ; i++) {
     ans[ 2 * i] = nums[i];
     ans[2 * i + 1] = nums[i + n];
-  }
-
-  return ans;
+  } return ans;
 }
 
 console.log(shuffleArr(nums, n));
