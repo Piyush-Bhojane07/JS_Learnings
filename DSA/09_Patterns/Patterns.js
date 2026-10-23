@@ -46,6 +46,18 @@ console.log("================");
 //     **
 //     *
 
+function loopThree(rows, cols) {
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j <= i; j++) {
+      process.stdout.write("* ");
+    }
+    console.log();
+  }
+}
+
+loopThree(5, 5);
+console.log();
+console.log("================");
 
 // 4.  1
 //     1 2
