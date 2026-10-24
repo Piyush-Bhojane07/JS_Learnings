@@ -13,3 +13,10 @@ console.log(arr.pop(2))
 
 console.log(arr);
 console.log()
+
+
+
+
+// ----------------------------------------
+
+
