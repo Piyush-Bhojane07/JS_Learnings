@@ -1,48 +1,74 @@
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 
-import { useState } from "react";
+import {View, Text, TextInput, Button, StyleSheet, TouchableOpacity, } from 'react-native';
+
+import {useState} from 'react'
 
 export default function App() {
+
   const [count, setCount] = useState(0);
-  return (
-    <View style={styles.container}>
-      <View style={styles.boxOne}></View>
 
-      <Text style={styles.titleTxt}>{count}</Text>
-      <View style={styles.boxTwo}></View>
+  const handleInc = () => {
+    setCount(count+1)
+  }
 
-      <Button
-        title="login"
-        onPress={() => Alert.alert("title", "btn clicked")}
-      />
-    </View>
-  );
+  const handleDec = () => {
+    setCount(count-1)
+  }
+return(
+  <View style = {styles.container}>
+  <View style = {{flexDirection : 'row', margin : 10, }}>
+
+  <TouchableOpacity 
+  style = {styles.boxTwo}>
+  onPress = {() => handleInc()}
+  >
+  <Text style = {styles.text}>+</Text>
+  </TouchableOpacity>
+
+  
+<Text style = {styles.titleTxt}>{count}</Text>
+
+
+  <TouchableOpacity 
+  style = {styles.boxOne}>
+   onPress = {() => handleInc()}
+  >
+  <Text style = {styles.text}>-</Text>
+  </TouchableOpacity>
+  
+
+
+  
+ </View>
+
+
+  </View>
+)
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: "5%",
-    alignItems: "center",
-    flex: 1,
-    justifyContent: "center",
-  },
-  titleTxt: {
-    fontSize: 50,
-  },
-
-  boxOne: {
-    width: 50,
-    height: 50,
-    backgroundColor: "red",
+  container : {
+    padding : '5%',
+    alignItems : 'center',
+    flex : 1,
+    justifyContent : 'center'
+  }, 
+  titleTxt  : {
+    fontSize : 50, 
   },
 
-  boxTwo: {
-    width: 50,
-    height: 50,
-    backgroundColor: "green",
+  boxOne : {
+    width : 50, height : 50, 
+    backgroundColor : 'red', padding : 20, 
   },
 
-  input: {
-    fontSize: "40",
+  boxTwo : {
+    width : 50, height : 50, 
+    backgroundColor : 'green', padding : 20, 
   },
-});
+
+  text : {
+    fontSize : '40',
+      color : 'white'
+  },
+})
