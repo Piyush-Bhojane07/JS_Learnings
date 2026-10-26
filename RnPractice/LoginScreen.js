@@ -1,6 +1,11 @@
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
 
-export default function App() {
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+const Stack = createNativeStackNavigator();
+
+function LoginScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.titleTxt}>Login page</Text>
@@ -8,11 +13,28 @@ export default function App() {
       <TextInput placeholder="mob no" style={styles.input} />
       <TextInput placeholder="Password" style={styles.input} />
 
-      <Button
-        title="login"
-        onPress={() => Alert.alert("title", "btn clicked")}
-      />
+      <Button title="login" onPress={() => navigation.navigate("Home")} />
     </View>
+  );
+}
+
+function HomeScreen() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titleTxt}>Welcome Home!</Text>
+    </View>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Login" component={LoginScreen} />
+
+        <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
