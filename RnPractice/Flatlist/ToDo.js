@@ -5,6 +5,7 @@ import {
   FlatList,
   Button,
   StyleSheet,
+  Alert,
 } from "react-native";
 import { useState } from "react";
 export default function Todo() {
@@ -18,6 +19,10 @@ export default function Todo() {
 
     setTasks([...tasks, task]);
     setTask("");
+  };
+
+  const handleDelete = (index) => {
+    Alert.alert("Delete Task", `Delete task at index ${index}?`);
   };
 
   return (
@@ -38,7 +43,12 @@ export default function Todo() {
       <FlatList
         data={tasks}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => <Text>{item}</Text>}
+        renderItem={({ item }) => (
+          <View>
+            <Text>{item}</Text>
+            <Button title="Delete" onPress={() => handleDelete(index)} />
+          </View>
+        )}
       />
     </View>
   );
