@@ -181,3 +181,12 @@ git add .
 git commit -m "feat: add JavaScript loop and pattern exercises"
 git push
 ```
+
+
+When to use	Example
+feat	Add a new feature	feat: add password visibility toggle
+fix	Fix a bug	fix: correct password visibility toggle
+style	Formatting or styling changes	style: improve password input styling
+refactor	Improve code without changing behavior	refactor: simplify password input logic
+docs	Update documentation	docs: add password toggle notes
+test	Add or update tests	test: add password visibility tests
