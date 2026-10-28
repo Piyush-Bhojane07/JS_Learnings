@@ -20,7 +20,6 @@ export default function App() {
         justifyContent: "center",
         alignItems: "center",
         padding: 20,
-        // backgroundColor: 'red',
       }}
     >
       <FlatList
