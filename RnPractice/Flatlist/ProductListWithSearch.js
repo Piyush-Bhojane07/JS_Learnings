@@ -4,7 +4,6 @@ import {
   View,
   TextInput,
   Button,
-  Alert,
   FlatList,
 } from "react-native";
 import { useState } from "react";
@@ -12,7 +11,6 @@ import { useState } from "react";
 export default function App() {
   const [search, setSearch] = useState("");
 
-  const handleSearch = () => {};
   const products = {
     productList: [
       {
@@ -80,24 +78,33 @@ export default function App() {
     ],
   };
 
+  // Filter products based on search text
+  const filteredProducts = products.productList.filter((item) =>
+    item.name.toLowerCase().includes(search.toLowerCase()),
+  );
+
   return (
     <View style={styles.container}>
       <TextInput
-        placeholder="Search..."
+        placeholder="Search products..."
         style={styles.input}
         value={search}
         onChangeText={setSearch}
       />
 
-      <Button title="Register" />
+      <Button title="Register" onPress={() => {}} />
 
       <FlatList
-        data={products.productList}
+        data={filteredProducts}
+        keyExtractor={(item) => item.id}
+        ListEmptyComponent={
+          <Text style={styles.emptyText}>No products found.</Text>
+        }
         renderItem={({ item }) => (
-          <View style={{ flexDirection: "row" }}>
-            <Text style={{ marginRight: 10 }}>{item.id}) </Text>
-            <Text style={{ marginRight: 10 }}>{item.name}</Text>
-            <Text style={{ marginRight: 10 }}>{item.price}</Text>
+          <View style={styles.product}>
+            <Text style={styles.text}>{item.id}</Text>
+            <Text style={styles.text}>{item.name}</Text>
+            <Text style={styles.text}>₹{item.price}</Text>
           </View>
         )}
       />
@@ -108,17 +115,33 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
     backgroundColor: "#ecf0f1",
     padding: 8,
+    paddingTop: 40,
   },
   input: {
-    margin: 24,
+    margin: 16,
     fontSize: 18,
-    padding: 5,
-    // fontWeight: 'bold',
+    padding: 10,
     textAlign: "center",
     borderWidth: 1,
     borderRadius: 5,
+    borderColor: "#999",
+  },
+  product: {
+    flexDirection: "row",
+    padding: 12,
+    marginVertical: 4,
+    backgroundColor: "white",
+    borderRadius: 5,
+  },
+  text: {
+    marginRight: 15,
+    fontSize: 16,
+  },
+  emptyText: {
+    textAlign: "center",
+    marginTop: 20,
+    fontSize: 16,
   },
 });
