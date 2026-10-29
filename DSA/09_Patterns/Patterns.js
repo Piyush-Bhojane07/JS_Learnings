@@ -15,9 +15,9 @@ function loopOne(rows, cols) {
   }
 }
 
-loopOne(5, 5);
-console.log();
-console.log('================');
+// loopOne(5, 5);
+// console.log();
+// console.log('================');
 
 
 // 2.  *
@@ -55,9 +55,9 @@ function loopThree(rows, cols) {
   }
 }
 
-loopThree(5, 5);
-console.log();
-console.log("================");
+// loopThree(5, 5);
+// console.log();
+// console.log("================");
 
 // 4.  1
 //     1 2
