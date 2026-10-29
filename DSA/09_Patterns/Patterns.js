@@ -55,9 +55,9 @@ function loopThree(rows, cols) {
   }
 }
 
-loopThree(5, 5);
-console.log();
-console.log("================");
+// loopThree(5, 5);
+// console.log();
+// console.log("================");
 
 // 4.  1
 //     1 2
@@ -97,6 +97,23 @@ function loopFour(rows) {
 //       ****
 //      *****
 
+function loopSix(rows, cols) {
+  for (let i = 0; i < rows; i++) {
+    //  let count = 1;
+     for(let s = cols; s >  i ; s--){
+      process.stdout.write(" ");
+     }
+    for (let j = i; j >=  0; j--) {
+          process.stdout.write("*");
+          // count++
+    }
+    console.log();
+  }
+}
+
+loopSix(5, 5);
+console.log();
+console.log("================");
 
 // 7.   *****
 //       ****
