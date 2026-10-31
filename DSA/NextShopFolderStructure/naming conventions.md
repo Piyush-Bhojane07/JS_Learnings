@@ -37,7 +37,7 @@ src/
 └── api.ts
 
 
-================================
+===================================
 
 1. function funName() {} — Creates a normal function; use export separately if you want to use it in another file.
 
