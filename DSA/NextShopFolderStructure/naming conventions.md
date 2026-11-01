@@ -37,10 +37,11 @@ src/
 └── api.ts
 
 
-===================================
+=============================================
 
 1. function funName() {} — Creates a normal function; use export separately if you want to use it in another file.
 
 2. export default function funName() {} — Creates and exports a function in one step; export default lets another file import it easily.
 
-3. export default const funName = () => {} — ❌ Invalid syntax; write const funName = () => {}; export default funName; instead.
+3. export default const funName = () => {} — ❌ Invalid syntax;
+ write const funName = () => {}; export default funName; instead.
