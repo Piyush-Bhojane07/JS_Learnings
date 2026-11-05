@@ -589,6 +589,7 @@ const styles = StyleSheet.create({
     marginTop: 24,
     textAlign: "center",
     fontSize: 12,
+    // 
     color: "#64748b",
   },
 });
