@@ -30,6 +30,7 @@ const products = [
   { id: "1", name: "T-shirt", price: "₹499" },
   { id: "2", name: "Shoes", price: "₹1,499" },
   { id: "3", name: "Backpack", price: "₹899" },
+  { id: "3", name: "Backpack", price: "₹899" },
 ];
 
 // Fake category data
