@@ -31,12 +31,14 @@ const products = [
   { id: "2", name: "Shoes", price: "₹1,499" },
   { id: "3", name: "Backpack", price: "₹899" },
   { id: "4", name: "exy", price: "₹999" },
+  { id: "5", name: "pqr", price: "₹99" },
 ];
 
 // Fake category data
 const categories = [
   { title: "Fruits", data: ["Apple", "Banana", "Orange"] },
   { title: "Vegetables", data: ["Carrot", "Potato", "Tomato"] },
+  { title: "General", data: ["pqr", "xyz", "abc"] },
 ];
 
 // Reusable heading component
