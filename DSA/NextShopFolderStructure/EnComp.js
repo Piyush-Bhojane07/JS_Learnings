@@ -56,12 +56,12 @@ export default function App() {
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [count, setCount] = useState(0);
-  const [message, setMessage] = useState("Tap a button to see its result.");
+  const [message, setMessage] = useState("Tap a button to see Result.");
   const [refreshing, setRefreshing] = useState(false);
 
   const { width } = useWindowDimensions();
 
-  // 1. RefreshControl
+  // 1. RefreshControl.
   const handleRefresh = useCallback(() => {
     setRefreshing(true);
 
@@ -76,7 +76,7 @@ export default function App() {
       style={styles.screen}
       behavior={Platform.OS === "ios" ? "padding" : undefined}
     >
-      {/* 2. StatusBar */}
+      {/* 2. StatusBar. */}
       <StatusBar backgroundColor="#17324d" barStyle="light-content" />
 
       {/* 3. ScrollView */}
